@@ -32,4 +32,9 @@ public class IndexController {
     public String home() {
         return "admin/home";
     }
+
+    @RequestMapping("/admin")
+    public String login() {
+        return "admin/login";
+    }
 }

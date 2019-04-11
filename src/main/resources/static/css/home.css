@@ -1,8 +1,64 @@
-nav{
-    max-height: 60px;
-    margin-left: 1rem;
-    padding: 0;
+.side-scroll {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 240px;
+    max-width: 240px;
+    z-index: 10;
+    background-color: white;
+    overflow: hidden;
 }
-.container{
-    padding: 0 20px;
+.side-menu {
+    min-width: 258px;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+/*用户头像区域*/
+.user-img {
+    max-width: 65px;
+}
+
+.user-info a {
+    color: #313a46;
+    text-decoration: none;
+}
+
+.user-info a:hover {
+    text-decoration: none;
+}
+
+/*side-menu*/
+#side-menu {
+    padding-left: 2rem;
+    list-style: none;
+}
+
+#side-menu > li > a {
+    color: rgba(49, 58, 70, 0.8);
+}
+
+#side-menu > li > a:hover {
+    color: #02c0ce;
+    text-decoration: none;
+}
+
+#side-menu > li.active a {
+    color: #02c0ce;
+}
+
+#side-menu > li.active a:hover {
+    text-decoration: none;
+}
+
+#side-menu li ul a {
+    color: rgba(49, 58, 70, 0.7);
+
+}
+
+#side-menu li ul a:hover {
+    color: #313a46;
+
 }

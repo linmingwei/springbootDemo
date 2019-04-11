@@ -83,11 +83,11 @@
             <optional>true</optional>
             <scope>true</scope>
         </dependency>
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>webjars-locator</artifactId>
-            <version>0.32</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.webjars</groupId>-->
+            <!--<artifactId>webjars-locator</artifactId>-->
+            <!--<version>0.32</version>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>org.webjars</groupId>
@@ -98,6 +98,11 @@
             <groupId>org.webjars</groupId>
             <artifactId>jquery</artifactId>
             <version>3.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>font-awesome</artifactId>
+            <version>4.7.0</version>
         </dependency>
 
     </dependencies>
