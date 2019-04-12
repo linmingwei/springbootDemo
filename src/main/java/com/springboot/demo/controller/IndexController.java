@@ -41,6 +41,6 @@ public class IndexController {
 
     @GetMapping("/admin/write")
     public String write() {
-        return "admin/write_article";
+        return "article/write";
     }
 }

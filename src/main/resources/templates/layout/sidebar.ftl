@@ -31,7 +31,7 @@
                     <div class="collapse" id="article-mng">
                         <ul class="d-flex flex-column list-unstyled pl-4 pt-2">
                             <li class="py-2 px-2">
-                                <a class="" href="#">
+                                <a class="" href="/admin/write">
 
                                     <span class="d-inline-block ml-2">写文章</span>
                                 </a>
