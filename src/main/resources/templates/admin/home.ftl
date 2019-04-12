@@ -1,316 +1,137 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/static/css/home.css"/>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/webjars/font-awesome/4.7.0/css/font-awesome.min.css"/>
-    <link rel="stylesheet" href="/webjars/bootstrap/4.1.3/css/bootstrap.min.css"/>
-    <script src="/webjars/jquery/3.2.1/jquery.min.js"></script>
-    <script src="/webjars/bootstrap/4.1.3/js/bootstrap.bundle.js"></script>
-    <title>Document</title>
-</head>
-<body>
-<div class="wrapper">
-    <div class="side-scroll">
+<#include "/include/macros.ftl"/>
+<@header>
 
-        <div class="left side-menu">
-            <div class="brand" style="position: fixed;top: 0;">
-                <img src="/static/images/logo.png" alt="logo">
+</@header>
 
+<div class=" d-flex justify-content-between">
+    <div class="shadow-sm bg-white rounded item">
+        <a href="#" class="d-flex p-2 align-items-center">
+            <div class="item-count ml-3 mr-5">
+                <h2>4</h2>
+                <h6>文章</h6>
             </div>
-            <div class="user-box d-flex pl-4" style="padding-top: 7rem;">
-                <div class="user-img flex-grow-1">
-                    <img class="rounded-circle img-fluid" width="48" height="48" src="/static/images/head.jpg" alt="">
-                </div>
-                <div class="user-info w-50 ">
-                    <h6 class="text-truncate"><a href="#">Maxine Kennedy</a></h6>
-                    <p class="text-truncate text-muted">Admin Heada</p>
-                </div>
+            <div class="item-icon ml-5 mr-2">
+                <i class="fa fa-envira" style="font-size: 40px"></i>
             </div>
-            <div id="sidebar-menu">
-                <ul class="d-flex flex-column" id="side-menu">
-                    <li class="active py-2">
-                        <a class="" href="#">
-                            <i class="fa fa-television" aria-hidden="true"></i>
-                            <span class="d-inline-block ml-2">Dashboard</span>
-                        </a>
-                    </li>
-                    <li class=" py-2">
-                        <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
-                           aria-controls="collapseExample">
-                            <i class="fa fa-television" aria-hidden="true"></i>
-                            <span class="d-inline-block ml-2">Dashboard</span>
-                        </a>
-                        <div class="collapse" id="collapseExample">
-                            <ul class="d-flex flex-column list-unstyled pl-4 pt-2">
-                                <li class="py-2 px-2">
-                                    <a class="" href="#">
-
-                                        <span class="d-inline-block ml-2">Dashboard</span>
-                                    </a>
-                                </li>
-                                <li class="py-2 px-2">
-                                    <a class="" href="#">
-
-                                        <span class="d-inline-block ml-2">Dashboard</span>
-                                    </a>
-                                </li>
-                                <li class="py-2 px-2">
-                                    <a class="" href="#">
-
-                                        <span class="d-inline-block ml-2">Dashboard</span>
-                                    </a>
-                                </li>
-
-                                <li class="py-2 px-2">
-                                    <a class="" href="#">
-
-                                        <span class="d-inline-block ml-2">Dashboard</span>
-                                    </a>
-                                </li>
-                                <li class="py-2 px-2">
-                                    <a class="" href="#">
-
-                                        <span class="d-inline-block ml-2">Dashboard</span>
-                                    </a>
-                                </li>
-                                <li class="py-2 px-2">
-                                    <a class="" href="#">
-
-                                        <span class="d-inline-block ml-2">Dashboard</span>
-                                    </a>
-                                </li>
-
-                            </ul>
-                        </div>
-                    </li>
-                    <li class=" py-2">
-                        <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
-                           aria-controls="collapseExample">
-                            <i class="fa fa-television" aria-hidden="true"></i>
-                            <span class="d-inline-block ml-2">Dashboard</span>
-                        </a>
-                        <div class="collapse" id="collapseExample">
-                            <ul class="d-flex flex-column list-unstyled pl-4 pt-2">
-                                <li class="py-2 px-2">
-                                    <a class="" href="#">
-
-                                        <span class="d-inline-block ml-2">Dashboard</span>
-                                    </a>
-                                </li>
-                                <li class="py-2 px-2">
-                                    <a class="" href="#">
-
-                                        <span class="d-inline-block ml-2">Dashboard</span>
-                                    </a>
-                                </li>
-                                <li class="py-2 px-2">
-                                    <a class="" href="#">
-
-                                        <span class="d-inline-block ml-2">Dashboard</span>
-                                    </a>
-                                </li>
-
-                                <li class="py-2 px-2">
-                                    <a class="" href="#">
-
-                                        <span class="d-inline-block ml-2">Dashboard</span>
-                                    </a>
-                                </li>
-                                <li class="py-2 px-2">
-                                    <a class="" href="#">
-
-                                        <span class="d-inline-block ml-2">Dashboard</span>
-                                    </a>
-                                </li>
-                                <li class="py-2 px-2">
-                                    <a class="" href="#">
-
-                                        <span class="d-inline-block ml-2">Dashboard</span>
-                                    </a>
-                                </li>
-
-                            </ul>
-                        </div>
-                    </li>
-                    <li class=" py-2">
-                        <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
-                           aria-controls="collapseExample">
-                            <i class="fa fa-television" aria-hidden="true"></i>
-                            <span class="d-inline-block ml-2">Dashboard</span>
-                        </a>
-                        <div class="collapse" id="collapseExample">
-                            <ul class="d-flex flex-column list-unstyled pl-4 pt-2">
-                                <li class="py-2 px-2">
-                                    <a class="" href="#">
-
-                                        <span class="d-inline-block ml-2">Dashboard</span>
-                                    </a>
-                                </li>
-                                <li class="py-2 px-2">
-                                    <a class="" href="#">
-
-                                        <span class="d-inline-block ml-2">Dashboard</span>
-                                    </a>
-                                </li>
-                                <li class="py-2 px-2">
-                                    <a class="" href="#">
-
-                                        <span class="d-inline-block ml-2">Dashboard</span>
-                                    </a>
-                                </li>
-
-                                <li class="py-2 px-2">
-                                    <a class="" href="#">
-
-                                        <span class="d-inline-block ml-2">Dashboard</span>
-                                    </a>
-                                </li>
-                                <li class="py-2 px-2">
-                                    <a class="" href="#">
-
-                                        <span class="d-inline-block ml-2">Dashboard</span>
-                                    </a>
-                                </li>
-                                <li class="py-2 px-2">
-                                    <a class="" href="#">
-
-                                        <span class="d-inline-block ml-2">Dashboard</span>
-                                    </a>
-                                </li>
-
-                            </ul>
-                        </div>
-                    </li>
-                    <li class=" py-2">
-                        <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
-                           aria-controls="collapseExample">
-                            <i class="fa fa-television" aria-hidden="true"></i>
-                            <span class="d-inline-block ml-2">Dashboard</span>
-                        </a>
-                        <div class="collapse" id="collapseExample">
-                            <ul class="d-flex flex-column list-unstyled pl-4 pt-2">
-                                <li class="py-2 px-2">
-                                    <a class="" href="#">
-
-                                        <span class="d-inline-block ml-2">Dashboard</span>
-                                    </a>
-                                </li>
-                                <li class="py-2 px-2">
-                                    <a class="" href="#">
-
-                                        <span class="d-inline-block ml-2">Dashboard</span>
-                                    </a>
-                                </li>
-                                <li class="py-2 px-2">
-                                    <a class="" href="#">
-
-                                        <span class="d-inline-block ml-2">Dashboard</span>
-                                    </a>
-                                </li>
-
-                                <li class="py-2 px-2">
-                                    <a class="" href="#">
-
-                                        <span class="d-inline-block ml-2">Dashboard</span>
-                                    </a>
-                                </li>
-                                <li class="py-2 px-2">
-                                    <a class="" href="#">
-
-                                        <span class="d-inline-block ml-2">Dashboard</span>
-                                    </a>
-                                </li>
-                                <li class="py-2 px-2">
-                                    <a class="" href="#">
-
-                                        <span class="d-inline-block ml-2">Dashboard</span>
-                                    </a>
-                                </li>
-
-                            </ul>
-                        </div>
-                    </li>
-
-                </ul>
-            </div>
-
-        </div>
+        </a>
     </div>
-    <div class="content-page p-4">
-        <div class="topbar">
-            <nav class="d-flex justify-content-between nav-custom">
-                <div class="nav-header">
-                    <h5 class="mb-1">Dashboard</h5>
-                    <span class="text-muted">Welcome to BLOG</span>
-                </div>
-                <ul class="d-inline-flex align-items-center list-unstyled mb-0 topbar-right-ul">
-                    <li>
-                        <form action="/" class=" app-search position-relative">
-                            <input type="text" class="form-control" placeholder="search...">
-                            <button type="submit">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </form>
-                    </li>
-                    <li>
-                        <div class="dropdown">
-                            <a href="#" class=" dropdown-toggle" data-offset="0,20"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-bell-o" aria-hidden="true"></i>
-                                <span class="position-absolute badge badge-pill badge-danger" style="top: -9px; left: 11px;">5</span>
-                            </a>
-                            <div class="dropdown-menu animated dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="dropdown">
-                            <a href="#" class=" dropdown-toggle" data-offset="0,20"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-comment-o" aria-hidden="true"></i>
-                                <span class="position-absolute badge badge-pill badge-info" style="top: -9px; left: 11px;">11</span>
-                            </a>
-                            <div class="dropdown-menu animated dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                        </div>
-
-
-                    </li>
-                    <li>
-                        <div class="dropdown">
-                            <a href="#" class=" dropdown-toggle" data-offset="0,20"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img class="rounded-circle" src="/static/images/head.jpg" width="40" height="40" alt="head">
-                                <p class="d-inline">Maxine K</p>
-                            </a>
-                            <div class="dropdown-menu animated dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </nav>
-
-        </div>
-        <div class="content mt-4 d-flex justify-content-between">
-            <div class="shadow-sm bg-white rounded">No shadow</div>
-            <div class="shadow-sm bg-white rounded">No shadow</div>
-            <div class="shadow-sm bg-white rounded">No shadow</div>
-
-        </div>
-
+    <div class="shadow-sm bg-white rounded item">
+        <a href="#" class="d-flex p-2 align-items-center">
+            <div class="item-count ml-3 mr-5">
+                <h2>4</h2>
+                <h6>分类</h6>
+            </div>
+            <div class="item-icon ml-5 mr-2">
+                <i class="fa fa-th" style="font-size: 40px"></i>
+            </div>
+        </a>
+    </div>
+    <div class="shadow-sm bg-white rounded item">
+        <a href="#" class="d-flex p-2 align-items-center">
+            <div class="item-count ml-3 mr-5">
+                <h2>4</h2>
+                <h6>标签</h6>
+            </div>
+            <div class="item-icon ml-5 mr-2">
+                <i class="fa fa-tags" style="font-size: 40px"></i>
+            </div>
+        </a>
+    </div>
+    <div class="shadow-sm bg-white rounded item">
+        <a href="#" class="d-flex p-2 align-items-center">
+            <div class="item-count ml-3 mr-5">
+                <h2>4</h2>
+                <h6>评论</h6>
+            </div>
+            <div class="item-icon ml-5 mr-2">
+                <i class="fa fa-comment" style="font-size: 40px"></i>
+            </div>
+        </a>
     </div>
 </div>
+<div class="mt-4 d-flex justify-content-between">
+    <div class="shadow-sm bg-white rounded item px-4 pt-3 pb-2">
+        <h5>最近文章</h5>
+        <hr>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">标题</th>
+                <th scope="col">分类</th>
+                <th scope="col">浏览数</th>
+                <th scope="col">发布时间</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@TwBootstrap</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+            </tr>
+            <tr>
+                <th scope="row">4</th>
+                <td colspan="2">Larry the Bird</td>
+                <td>@twitter</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="shadow-sm bg-white rounded item px-4 pt-3 pb-2">
+        <h5>最近文章</h5>
+        <hr>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">发起人</th>
+                <th scope="col">评论内容</th>
+                <th scope="col">出处</th>
+                <th scope="col">评论时间</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@TwBootstrap</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+            </tr>
+            <tr>
+                <th scope="row">4</th>
+                <td colspan="2">Larry the Bird</td>
+                huang
+                <td>@twitter</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<@footer>
 
-</body>
-</html>
+</@footer>

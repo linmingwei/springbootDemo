@@ -6,9 +6,9 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css"/>
-    <script src="/webjars/jquery/jquery.min.js"></script>
-    <script src="/webjars/bootstrap/js/bootstrap.bundle.js"></script>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.1.3/css/bootstrap.min.css"/>
+    <script src="/webjars/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/4.1.3/js/bootstrap.bundle.js"></script>
     <style>
         .form-box {
             height: 80vh;

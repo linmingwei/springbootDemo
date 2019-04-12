@@ -48,11 +48,11 @@ body{
     text-decoration: none;
 }
 
-#side-menu > li.active a {
+#side-menu > li.active>a {
     color: #02c0ce;
 }
 
-#side-menu > li.active a:hover {
+#side-menu > li.active>a:hover {
     text-decoration: none;
 }
 
@@ -109,4 +109,12 @@ body{
 .app-search button:hover{
     color: #313a46;
     cursor: pointer;
+}
+/*content*/
+.item a{
+    color: #4f7393;
+}
+.item a:hover{
+    text-decoration: none;
+
 }
