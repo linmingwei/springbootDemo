@@ -1,3 +1,6 @@
+body{
+    background-color: #f3f6f8!important;
+}
 .side-scroll {
     position: fixed;
     top: 0;
@@ -61,4 +64,49 @@
 #side-menu li ul a:hover {
     color: #313a46;
 
+}
+/*content-page*/
+.content-page{
+    margin-left: 258px;
+
+}
+.topbar-right-ul >li{
+    padding: 0 .85rem;
+}
+.topbar-right-ul >li a{
+    color: rgba(49, 58, 70, 0.8);
+}
+.topbar-right-ul >li a:hover{
+    text-decoration: none;
+}
+.topbar-right-ul >li .dropdown-toggle::after{
+    content: none;
+}
+.topbar-right-ul >li i{
+    font-size: 20px;
+}
+/*search*/
+.app-search .form-control, .app-search .form-control:focus{
+    border: 1px solid #e3eaef;
+    font-size: 13px;
+    height: 34px;
+    color: #313a46;
+    padding-left: 20px;
+    padding-right: 40px;
+    background: #e3eaef;
+    box-shadow: none;
+    border-radius: 30px;
+    width: 200px;
+}
+.app-search button{
+    position: absolute;
+    top: 4px;
+    left: 166px;
+    color: rgba(49, 58, 70, 0.5);
+    background-color: transparent;
+    border: none;
+}
+.app-search button:hover{
+    color: #313a46;
+    cursor: pointer;
 }

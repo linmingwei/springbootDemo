@@ -13,16 +13,16 @@
     <script src="/webjars/bootstrap/4.1.3/js/bootstrap.bundle.js"></script>
     <title>Document</title>
 </head>
-<body class="bg-light">
+<body>
 <div class="wrapper">
     <div class="side-scroll">
 
         <div class="left side-menu">
-            <div class="brand">
+            <div class="brand" style="position: fixed;top: 0;">
                 <img src="/static/images/logo.png" alt="logo">
 
             </div>
-            <div class="user-box d-flex pl-4">
+            <div class="user-box d-flex pl-4" style="padding-top: 7rem;">
                 <div class="user-img flex-grow-1">
                     <img class="rounded-circle img-fluid" width="48" height="48" src="/static/images/head.jpg" alt="">
                 </div>
@@ -240,6 +240,75 @@
             </div>
 
         </div>
+    </div>
+    <div class="content-page p-4">
+        <div class="topbar">
+            <nav class="d-flex justify-content-between nav-custom">
+                <div class="nav-header">
+                    <h5 class="mb-1">Dashboard</h5>
+                    <span class="text-muted">Welcome to BLOG</span>
+                </div>
+                <ul class="d-inline-flex align-items-center list-unstyled mb-0 topbar-right-ul">
+                    <li>
+                        <form action="/" class=" app-search position-relative">
+                            <input type="text" class="form-control" placeholder="search...">
+                            <button type="submit">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </form>
+                    </li>
+                    <li>
+                        <div class="dropdown">
+                            <a href="#" class=" dropdown-toggle" data-offset="0,20"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-bell-o" aria-hidden="true"></i>
+                                <span class="position-absolute badge badge-pill badge-danger" style="top: -9px; left: 11px;">5</span>
+                            </a>
+                            <div class="dropdown-menu animated dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="dropdown">
+                            <a href="#" class=" dropdown-toggle" data-offset="0,20"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-comment-o" aria-hidden="true"></i>
+                                <span class="position-absolute badge badge-pill badge-info" style="top: -9px; left: 11px;">11</span>
+                            </a>
+                            <div class="dropdown-menu animated dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </div>
+
+
+                    </li>
+                    <li>
+                        <div class="dropdown">
+                            <a href="#" class=" dropdown-toggle" data-offset="0,20"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img class="rounded-circle" src="/static/images/head.jpg" width="40" height="40" alt="head">
+                                <p class="d-inline">Maxine K</p>
+                            </a>
+                            <div class="dropdown-menu animated dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+
+        </div>
+        <div class="content mt-4 d-flex justify-content-between">
+            <div class="shadow-sm bg-white rounded">No shadow</div>
+            <div class="shadow-sm bg-white rounded">No shadow</div>
+            <div class="shadow-sm bg-white rounded">No shadow</div>
+
+        </div>
+
     </div>
 </div>
 
