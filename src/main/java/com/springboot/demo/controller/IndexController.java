@@ -29,18 +29,4 @@ public class IndexController {
         return "你好";
     }
 
-    @RequestMapping("/admin/home")
-    public String home() {
-        return "admin/home";
-    }
-
-    @RequestMapping("/admin")
-    public String login() {
-        return "admin/login";
-    }
-
-    @GetMapping("/admin/write")
-    public String write() {
-        return "article/write";
-    }
 }

@@ -3,7 +3,7 @@
 
 </@header>
 
-<div class=" d-flex justify-content-between">
+<div class=" d-flex justify-content-between flex-wrap">
     <div class="shadow-sm bg-white rounded item">
         <a href="#" class="d-flex p-2 align-items-center">
             <div class="item-count ml-3 mr-5">
