@@ -5,12 +5,12 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="description" jdbcType="VARCHAR" property="description" />
-    <result column="aId" jdbcType="INTEGER" property="aid" />
-    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
-    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="aid" jdbcType="INTEGER" property="aid" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="email" jdbcType="VARCHAR" property="email" />
-    <result column="pId" jdbcType="INTEGER" property="pid" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
     <result column="status" jdbcType="INTEGER" property="status" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
@@ -21,34 +21,34 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into comment (username, description, aId, 
+    insert into comment (username, description, aid, 
       createTime, updateTime, content, 
-      email, pId, status)
+      email, pid, status)
     values (#{username,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{aid,jdbcType=INTEGER}, 
-      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, #{content,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{content,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{pid,jdbcType=INTEGER}, #{status,jdbcType=INTEGER})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.springboot.demo.entity.Comment">
     update comment
     set username = #{username,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR},
-      aId = #{aid,jdbcType=INTEGER},
-      createTime = #{createtime,jdbcType=TIMESTAMP},
-      updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      aid = #{aid,jdbcType=INTEGER},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      updateTime = #{updateTime,jdbcType=TIMESTAMP},
       content = #{content,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
-      pId = #{pid,jdbcType=INTEGER},
+      pid = #{pid,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select id, username, description, aId, createTime, updateTime, content, email, pId, 
+    select id, username, description, aid, createTime, updateTime, content, email, pid, 
     status
     from comment
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select id, username, description, aId, createTime, updateTime, content, email, pId, 
+    select id, username, description, aid, createTime, updateTime, content, email, pid, 
     status
     from comment
   </select>

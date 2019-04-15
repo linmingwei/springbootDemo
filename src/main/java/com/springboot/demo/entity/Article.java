@@ -9,19 +9,19 @@ public class Article {
 
     private String content;
 
-    private Byte status;
+    private Integer status;
 
     private String description;
 
-    private Date createtime;
+    private Date createTime;
 
-    private Date updatetime;
+    private Date updateTime;
 
-    private Integer typeid;
+    private Integer typeId;
 
-    private Integer tagid;
+    private Integer tagId;
 
-    private Integer cid;
+    private Boolean comment;
 
     private Boolean top;
 
@@ -51,11 +51,11 @@ public class Article {
         this.content = content == null ? null : content.trim();
     }
 
-    public Byte getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Byte status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
@@ -67,44 +67,44 @@ public class Article {
         this.description = description == null ? null : description.trim();
     }
 
-    public Date getCreatetime() {
-        return createtime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
-    public Date getUpdatetime() {
-        return updatetime;
+    public Date getUpdateTime() {
+        return updateTime;
     }
 
-    public void setUpdatetime(Date updatetime) {
-        this.updatetime = updatetime;
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 
-    public Integer getTypeid() {
-        return typeid;
+    public Integer getTypeId() {
+        return typeId;
     }
 
-    public void setTypeid(Integer typeid) {
-        this.typeid = typeid;
+    public void setTypeId(Integer typeId) {
+        this.typeId = typeId;
     }
 
-    public Integer getTagid() {
-        return tagid;
+    public Integer getTagId() {
+        return tagId;
     }
 
-    public void setTagid(Integer tagid) {
-        this.tagid = tagid;
+    public void setTagId(Integer tagId) {
+        this.tagId = tagId;
     }
 
-    public Integer getCid() {
-        return cid;
+    public Boolean getComment() {
+        return comment;
     }
 
-    public void setCid(Integer cid) {
-        this.cid = cid;
+    public void setComment(Boolean comment) {
+        this.comment = comment;
     }
 
     public Boolean getTop() {

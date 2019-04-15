@@ -5,13 +5,13 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="content" jdbcType="VARCHAR" property="content" />
-    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="status" jdbcType="INTEGER" property="status" />
     <result column="description" jdbcType="VARCHAR" property="description" />
-    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
-    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
-    <result column="typeId" jdbcType="INTEGER" property="typeid" />
-    <result column="tagId" jdbcType="INTEGER" property="tagid" />
-    <result column="cId" jdbcType="INTEGER" property="cid" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="typeId" jdbcType="INTEGER" property="typeId" />
+    <result column="tagId" jdbcType="INTEGER" property="tagId" />
+    <result column="comment" jdbcType="BIT" property="comment" />
     <result column="top" jdbcType="BIT" property="top" />
     <result column="order" jdbcType="INTEGER" property="order" />
   </resultMap>
@@ -25,37 +25,37 @@
     </selectKey>
     insert into article (title, content, status, 
       description, createTime, updateTime, 
-      typeId, tagId, cId, 
-      top, order)
-    values (#{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, 
-      #{description,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
-      #{typeid,jdbcType=INTEGER}, #{tagid,jdbcType=INTEGER}, #{cid,jdbcType=INTEGER}, 
+      typeId, tagId, comment, 
+      top, `order`)
+    values (#{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{description,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{typeId,jdbcType=INTEGER}, #{tagId,jdbcType=INTEGER}, #{comment,jdbcType=BIT}, 
       #{top,jdbcType=BIT}, #{order,jdbcType=INTEGER})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.springboot.demo.entity.Article">
     update article
     set title = #{title,jdbcType=VARCHAR},
       content = #{content,jdbcType=VARCHAR},
-      status = #{status,jdbcType=TINYINT},
+      status = #{status,jdbcType=INTEGER},
       description = #{description,jdbcType=VARCHAR},
-      createTime = #{createtime,jdbcType=TIMESTAMP},
-      updateTime = #{updatetime,jdbcType=TIMESTAMP},
-      typeId = #{typeid,jdbcType=INTEGER},
-      tagId = #{tagid,jdbcType=INTEGER},
-      cId = #{cid,jdbcType=INTEGER},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      updateTime = #{updateTime,jdbcType=TIMESTAMP},
+      typeId = #{typeId,jdbcType=INTEGER},
+      tagId = #{tagId,jdbcType=INTEGER},
+      comment = #{comment,jdbcType=BIT},
       top = #{top,jdbcType=BIT},
-      order = #{order,jdbcType=INTEGER}
+      `order` = #{order,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select id, title, content, status, description, createTime, updateTime, typeId, tagId, 
-    cId, top, order
+    comment, top, `order`
     from article
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
     select id, title, content, status, description, createTime, updateTime, typeId, tagId, 
-    cId, top, order
+    comment, top, `order`
     from article
   </select>
 </mapper>
