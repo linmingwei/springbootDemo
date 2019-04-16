@@ -1,6 +1,7 @@
 package com.springboot.demo.controller;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.springboot.demo.entity.Article;
 import com.springboot.demo.service.ArticleService;
 import com.springboot.demo.vo.ResponseVo;
@@ -28,9 +29,10 @@ public class ArticleController {
 
     @GetMapping("/list")
     @ResponseBody
-    public ResponseVo list(@RequestParam(value = "pageNo",defaultValue = "1") int pageNo,@RequestParam(value = "pageSize",defaultValue = "10") int pageSize) {
+    public PageInfo<Article> list(@RequestParam(value = "pageNo",defaultValue = "1") int pageNo,@RequestParam(value = "pageSize",defaultValue = "10") int pageSize) {
         PageHelper.startPage(pageNo,pageSize);
-        List<Article> list = articleService.list();
-        return ResponseVo.success(list);
+        List<Article> rows = articleService.list();
+        PageInfo<Article> pageInfo = new PageInfo<>(rows);
+        return pageInfo;
     }
 }
