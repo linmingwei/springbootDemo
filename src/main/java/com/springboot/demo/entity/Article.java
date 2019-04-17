@@ -1,5 +1,7 @@
 package com.springboot.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Article {
@@ -13,8 +15,9 @@ public class Article {
 
     private String description;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date createTime;
-
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date updateTime;
 
     private Integer typeId;
@@ -66,7 +69,7 @@ public class Article {
     public void setDescription(String description) {
         this.description = description == null ? null : description.trim();
     }
-
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     public Date getCreateTime() {
         return createTime;
     }
@@ -74,7 +77,7 @@ public class Article {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
-
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     public Date getUpdateTime() {
         return updateTime;
     }

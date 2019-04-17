@@ -22,7 +22,8 @@ public class ArticleController {
     @Autowired
     private ArticleService articleService;
     @PostMapping("/publish")
-    public String publishArticle() {
+    public String publishArticle(Article article) {
+        System.out.println(article.toString());
         return "";
 
     }

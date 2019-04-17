@@ -121,3 +121,73 @@ body{
     text-decoration: none;
 
 }
+
+
+.check-switch {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    display: inline-block;
+    cursor: pointer;
+    width: 44px;
+    height: 24px;
+    position: relative;
+    border: 1px solid #dfdfdf;
+
+    background-color: #fdfdfd;
+
+    box-shadow: #dfdfdf 0 0 0 0 inset;
+
+    border-radius: 20px;
+
+    background-clip: content-box;
+}
+
+.check-switch:before {
+
+    content: '';
+    width: 22px;
+    height: 22px;
+
+    position: absolute;
+
+    top: 0px;
+    left: 0;
+
+    border-radius: 20px;
+
+    background-color: #fff;
+
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.check-switch:checked {
+
+    border-color: #64bd63;
+
+    box-shadow: #64bd63 0 0 0 16px inset;
+
+    background-color: #64bd63;
+}
+
+.check-switch:checked:before {
+    left: 21px;
+}
+
+.check-switch-anim {
+    transition: border cubic-bezier(0, 0, 0, 1) 0.4s, box-shadow cubic-bezier(0, 0, 0, 1) 0.4s;
+}
+
+.check-switch-anim:before {
+    transition: left 0.3s;
+}
+
+.check-switch-anim:checked {
+    box-shadow: #64bd63 0 0 0 16px inset;
+    background-color: #64bd63;
+    transition: border ease 0.4s, box-shadow ease 0.4s, background-color ease 1.2s;
+}
+
+.check-switch-anim:checked:before {
+    transition: left 0.3s;
+}

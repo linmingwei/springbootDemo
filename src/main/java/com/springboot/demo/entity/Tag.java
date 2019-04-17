@@ -1,5 +1,7 @@
 package com.springboot.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Tag {
@@ -10,9 +12,9 @@ public class Tag {
     private String description;
 
     private Integer aid;
-
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date createTime;
-
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date updateTime;
 
     private Integer status;
