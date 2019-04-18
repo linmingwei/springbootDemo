@@ -3,6 +3,7 @@ package com.springboot.demo.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.springboot.demo.entity.Article;
+import com.springboot.demo.entity.ArticleForm;
 import com.springboot.demo.service.ArticleService;
 import com.springboot.demo.vo.ResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ public class ArticleController {
     @Autowired
     private ArticleService articleService;
     @PostMapping("/publish")
+    @ResponseBody
     public String publishArticle(Article article) {
         System.out.println(article.toString());
         return "";

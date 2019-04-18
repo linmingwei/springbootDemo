@@ -5,7 +5,7 @@
 <div class="shadow-sm bg-white rounded item px-4 pt-3 pb-2">
     <h4>文章发布</h4>
     <hr>
-    <form action="/article/publish" method="post">
+    <form action="/article/publish" method="post" id="article_form">
         <div class="form-group row">
             <label for="titleInput" class="col-sm-1 col-form-label">标题</label>
             <div class="col-sm-11">
@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="form-group">
-            <textarea name="content" id="article_editor"></textarea>
+            <textarea  id="article_editor"></textarea>
         </div>
         <div class="form-group row">
             <label for="typeInput" class="col-sm-1 col-form-label">分类</label>
@@ -74,7 +74,17 @@
     });
     $('#publish_btn').click(function (e) {
         e.preventDefault();
-        console.log("")
+        var data = $('#article_form').serialize();
+        data+='&content='+simplemde.value();
+        console.log(data.comment);
+        console.log(data);
+        $.post({
+            url:'/article/publish',
+            data:data,
+            success:function (res) {
+                console.log(JSON.stringify(res));
+            }
+        })
 
     })
 

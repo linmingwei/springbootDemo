@@ -17,7 +17,7 @@ public class Type {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date updateTime;
 
-    private Integer status;
+    private Integer order;
 
     public Integer getId() {
         return id;
@@ -67,11 +67,11 @@ public class Type {
         this.updateTime = updateTime;
     }
 
-    public Integer getStatus() {
-        return status;
+    public Integer getOrder() {
+        return order;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setOrder(Integer order) {
+        this.order = order;
     }
 }

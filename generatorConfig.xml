@@ -7,6 +7,7 @@
     <classPathEntry location="C:\Users\mingweilin\.m2\repository\mysql\mysql-connector-java\8.0.15\mysql-connector-java-8.0.15.jar" />
 
     <context id="bootdemo" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <property name="autoDelimitKeywords" value="true"/>
         <property name="beginningDelimiter" value="`"/>
         <property name="endingDelimiter" value="`"/>
         <commentGenerator>
@@ -31,7 +32,7 @@
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.springboot.demo.mapper"  targetProject="src\main\java">
         </javaClientGenerator>
 
-        <table  tableName="%"   >
+        <table  tableName="type"   >
             <property name="useActualColumnNames" value="true"/>
             <generatedKey column="id" sqlStatement="MySQL" identity="true" />
         </table>

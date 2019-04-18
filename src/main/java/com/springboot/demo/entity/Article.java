@@ -22,8 +22,6 @@ public class Article {
 
     private Integer typeId;
 
-    private Integer tagId;
-
     private Boolean comment;
 
     private Boolean top;
@@ -92,14 +90,6 @@ public class Article {
 
     public void setTypeId(Integer typeId) {
         this.typeId = typeId;
-    }
-
-    public Integer getTagId() {
-        return tagId;
-    }
-
-    public void setTagId(Integer tagId) {
-        this.tagId = tagId;
     }
 
     public Boolean getComment() {

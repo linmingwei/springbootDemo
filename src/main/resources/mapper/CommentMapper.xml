@@ -23,7 +23,7 @@
     </selectKey>
     insert into comment (username, description, aid, 
       createTime, updateTime, content, 
-      email, pid, status)
+      email, pid, `status`)
     values (#{username,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{aid,jdbcType=INTEGER}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{content,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{pid,jdbcType=INTEGER}, #{status,jdbcType=INTEGER})
@@ -38,18 +38,18 @@
       content = #{content,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       pid = #{pid,jdbcType=INTEGER},
-      status = #{status,jdbcType=INTEGER}
+      `status` = #{status,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select id, username, description, aid, createTime, updateTime, content, email, pid, 
-    status
+    `status`
     from comment
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
     select id, username, description, aid, createTime, updateTime, content, email, pid, 
-    status
+    `status`
     from comment
   </select>
 </mapper>

@@ -10,7 +10,6 @@
     <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
     <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="typeId" jdbcType="INTEGER" property="typeId" />
-    <result column="tagId" jdbcType="INTEGER" property="tagId" />
     <result column="comment" jdbcType="BIT" property="comment" />
     <result column="top" jdbcType="BIT" property="top" />
     <result column="order" jdbcType="INTEGER" property="order" />
@@ -23,39 +22,38 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into article (title, content, status, 
+    insert into article (title, content, `status`, 
       description, createTime, updateTime, 
-      typeId, tagId, comment, 
-      top, `order`)
+      typeId, `comment`, `top`, `order`
+      )
     values (#{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
       #{description,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{typeId,jdbcType=INTEGER}, #{tagId,jdbcType=INTEGER}, #{comment,jdbcType=BIT}, 
-      #{top,jdbcType=BIT}, #{order,jdbcType=INTEGER})
+      #{typeId,jdbcType=INTEGER}, #{comment,jdbcType=BIT}, #{top,jdbcType=BIT}, #{order,jdbcType=INTEGER}
+      )
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.springboot.demo.entity.Article">
     update article
     set title = #{title,jdbcType=VARCHAR},
       content = #{content,jdbcType=VARCHAR},
-      status = #{status,jdbcType=INTEGER},
+      `status` = #{status,jdbcType=INTEGER},
       description = #{description,jdbcType=VARCHAR},
       createTime = #{createTime,jdbcType=TIMESTAMP},
       updateTime = #{updateTime,jdbcType=TIMESTAMP},
       typeId = #{typeId,jdbcType=INTEGER},
-      tagId = #{tagId,jdbcType=INTEGER},
-      comment = #{comment,jdbcType=BIT},
-      top = #{top,jdbcType=BIT},
+      `comment` = #{comment,jdbcType=BIT},
+      `top` = #{top,jdbcType=BIT},
       `order` = #{order,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select id, title, content, status, description, createTime, updateTime, typeId, tagId, 
-    comment, top, `order`
+    select id, title, content, `status`, description, createTime, updateTime, typeId, 
+    `comment`, `top`, `order`
     from article
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select id, title, content, status, description, createTime, updateTime, typeId, tagId, 
-    comment, top, `order`
+    select id, title, content, `status`, description, createTime, updateTime, typeId, 
+    `comment`, `top`, `order`
     from article
   </select>
 </mapper>
