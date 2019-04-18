@@ -11,4 +11,10 @@ import java.util.List;
  */
 public interface ArticleService {
     List<Article> list();
+
+    int insert(Article article);
+
+    int update(Article article);
+
+    int delete(Integer aid);
 }

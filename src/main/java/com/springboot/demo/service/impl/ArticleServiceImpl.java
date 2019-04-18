@@ -17,6 +17,22 @@ import java.util.List;
 public class ArticleServiceImpl implements ArticleService {
     @Autowired
     private ArticleMapper articleMapper;
+
+    @Override
+    public int delete(Integer aid) {
+        return articleMapper.deleteByPrimaryKey(aid);
+    }
+
+    @Override
+    public int update(Article article) {
+        return articleMapper.updateByPrimaryKey(article);
+    }
+
+    @Override
+    public int insert(Article article) {
+        return articleMapper.insert(article);
+    }
+
     @Override
     public List<Article> list() {
         List<Article> articles = articleMapper.selectAll();

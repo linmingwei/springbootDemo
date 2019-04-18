@@ -1,6 +1,7 @@
 <#include "/include/macros.ftl"/>
 <@header>
 <link rel="stylesheet" href="/static/css/simplemde.min.css"/>
+<link rel="stylesheet" href="/webjars/select2/4.0.5/css/select2.min.css">
 </@header>
 <div class="shadow-sm bg-white rounded item px-4 pt-3 pb-2">
     <h4>文章发布</h4>
@@ -13,16 +14,21 @@
             </div>
         </div>
         <div class="form-group">
-            <textarea  id="article_editor"></textarea>
+            <textarea id="article_editor"></textarea>
         </div>
         <div class="form-group row">
             <label for="typeInput" class="col-sm-1 col-form-label">分类</label>
             <div class="col-sm-5">
-                <input type="text" class="form-control" name="type" id="typeInput" placeholder="分类">
+                <select class="custom-select" name="typeId" id="type_select">
+                </select>
+            <#--<input type="text" class="form-control" name="type" id="typeInput" placeholder="分类">-->
             </div>
             <label for="tagInput" class="col-sm-1 col-form-label">标签</label>
             <div class="col-sm-5">
-                <input type="text" class="form-control" name="tag" id="tagInput" placeholder="多个标签请用逗号分隔">
+                <select class="custom-select" name="tagIds" id="tag_select" multiple="multiple">
+                </select>
+
+                <#--<input type="text" class="form-control" name="tag" id="tagInput" placeholder="多个标签请用逗号分隔">-->
             </div>
         </div>
         <div class="form-group row">
@@ -35,11 +41,11 @@
         <div class="form-group row">
             <label for="comment" class="col-sm-1 col-form-label">评论</label>
             <div class="col-sm-5">
-                <input type="checkbox" class="check-switch check-switch-anim mt-2" name="comment" id="comment" >
+                <input type="checkbox" class="check-switch check-switch-anim mt-2" name="comment" id="comment">
             </div>
             <label for="top" class="col-sm-1 col-form-label">置顶</label>
             <div class="col-sm-5">
-                <input type="checkbox" class="check-switch check-switch-anim mt-2" name="top" id="top" >
+                <input type="checkbox" class="check-switch check-switch-anim mt-2" name="top" id="top">
             </div>
 
         </div>
@@ -52,6 +58,7 @@
 </div>
 <@footer>
 <script src="/static/js/simplemde.min.js"></script>
+<script src="/webjars/select2/4.0.5/js/select2.min.js"></script>
 <script>
     var simplemde = new SimpleMDE({
         element: document.getElementById("article_editor"),
@@ -72,20 +79,46 @@
         }
 
     });
+    $('#tag_select').select2({
+        ajax: {
+            url: '/tag/all',
+            type: 'get',
+            dataType: 'json',
+            processResults: function (res) {
+                var data_select = [];
+                $.each(res.data, function (i, value) {
+                    data_select.push({id: value.id, text: value.name});
+                });
+                return {
+                    results:data_select
+                };
+            },
+            cache:true
+        }
+    });
     $('#publish_btn').click(function (e) {
         e.preventDefault();
         var data = $('#article_form').serialize();
-        data+='&content='+simplemde.value();
-        console.log(data.comment);
-        console.log(data);
+        data += '&content=' + simplemde.value();
+        console.log(JSON.stringify(data));
         $.post({
-            url:'/article/publish',
-            data:data,
-            success:function (res) {
-                console.log(JSON.stringify(res));
+            url: '/article/publish',
+            data: data,
+            success: function (res) {
+                alert("添加文章成功");
+                window.location.href='/admin/article/write';
             }
         })
+    });
+    $.get({
+        url: '/type/child',
+        success: function (res) {
+            var data = res.data;
+            $.each(data, function (i, value) {
+                $('#type_select').append('<option value="' + value.id + '">' + value.name + '</option>')
+            })
 
+        }
     })
 
 </script>

@@ -16,7 +16,7 @@
                     <i class="fa fa-minus" aria-hidden="true"></i> 批量删除
                 </button>
             </div>
-            <table id="article_list"></table>
+            <table id="article_table"></table>
         </div>
     </form>
 </div>
@@ -29,10 +29,23 @@
             e.preventDefault();
         },
         'click .article-delete': function (e, value, row, index) {
-            alert(value);
+            console.log(JSON.stringify(row));
+            deleteArticle(row.id);
             e.preventDefault();
         }
     };
+    function deleteArticle(ids) {
+        $.post({
+            url:'/article/delete',
+            data:{ids:ids},
+            dataType:'json',
+            success:function (res) {
+                alert(res.msg);
+                $('button[name="refresh"]').click();
+            }
+        });
+
+    }
     var columns = [{
         field: 'state',
         // halign:'center',
@@ -70,7 +83,7 @@
         events: 'operateEvents',
         formatter: addButton
     }];
-    $('#article_list').bootstrapTable({
+    $('#article_table').bootstrapTable({
         url: "/article/list",                           //请求后台的URL（*）
         method: 'get',                     //请求方式（*）
         toolbar: $('#toolbar'),                   //工具按钮用哪个容器
@@ -136,6 +149,16 @@
         }
 
     }
+    $('#btn_delete').click(function (e) {
+        e.preventDefault();
+        var rows = $('#article_table').bootstrapTable('getSelections');
+        var ids =[];
+        $.each(rows,function (i, value) {
+            ids[i] =value.id;
+        });
+        console.log(ids);
+        deleteArticle(ids);
+    })
 
 
 </script>

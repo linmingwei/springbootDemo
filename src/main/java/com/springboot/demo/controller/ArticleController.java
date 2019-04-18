@@ -4,12 +4,16 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.springboot.demo.entity.Article;
 import com.springboot.demo.entity.ArticleForm;
+import com.springboot.demo.entity.ArticleTag;
 import com.springboot.demo.service.ArticleService;
+import com.springboot.demo.service.ArticleTagService;
 import com.springboot.demo.vo.ResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -22,20 +26,46 @@ import java.util.List;
 public class ArticleController {
     @Autowired
     private ArticleService articleService;
+    @Autowired
+    private ArticleTagService articleTagService;
+
     @PostMapping("/publish")
     @ResponseBody
-    public String publishArticle(Article article) {
-        System.out.println(article.toString());
-        return "";
+    @Transactional
+    public ResponseVo publishArticle(Article article, @RequestParam("tagIds") Integer[] tagIds) {
+        if (article.getId() == null) {
+            articleService.insert(article);
+            for (int i = 0; i < tagIds.length; i++) {
+                articleTagService.insert(new ArticleTag(article.getId(), tagIds[i]));
+            }
+        } else {
+            articleService.update(article);
+        }
+
+
+        return ResponseVo.success();
 
     }
 
     @GetMapping("/list")
     @ResponseBody
-    public PageInfo<Article> list(@RequestParam(value = "pageNo",defaultValue = "1") int pageNo,@RequestParam(value = "pageSize",defaultValue = "10") int pageSize) {
-        PageHelper.startPage(pageNo,pageSize);
+    public PageInfo<Article> list(@RequestParam(value = "pageNo", defaultValue = "1") int pageNo, @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
+        PageHelper.startPage(pageNo, pageSize);
         List<Article> rows = articleService.list();
         PageInfo<Article> pageInfo = new PageInfo<>(rows);
         return pageInfo;
+    }
+
+    @PostMapping("/delete")
+    @ResponseBody
+    public ResponseVo delete(Integer[] ids) {
+        if (ids == null || ids.length == 0) {
+            return ResponseVo.fail("请至少选择一篇文章");
+        }
+        for (Integer id :
+                ids) {
+            articleService.delete(id);
+        }
+        return ResponseVo.success("共删除" + ids.length + "篇文章");
     }
 }

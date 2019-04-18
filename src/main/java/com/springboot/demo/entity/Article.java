@@ -1,9 +1,11 @@
 package com.springboot.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.ToString;
 
 import java.util.Date;
 
+@ToString
 public class Article {
     private Integer id;
 
