@@ -32,14 +32,20 @@ public class ArticleController {
     @PostMapping("/publish")
     @ResponseBody
     @Transactional
-    public ResponseVo publishArticle(Article article, @RequestParam("tagIds") Integer[] tagIds) {
+    public ResponseVo publishArticle(Article article, @RequestParam(value = "tagIds",required = false) Integer[] tagIds) {
         if (article.getId() == null) {
             articleService.insert(article);
-            articleTagService.insert(article.getId(),tagIds);
+            if (tagIds != null && tagIds.length != 0) {
+                articleTagService.insert(article.getId(), tagIds);
+
+            }
         } else {
             articleService.update(article);
-            articleTagService.deleteByAid(article.getId());
-            articleTagService.insert(article.getId(),tagIds);
+            if (tagIds != null && tagIds.length != 0) {
+                articleTagService.deleteByAid(article.getId());
+                articleTagService.insert(article.getId(), tagIds);
+
+            }
         }
 
 
@@ -67,5 +73,19 @@ public class ArticleController {
             articleService.delete(id);
         }
         return ResponseVo.success("共删除" + ids.length + "篇文章");
+    }
+    @PostMapping("/update/top")
+    public ResponseVo updateTop(@RequestParam("id")Integer aid) {
+        Article article = articleService.getById(aid);
+        article.setTop(!article.getTop());
+        articleService.update(article);
+        return ResponseVo.success();
+    }
+    @PostMapping("/update/comment")
+    public ResponseVo updateComment(@RequestParam("id")Integer aid) {
+        Article article = articleService.getById(aid);
+        article.setComment(!article.getComment());
+        articleService.update(article);
+        return ResponseVo.success();
     }
 }

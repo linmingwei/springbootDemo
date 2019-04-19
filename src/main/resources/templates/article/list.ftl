@@ -30,8 +30,33 @@
         },
         'click .article-delete': function (e, value, row, index) {
             console.log(JSON.stringify(row));
-            // deleteArticle(row.id);
+            deleteArticle(row.id);
             e.preventDefault();
+        }
+    };
+    window.updateComment = {
+        'click .update-comment': function (e, value, row, index) {
+            console.log(JSON.stringify(row));
+            $.post({
+                url:'/article/update/comment',
+                data:{id:row.id},
+                success:function (res) {
+                    console.log(JSON.stringify(res));
+                }
+            });
+        }
+    };
+    window.updateTop = {
+        'click .update-top': function (e, value, row, index) {
+            console.log(JSON.stringify(row));
+
+            $.post({
+                url:'/article/update/top',
+                data:{id:row.id},
+                success:function (res) {
+                    console.log(JSON.stringify(res));
+                }
+            });
         }
     };
     function deleteArticle(ids) {
@@ -53,7 +78,8 @@
         checkbox: true
     }, {
         field: 'title',
-        title: '标题'
+        title: '标题',
+        formatter: title_for
     }, {
         field: 'description',
         title: '描述'
@@ -61,11 +87,13 @@
         field: 'comment',
         title: '评论',
         align: 'center',
+        events: 'updateComment',
         formatter: comment_check
     }, {
         field: 'top',
         title: '置顶',
         align: 'center',
+        events: 'updateTop',
         formatter: top_check
 
     }, {
@@ -126,7 +154,15 @@
 
         }
     }
-
+    function title_for(value, row, index) {
+        if (row.status == 1) {
+            return '<span class="badge badge-danger">草稿</span> '+row.title;
+        }else if (row.status == 0) {
+            return '<span class="badge badge-success">已发布</span> '+row.title;
+        }else{
+            return row.title;
+        }
+    }
     function addButton(value, row, index) {
         return [
             '<button  class="btn article-edit btn-primary btn-sm mr-3"><i class="fa fa-pencil" aria-hidden="true"></i></button>',
@@ -135,16 +171,17 @@
     }
 
     function comment_check(value, row, index) {
-        return common_check(row.comment);
+        if (row.comment) {
+            return '<input type="checkbox" role="button" checked class="check-switch check-switch-anim .update-comment" >';
+        }else {
+            return '<input type="checkbox" class="check-switch check-switch-anim .update-comment" >';
+        }
     }
     function top_check(value, row, index) {
-        return common_check(row.top);
-    }
-    function common_check(value) {
-        if (value) {
-            return '<input type="checkbox" checked class="check-switch check-switch-anim" >';
-        } else {
-            return '<input type="checkbox" class="check-switch check-switch-anim" >';
+        if (row.top) {
+            return '<input type="checkbox" checked class="check-switch check-switch-anim .update-top" >';
+        }else {
+            return '<input type="checkbox" class="check-switch check-switch-anim .update-top" >';
         }
 
     }
@@ -156,7 +193,10 @@
             ids[i] =value.id;
         });
         deleteArticle(ids);
-    })
+    });
+    $('.update-comment').click(function () {
+        alert("good");
+    });
 
 
 </script>

@@ -128,20 +128,28 @@
         });
 
     });
+    $('#draft_btn').click(function (e) {
+        e.preventDefault();
+        publish_article('&status=1');
+    });
     $('#publish_btn').click(function (e) {
         e.preventDefault();
+        publish_article()
+    });
+    function publish_article(ext){
         var data = $('#article_form').serialize();
-        data += '&content=' + simplemde.value();
+        data += '&content=' + simplemde.value()+ext;
         console.log(JSON.stringify(data));
         $.post({
             url: '/article/publish',
             data: data,
             success: function (res) {
-                alert("添加文章成功");
+                alert("操作成功");
                 window.location.href = '/admin/article/write';
             }
         })
-    });
+
+    }
     $.get({
         url: '/type/child',
         success: function (res) {

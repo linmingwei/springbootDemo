@@ -51,6 +51,14 @@ public class AdminController {
     public String articleList() {
         return "article/list";
     }
+    @GetMapping("/article/type")
+    public String articleType() {
+        return "article/type";
+    }
+    @GetMapping("/article/tag")
+    public String articleTag() {
+        return "article/tag";
+    }
     @GetMapping("/article/update/{aid}")
     public String articleUpdate(@PathVariable("aid") Integer aid, Model model) {
         if (aid == null) {

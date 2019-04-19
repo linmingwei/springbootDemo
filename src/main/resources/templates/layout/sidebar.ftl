@@ -43,14 +43,14 @@
                                 </a>
                             </li>
                             <li class="py-2 px-2">
-                                <a class="" href="#">
+                                <a class="" href="/admin/article/type">
 
                                     <span class="d-inline-block ml-2">分类列表</span>
                                 </a>
                             </li>
 
                             <li class="py-2 px-2">
-                                <a class="" href="#">
+                                <a class="" href="/admin/article/tag">
 
                                     <span class="d-inline-block ml-2">标签列表</span>
                                 </a>
