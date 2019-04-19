@@ -17,4 +17,6 @@ public interface ArticleService {
     int update(Article article);
 
     int delete(Integer aid);
+
+    Article getById(Integer aid);
 }

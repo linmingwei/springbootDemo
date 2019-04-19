@@ -2,6 +2,7 @@ package com.springboot.demo.service.impl;
 
 import com.springboot.demo.entity.Article;
 import com.springboot.demo.mapper.ArticleMapper;
+import com.springboot.demo.mapper.ArticleTagMapper;
 import com.springboot.demo.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,9 +18,17 @@ import java.util.List;
 public class ArticleServiceImpl implements ArticleService {
     @Autowired
     private ArticleMapper articleMapper;
+    @Autowired
+    private ArticleTagMapper articleTagMapper;
+
+    @Override
+    public Article getById(Integer aid) {
+        return articleMapper.selectByPrimaryKey(aid);
+    }
 
     @Override
     public int delete(Integer aid) {
+        articleTagMapper.deleteByAid(aid);
         return articleMapper.deleteByPrimaryKey(aid);
     }
 

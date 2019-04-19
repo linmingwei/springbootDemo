@@ -35,11 +35,11 @@ public class ArticleController {
     public ResponseVo publishArticle(Article article, @RequestParam("tagIds") Integer[] tagIds) {
         if (article.getId() == null) {
             articleService.insert(article);
-            for (int i = 0; i < tagIds.length; i++) {
-                articleTagService.insert(new ArticleTag(article.getId(), tagIds[i]));
-            }
+            articleTagService.insert(article.getId(),tagIds);
         } else {
             articleService.update(article);
+            articleTagService.deleteByAid(article.getId());
+            articleTagService.insert(article.getId(),tagIds);
         }
 
 

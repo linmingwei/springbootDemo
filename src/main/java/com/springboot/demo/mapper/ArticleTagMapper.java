@@ -9,8 +9,11 @@ public interface ArticleTagMapper {
     int insert(ArticleTag record);
 
     ArticleTag selectByPrimaryKey(Integer id);
+    List<ArticleTag> selectByAid(Integer aid);
 
     List<ArticleTag> selectAll();
 
     int updateByPrimaryKey(ArticleTag record);
+
+    int deleteByAid(Integer aid);
 }

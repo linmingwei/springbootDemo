@@ -1,5 +1,6 @@
 package com.springboot.demo.service;
 
+import com.springboot.demo.entity.Article;
 import com.springboot.demo.entity.Tag;
 
 import java.util.List;
@@ -11,4 +12,8 @@ import java.util.List;
  */
 public interface TagService {
     List<Tag> list();
+
+    Tag getById(Integer i);
+
+    List<Tag> getByAid(Integer aid);
 }

@@ -4,6 +4,7 @@ import com.springboot.demo.service.TagService;
 import com.springboot.demo.vo.ResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,5 +22,10 @@ public class TagController {
     @GetMapping("/all")
     public ResponseVo all() {
         return ResponseVo.success(tagService.list());
+    }
+
+    @GetMapping("/{aid}")
+    public ResponseVo articleTag(@PathVariable("aid") Integer aid) {
+        return ResponseVo.success(tagService.getByAid(aid));
     }
 }

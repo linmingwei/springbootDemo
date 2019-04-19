@@ -1,35 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.springboot.demo.mapper.ArticleTagMapper">
-  <resultMap id="BaseResultMap" type="com.springboot.demo.entity.ArticleTag">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="aid" jdbcType="INTEGER" property="aid" />
-    <result column="tid" jdbcType="INTEGER" property="tid" />
-  </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <resultMap id="BaseResultMap" type="com.springboot.demo.entity.ArticleTag">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="aid" jdbcType="INTEGER" property="aid"/>
+        <result column="tid" jdbcType="INTEGER" property="tid"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from article_tag
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.springboot.demo.entity.ArticleTag">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into article_tag (aid, tid)
-    values (#{aid,jdbcType=INTEGER}, #{tid,jdbcType=INTEGER})
-  </insert>
-  <update id="updateByPrimaryKey" parameterType="com.springboot.demo.entity.ArticleTag">
+    <delete id="deleteByAid" parameterType="java.lang.Integer">
+      delete from article_tag where aid = #{aid}
+
+    </delete>
+    <insert id="insert" parameterType="com.springboot.demo.entity.ArticleTag">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into article_tag (aid, tid)
+        values (#{aid,jdbcType=INTEGER}, #{tid,jdbcType=INTEGER})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.springboot.demo.entity.ArticleTag">
     update article_tag
     set aid = #{aid,jdbcType=INTEGER},
       tid = #{tid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select id, aid, tid
     from article_tag
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <select id="selectAll" resultMap="BaseResultMap">
+    <select id="selectAll" resultMap="BaseResultMap">
     select id, aid, tid
     from article_tag
+  </select>
+    <select id="selectByAid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select id, aid, tid
+    from article_tag
+    where aid = #{aid,jdbcType=INTEGER}
+
   </select>
 </mapper>

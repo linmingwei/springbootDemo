@@ -10,42 +10,50 @@
         <div class="form-group row">
             <label for="titleInput" class="col-sm-1 col-form-label">标题</label>
             <div class="col-sm-11">
-                <input type="text" class="form-control" name="title" id="titleInput" placeholder="标题">
+                <input type="text" class="form-control" name="title" value="${(article.title)!}" id="titleInput"
+                       placeholder="标题">
+                <input type="hidden" name="id" id="aid_hide" value="${(article.id)!}">
             </div>
         </div>
         <div class="form-group">
             <textarea id="article_editor"></textarea>
+            <input type="hidden" id="content_hid" value="${(article.content)!}">
         </div>
         <div class="form-group row">
             <label for="typeInput" class="col-sm-1 col-form-label">分类</label>
             <div class="col-sm-5">
                 <select class="custom-select" name="typeId" id="type_select">
                 </select>
+                <input type="hidden" id="type_hide" value="${(article.typeId)!}">
             <#--<input type="text" class="form-control" name="type" id="typeInput" placeholder="分类">-->
             </div>
             <label for="tagInput" class="col-sm-1 col-form-label">标签</label>
             <div class="col-sm-5">
                 <select class="custom-select" name="tagIds" id="tag_select" multiple="multiple">
                 </select>
+            <#--<input type="hidden" id="tags_hide" value="${tags!}">-->
 
-                <#--<input type="text" class="form-control" name="tag" id="tagInput" placeholder="多个标签请用逗号分隔">-->
+            <#--<input type="text" class="form-control" name="tag" id="tagInput" placeholder="多个标签请用逗号分隔">-->
             </div>
         </div>
         <div class="form-group row">
             <label for="titleInput" class="col-sm-1 col-form-label">描述</label>
             <div class="col-sm-11">
-                <input type="text" class="form-control" name="description" id="titleInput" placeholder="描述">
+                <input type="text" class="form-control" value="${(article.description)!}" name="description"
+                       id="titleInput" placeholder="描述">
             </div>
         </div>
 
         <div class="form-group row">
             <label for="comment" class="col-sm-1 col-form-label">评论</label>
             <div class="col-sm-5">
-                <input type="checkbox" class="check-switch check-switch-anim mt-2" name="comment" id="comment">
+                <input type="checkbox" ${((article.comment)?string('checked',''))!}
+                       class="check-switch check-switch-anim mt-2" name="comment" id="comment">
             </div>
             <label for="top" class="col-sm-1 col-form-label">置顶</label>
             <div class="col-sm-5">
-                <input type="checkbox" class="check-switch check-switch-anim mt-2" name="top" id="top">
+                <input type="checkbox" ${((article.top)?string('checked',''))!}
+                       class="check-switch check-switch-anim mt-2" name="top" id="top">
             </div>
 
         </div>
@@ -79,6 +87,8 @@
         }
 
     });
+    var value = $('#content_hid').val();
+    simplemde.value(value);
     $('#tag_select').select2({
         ajax: {
             url: '/tag/all',
@@ -90,11 +100,33 @@
                     data_select.push({id: value.id, text: value.name});
                 });
                 return {
-                    results:data_select
+                    results: data_select
                 };
             },
-            cache:true
+            cache: true
         }
+    });
+    $.get({
+                url: '/tag/' + $('#aid_hide').val()
+            }
+    ).then(function (res) {
+        console.log(res);
+        var data = res.data;
+        // create the option and append to Select2
+        $.each(data, function (i, value) {
+
+            var option = new Option(value.name, value.id, true, true);
+            $('#tag_select').append(option).trigger('change');
+        });
+
+        // manually trigger the `select2:select` event
+        $('#tag_select').trigger({
+            type: 'select2:select',
+            params: {
+                data: data
+            }
+        });
+
     });
     $('#publish_btn').click(function (e) {
         e.preventDefault();
@@ -106,7 +138,7 @@
             data: data,
             success: function (res) {
                 alert("添加文章成功");
-                window.location.href='/admin/article/write';
+                window.location.href = '/admin/article/write';
             }
         })
     });
@@ -114,8 +146,13 @@
         url: '/type/child',
         success: function (res) {
             var data = res.data;
+            var typeId = $('#type_hide').val();
             $.each(data, function (i, value) {
-                $('#type_select').append('<option value="' + value.id + '">' + value.name + '</option>')
+                if (value.id == typeId) {
+                    $('#type_select').append('<option selected value="' + value.id + '">' + value.name + '</option>');
+                } else {
+                    $('#type_select').append('<option value="' + value.id + '">' + value.name + '</option>');
+                }
             })
 
         }

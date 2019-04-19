@@ -25,12 +25,12 @@
 <script>
     window.operateEvents = {
         'click .article-edit ': function (e, value, row, index) {
-            console.log(JSON.stringify(value));
+            window.location.href='/admin/article/update/'+row.id;
             e.preventDefault();
         },
         'click .article-delete': function (e, value, row, index) {
             console.log(JSON.stringify(row));
-            deleteArticle(row.id);
+            // deleteArticle(row.id);
             e.preventDefault();
         }
     };
@@ -39,6 +39,7 @@
             url:'/article/delete',
             data:{ids:ids},
             dataType:'json',
+            traditional: true,
             success:function (res) {
                 alert(res.msg);
                 $('button[name="refresh"]').click();
@@ -134,18 +135,16 @@
     }
 
     function comment_check(value, row, index) {
-        return common_check(value);
+        return common_check(row.comment);
     }
     function top_check(value, row, index) {
-        return common_check(value);
+        return common_check(row.top);
     }
     function common_check(value) {
-        var checkbox = '<input type="checkbox" class="check-switch check-switch-anim" >';
         if (value) {
-            $(checkbox).attr('checked');
-            return checkbox;
+            return '<input type="checkbox" checked class="check-switch check-switch-anim" >';
         } else {
-            return checkbox;
+            return '<input type="checkbox" class="check-switch check-switch-anim" >';
         }
 
     }
@@ -156,7 +155,6 @@
         $.each(rows,function (i, value) {
             ids[i] =value.id;
         });
-        console.log(ids);
         deleteArticle(ids);
     })
 
