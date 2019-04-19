@@ -27,6 +27,19 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    public void toPublish(Integer[] ids) {
+        for (Integer id : ids) {
+            Article article = articleMapper.selectByPrimaryKey(id);
+            if (article.getStatus() == null || article.getStatus() == 1) {
+                article.setStatus(0);
+                articleMapper.updateByPrimaryKey(article);
+            }
+
+        }
+
+    }
+
+    @Override
     public int delete(Integer aid) {
         articleTagMapper.deleteByAid(aid);
         return articleMapper.deleteByPrimaryKey(aid);

@@ -9,10 +9,10 @@
     <form action="/">
         <div class="form-group">
             <div id="toolbar" class="btn-group">
-                <button id="btn_edit" type="button" class="btn btn-light">
+                <button id="batch_publish" type="button" class="btn btn-light">
                     <i class="fa fa-plane" aria-hidden="true"></i> 批量发布
                 </button>
-                <button id="btn_delete" type="button" class="btn btn-light">
+                <button id="batch_delete" type="button" class="btn btn-light">
                     <i class="fa fa-minus" aria-hidden="true"></i> 批量删除
                 </button>
             </div>
@@ -172,20 +172,20 @@
 
     function comment_check(value, row, index) {
         if (row.comment) {
-            return '<input type="checkbox" role="button" checked class="check-switch check-switch-anim .update-comment" >';
+            return '<input type="checkbox" role="button" checked class="check-switch check-switch-anim update-comment" >';
         }else {
-            return '<input type="checkbox" class="check-switch check-switch-anim .update-comment" >';
+            return '<input type="checkbox" class="check-switch check-switch-anim update-comment" >';
         }
     }
     function top_check(value, row, index) {
         if (row.top) {
-            return '<input type="checkbox" checked class="check-switch check-switch-anim .update-top" >';
+            return '<input type="checkbox" checked class="check-switch check-switch-anim update-top" >';
         }else {
-            return '<input type="checkbox" class="check-switch check-switch-anim .update-top" >';
+            return '<input type="checkbox" class="check-switch check-switch-anim update-top" >';
         }
 
     }
-    $('#btn_delete').click(function (e) {
+    $('#batch_delete').click(function (e) {
         e.preventDefault();
         var rows = $('#article_table').bootstrapTable('getSelections');
         var ids =[];
@@ -194,10 +194,27 @@
         });
         deleteArticle(ids);
     });
-    $('.update-comment').click(function () {
-        alert("good");
+    $('#batch_publish').click(function (e) {
+        e.preventDefault();
+        var rows = $('#article_table').bootstrapTable('getSelections');
+        var ids =[];
+        $.each(rows,function (i, value) {
+            ids[i] =value.id;
+        });
+        batchPublishArticle(ids)
     });
+    function batchPublishArticle(ids) {
+        $.post({
+            url:'/article/topublish',
+            data:{ids:ids},
+            dataType:'json',
+            traditional: true,
+            success:function (res) {
+                alert(res.msg);
+                $('button[name="refresh"]').click();
+            }
+        });
 
-
+    }
 </script>
 </@footer>

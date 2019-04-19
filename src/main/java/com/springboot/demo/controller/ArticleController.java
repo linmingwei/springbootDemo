@@ -32,7 +32,7 @@ public class ArticleController {
     @PostMapping("/publish")
     @ResponseBody
     @Transactional
-    public ResponseVo publishArticle(Article article, @RequestParam(value = "tagIds",required = false) Integer[] tagIds) {
+    public ResponseVo publishArticle(Article article, @RequestParam(value = "tagIds", required = false) Integer[] tagIds) {
         if (article.getId() == null) {
             articleService.insert(article);
             if (tagIds != null && tagIds.length != 0) {
@@ -74,18 +74,38 @@ public class ArticleController {
         }
         return ResponseVo.success("共删除" + ids.length + "篇文章");
     }
+
     @PostMapping("/update/top")
-    public ResponseVo updateTop(@RequestParam("id")Integer aid) {
+    @ResponseBody
+    public ResponseVo updateTop(@RequestParam("id") Integer aid) {
         Article article = articleService.getById(aid);
-        article.setTop(!article.getTop());
+        if (article.getTop() == null) {
+            article.setTop(false);
+        } else {
+
+            article.setTop(!article.getTop());
+        }
         articleService.update(article);
         return ResponseVo.success();
     }
+
     @PostMapping("/update/comment")
-    public ResponseVo updateComment(@RequestParam("id")Integer aid) {
+    @ResponseBody
+    public ResponseVo updateComment(@RequestParam("id") Integer aid) {
         Article article = articleService.getById(aid);
-        article.setComment(!article.getComment());
+        if (article.getComment() == null) {
+            article.setComment(false);
+        } else {
+            article.setComment(!article.getComment());
+        }
         articleService.update(article);
         return ResponseVo.success();
+    }
+
+    @PostMapping("/topublish")
+    @ResponseBody
+    public ResponseVo toPublish(@RequestParam("ids") Integer[] ids) {
+        articleService.toPublish(ids);
+        return ResponseVo.success("发布文章成功");
     }
 }

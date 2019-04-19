@@ -19,4 +19,6 @@ public interface ArticleService {
     int delete(Integer aid);
 
     Article getById(Integer aid);
+
+    void toPublish(Integer[] ids);
 }
