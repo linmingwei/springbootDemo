@@ -56,4 +56,7 @@
     `comment`, `top`, `order`
     from article
   </select>
+    <select id="count" resultType="java.lang.Integer">
+      select COUNT(*) from article;
+    </select>
 </mapper>

@@ -40,6 +40,11 @@
     from type
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectByPid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, `name`, description, pid, createTime, updateTime, `order`
+    from type
+    where pid = #{pid,jdbcType=INTEGER}
+  </select>
   <select id="selectAll" resultMap="BaseResultMap">
     select id, `name`, description, pid, createTime, updateTime, `order`
     from type

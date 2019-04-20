@@ -21,4 +21,6 @@ public interface ArticleService {
     Article getById(Integer aid);
 
     void toPublish(Integer[] ids);
+
+    int count();
 }

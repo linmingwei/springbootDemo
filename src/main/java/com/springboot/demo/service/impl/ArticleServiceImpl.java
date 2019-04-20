@@ -27,6 +27,11 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    public int count() {
+        return articleMapper.count();
+    }
+
+    @Override
     public void toPublish(Integer[] ids) {
         for (Integer id : ids) {
             Article article = articleMapper.selectByPrimaryKey(id);

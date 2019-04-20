@@ -6,6 +6,7 @@ import com.springboot.demo.entity.Tag;
 import com.springboot.demo.service.ArticleService;
 import com.springboot.demo.service.ArticleTagService;
 import com.springboot.demo.service.TagService;
+import com.springboot.demo.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,13 +33,18 @@ public class AdminController {
     private ArticleTagService articleTagService;
     @Autowired
     private TagService tagService;
+    @Autowired
+    private TypeService typeService;
     @GetMapping("")
     public String login() {
         return "admin/login";
     }
 
     @GetMapping("/home")
-    public String home() {
+    public String home(Model model) {
+        model.addAttribute("articleCount",articleService.count());
+        model.addAttribute("tagCount",tagService.count());
+        model.addAttribute("typeCount",typeService.count());
         return "admin/home";
     }
 

@@ -1,6 +1,8 @@
 package com.springboot.demo.mapper;
 
 import com.springboot.demo.entity.Article;
+import org.apache.ibatis.annotations.Select;
+
 import java.util.List;
 
 public interface ArticleMapper {
@@ -13,4 +15,7 @@ public interface ArticleMapper {
     List<Article> selectAll();
 
     int updateByPrimaryKey(Article record);
+
+//    @Select("select count(*) from article")
+    int count();
 }

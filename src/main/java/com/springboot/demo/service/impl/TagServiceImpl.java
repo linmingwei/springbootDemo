@@ -22,6 +22,27 @@ public class TagServiceImpl implements TagService {
     private TagMapper tagMapper;
     @Autowired
     private ArticleTagMapper articleTagMapper;
+
+    @Override
+    public int count() {
+        return tagMapper.count();
+    }
+
+    @Override
+    public int delete(Integer id) {
+        return  tagMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public int update(Tag tag) {
+        return tagMapper.updateByPrimaryKey(tag);
+    }
+
+    @Override
+    public int insert(Tag tag) {
+        return tagMapper.insert(tag);
+    }
+
     @Override
     public List<Tag> list() {
         return tagMapper.selectAll();

@@ -10,5 +10,13 @@ import java.util.List;
  * @Description:
  */
 public interface TypeService {
-    List<Type> list(boolean all);
+    List<Type> list(Integer filter);
+
+    int insert(Type type);
+
+    int update(Type type);
+
+    int delete(Integer id);
+
+    int count();
 }

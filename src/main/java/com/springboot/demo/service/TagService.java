@@ -16,4 +16,12 @@ public interface TagService {
     Tag getById(Integer i);
 
     List<Tag> getByAid(Integer aid);
+
+    int insert(Tag tag);
+
+    int update(Tag tag);
+
+    int delete(Integer id);
+
+    int count();
 }

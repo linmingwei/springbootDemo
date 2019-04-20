@@ -1,6 +1,8 @@
 package com.springboot.demo.mapper;
 
 import com.springboot.demo.entity.Tag;
+import org.apache.ibatis.annotations.Select;
+
 import java.util.List;
 
 public interface TagMapper {
@@ -13,4 +15,7 @@ public interface TagMapper {
     List<Tag> selectAll();
 
     int updateByPrimaryKey(Tag record);
+
+    @Select("select count(*) from tag")
+    int count();
 }

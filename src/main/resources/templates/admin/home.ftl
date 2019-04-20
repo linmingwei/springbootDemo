@@ -5,9 +5,9 @@
 
 <div class=" d-flex justify-content-between flex-wrap">
     <div class="shadow-sm bg-white rounded item">
-        <a href="#" class="d-flex p-2 align-items-center">
+        <a href="/admin/article/list" class="d-flex p-2 align-items-center">
             <div class="item-count ml-3 mr-5">
-                <h2>4</h2>
+                <h2>${articleCount!0}</h2>
                 <h6>文章</h6>
             </div>
             <div class="item-icon ml-5 mr-2">
@@ -16,9 +16,9 @@
         </a>
     </div>
     <div class="shadow-sm bg-white rounded item">
-        <a href="#" class="d-flex p-2 align-items-center">
+        <a href="/admin/article/type" class="d-flex p-2 align-items-center">
             <div class="item-count ml-3 mr-5">
-                <h2>4</h2>
+                <h2>${typeCount!0}</h2>
                 <h6>分类</h6>
             </div>
             <div class="item-icon ml-5 mr-2">
@@ -27,9 +27,9 @@
         </a>
     </div>
     <div class="shadow-sm bg-white rounded item">
-        <a href="#" class="d-flex p-2 align-items-center">
+        <a href="/admin/article/tag" class="d-flex p-2 align-items-center">
             <div class="item-count ml-3 mr-5">
-                <h2>4</h2>
+                <h2>${tagCount!0}</h2>
                 <h6>标签</h6>
             </div>
             <div class="item-icon ml-5 mr-2">
@@ -38,7 +38,7 @@
         </a>
     </div>
     <div class="shadow-sm bg-white rounded item">
-        <a href="#" class="d-flex p-2 align-items-center">
+        <a href="/admin/article/comment" class="d-flex p-2 align-items-center">
             <div class="item-count ml-3 mr-5">
                 <h2>4</h2>
                 <h6>评论</h6>

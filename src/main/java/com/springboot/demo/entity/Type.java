@@ -19,6 +19,16 @@ public class Type {
 
     private Integer order;
 
+    private Type parent;
+
+    public Type getParent() {
+        return parent;
+    }
+
+    public void setParent(Type parent) {
+        this.parent = parent;
+    }
+
     public Integer getId() {
         return id;
     }

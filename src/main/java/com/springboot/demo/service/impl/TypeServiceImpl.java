@@ -3,6 +3,7 @@ package com.springboot.demo.service.impl;
 import com.springboot.demo.entity.Type;
 import com.springboot.demo.mapper.TypeMapper;
 import com.springboot.demo.service.TypeService;
+import com.springboot.demo.vo.ResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,14 +19,40 @@ import java.util.stream.Collectors;
 public class TypeServiceImpl implements TypeService {
     @Autowired
     private TypeMapper typeMapper;
+
     @Override
-    public List<Type> list(boolean all) {
+    public int count() {
+        return typeMapper.count();
+    }
+
+    @Override
+    public int delete(Integer id) {
+        return typeMapper.deleteByPrimaryKey(id);
+
+    }
+
+    @Override
+    public int update(Type type) {
+        return typeMapper.updateByPrimaryKey(type);
+    }
+
+    @Override
+    public int insert(Type type) {
+        return typeMapper.insert(type);
+    }
+
+    @Override
+    public List<Type> list(Integer filter) {
         List<Type> types = typeMapper.selectAll();
-        if (all) {
+        if (filter == null) {
             return types;
-        }else {
+        }else if (filter == 1){
             List<Type> childTypes = types.stream().filter(type -> type.getPid() != 0).collect(Collectors.toList());
             return childTypes;
+        } else if (filter == 0) {
+            List<Type> parentTypes = types.stream().filter(type -> type.getPid() == 0).collect(Collectors.toList());
+            return parentTypes;
         }
+        return null;
     }
 }
