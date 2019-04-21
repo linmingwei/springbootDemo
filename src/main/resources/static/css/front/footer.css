@@ -1,0 +1,10 @@
+/*-----------------------------------------footer*/
+.footer-info{
+    border-top: 1px solid #ddd;
+    box-shadow: 0 -1px 1px rgba(0, 0, 0, 0.03);
+    min-height: 30px;
+    line-height: 30px;
+    margin-bottom: 0!important;
+    margin-top: 20px!important;
+}
+/*-----------------------------------------footer*/

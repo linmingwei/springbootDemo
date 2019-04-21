@@ -1,0 +1,61 @@
+.layui-nav .layui-nav-item{
+    line-height: 80px!important;
+}
+.layui-nav-item .layui-nav-child{
+    top: 80px!important;
+
+}
+.layui-nav-item .layui-nav-child a{
+    color: #006759 !important;
+    font-size: 15px!important;
+    font-weight: lighter!important;
+}
+.container{
+    width: 100%!important;
+    padding-left: 6% !important;
+    padding-right: 6% !important;
+}
+/*blog header begin*/
+.blog-header{
+    background-color: white;
+    line-height: 80px;
+    height: 80px;
+    padding-left: 6%;
+    padding-right:6%;
+    box-shadow: 0 1px 0 rgba(0,0,0,.1);
+    z-index: 999;
+
+}
+.brand-title{
+    display: inline-block;
+    color: #007769;
+
+}
+.blog-nav{
+    background: none;
+}
+.blog-nav a{
+    font-size: 16px!important;
+
+
+    color: #007769!important;
+}
+.blog-nav a:hover{
+    color: #004f44 !important;
+}
+#search{
+    display: inline;
+    width: auto;
+    vertical-align: middle;
+}
+
+.blog-banner{
+    background: #fff;
+    margin: 15px 0 10px 0;
+    height: 35px;
+    line-height: 35px;
+    border-radius: 3px;
+    padding: 0 0 0 10px;
+
+}
+/*blog header End*/
