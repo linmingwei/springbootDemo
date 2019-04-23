@@ -19,4 +19,6 @@ public interface TypeService {
     int delete(Integer id);
 
     int count();
+
+    List<Type> withChildren();
 }

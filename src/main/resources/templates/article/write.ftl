@@ -134,7 +134,7 @@
     });
     $('#publish_btn').click(function (e) {
         e.preventDefault();
-        publish_article()
+        publish_article('&status=0')
     });
     function publish_article(ext){
         var data = $('#article_form').serialize();

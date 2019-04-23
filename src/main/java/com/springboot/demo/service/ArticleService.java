@@ -3,6 +3,7 @@ package com.springboot.demo.service;
 import com.springboot.demo.entity.Article;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Auther: mingweilin
@@ -10,7 +11,7 @@ import java.util.List;
  * @Description:
  */
 public interface ArticleService {
-    List<Article> list();
+    List<Article> list(Map map);
 
     int insert(Article article);
 

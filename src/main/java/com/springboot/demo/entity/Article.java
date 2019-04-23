@@ -17,9 +17,9 @@ public class Article {
 
     private String description;
 
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateTime;
 
     private Integer typeId;
@@ -29,6 +29,26 @@ public class Article {
     private Boolean top;
 
     private Integer order;
+
+    private Integer look;
+
+    private Integer favorate;
+
+    public Integer getLook() {
+        return look;
+    }
+
+    public void setLook(Integer look) {
+        this.look = look;
+    }
+
+    public Integer getFavorate() {
+        return favorate;
+    }
+
+    public void setFavorate(Integer favorate) {
+        this.favorate = favorate;
+    }
 
     public Integer getId() {
         return id;
@@ -69,7 +89,8 @@ public class Article {
     public void setDescription(String description) {
         this.description = description == null ? null : description.trim();
     }
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     public Date getCreateTime() {
         return createTime;
     }
@@ -77,7 +98,8 @@ public class Article {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     public Date getUpdateTime() {
         return updateTime;
     }

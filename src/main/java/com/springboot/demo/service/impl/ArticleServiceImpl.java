@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Auther: mingweilin
@@ -61,8 +62,8 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<Article> list() {
-        List<Article> articles = articleMapper.selectAll();
+    public List<Article> list(Map map) {
+        List<Article> articles = articleMapper.selectAll(null);
         return articles;
     }
 }

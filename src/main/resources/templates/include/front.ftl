@@ -14,7 +14,7 @@
     <#nested >
     <title>Blog小站</title>
 </head>
-<body class="bg-light">
+<body style="background-color: #f3f6f8;">
     <#include "/front/header.ftl">
 </#macro>
 

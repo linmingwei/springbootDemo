@@ -127,6 +127,7 @@
 /*blog header End*/
 .blog-banner a:hover{
     color: #007769;
+    text-decoration: none;
 }
 .blog-carousel{
     margin-bottom: 15px;

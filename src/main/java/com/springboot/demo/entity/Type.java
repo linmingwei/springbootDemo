@@ -1,9 +1,12 @@
 package com.springboot.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.ToString;
 
+import java.util.ArrayList;
 import java.util.Date;
-
+import java.util.List;
+@ToString
 public class Type {
     private Integer id;
 
@@ -20,6 +23,16 @@ public class Type {
     private Integer order;
 
     private Type parent;
+
+    private List<Type> children = new ArrayList<>();
+
+    public List<Type> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<Type> children) {
+        this.children = children;
+    }
 
     public Type getParent() {
         return parent;

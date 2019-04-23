@@ -3,105 +3,68 @@
 
 </@header>
 <div class="blog-body">
-    <div class="container">
+    <div class="container  p-0 mw-80">
         <div class="blog-banner">
             <i class="fa fa-volume-up" style="color:#007769">&nbsp;&nbsp;</i>
-            <a href="#banner">This is a Bannner</a>
+            <a href="#banner" class="text-success">This is a Bannner</a>
         </div>
-        <div class="row layui-col-space20">
-            <div class="col-8 ">
-                <div class="blog-carousel">
-
-                    <div class="layui-carousel" id="carousel" style="height: 280px;">
-                        <div carousel-item>
-                            <a href="#">
-                                <img src="/static/images/item1.jpg" alt="none">
-                            </a>
-                            <div><a href="#">
-                                <img src="/static/images/item2.jpg" alt="none">
-                            </a></div>
-                            <div><a href="#">
-                                <img src="/static/images/item3.jpg" alt="none">
-                            </a></div>
+        <div class="row" style="margin-right: 0px;">
+            <div class="col-9 ">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="/static/images/item1.jpg" height="500px" class="d-block w-100" alt="...">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>First slide label</h5>
+                                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="/static/images/item2.jpg" height="500px" class="d-block w-100" alt="...">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Second slide label</h5>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="/static/images/item3.jpg" height="500px" class="d-block w-100" alt="...">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Third slide label</h5>
+                                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                            </div>
                         </div>
                     </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
-                <article class="blog-article">
-                    <div class="thumbnail">
-                        <a href="#img">
-                            <img src="/static/images/20181024185055343.jpg" alt="none">
-                        </a>
-                        <span class="cata"><a href="#cata">
-                            Java
-                        </a></span>
-                    </div>
-                    <div class="article-header">
-                        <h1 class="text-truncate"><a href="#">
-                            Article Header
-                            Let me not to the marriage of true minds
-                            Admit impediments. Love is not love
-                            Which alters when it alteration finds,
-                            Or bends with the remover to remove:
-                            O, no! it is an ever-fix`ed mark,
-                            That looks on tempests and is never shaken;
-                            It is the star to every wand'ring bark,
-                            Whose worth's unknown, although his heighth be taken.
-                            Love's not Time's fool, though rosy lips and cheeks
-                            Within his bending sickle's compass come;
-                            Love alters not with his brief hours and weeks,
-                            But bears it out even to the edge of doom:
-                            If this be error and upon me proved,
-                            I never writ, nor no man ever loved.
-                        </a></h1>
-                    </div>
-                    <div class="article-content ">
-                        Let me not to the marriage of true minds
-                        Admit impediments. Love is not love
-                        Which alters when it alteration finds,
-                        Or bends with the remover to remove:
-                        O, no! it is an ever-fix`ed mark,
-                        That looks on tempests and is never shaken;
-                        It is the star to every wand'ring bark,
-                        Whose worth's unknown, although his heighth be taken.
-                        Love's not Time's fool, though rosy lips and cheeks
-                        Within his bending sickle's compass come;
-                        Love alters not with his brief hours and weeks,
-                        But bears it out even to the edge of doom:
-                        If this be error and upon me proved,
-                        I never writ, nor no man ever loved.
-                        Let me not to the marriage of true minds
-                        Admit impediments. Love is not love
-                        Which alters when it alteration finds,
-                        Or bends with the remover to remove:
-                        O, no! it is an ever-fix`ed mark,
-                        That looks on tempests and is never shaken;
-                        It is the star to every wand'ring bark,
-                        Whose worth's unknown, although his heighth be taken.
-                        Love's not Time's fool, though rosy lips and cheeks
-                        Within his bending sickle's compass come;
-                        Love alters not with his brief hours and weeks,
-                        But bears it out even to the edge of doom:
-                        If this be error and upon me proved,
-                        I never writ, nor no man ever loved.
-                    </div>
-                    <span class="article-meta">
-                        <i class="layui-icon layui-icon-date"></i>
-                        <span class="inl">2018-10-29</span>&nbsp;&nbsp;
-                        <i class="fa fa-eye" aria-hidden="true"></i>
-                        <span>浏览(20)</span>&nbsp;&nbsp;
-                        <i class="fa fa-comments-o" aria-hidden="true"></i>
-                        <span>0</span>
-                    </span>
-                    <span class="readArt">
-                        <a href="#read" style="color: #ffffff;">阅读全文</a>
-                    </span>
+                <#list articles as article>
 
-                </article>
+                <div class="media rounded p-3 bg-white shadow-sm mt-3">
+                    <img class="mr-3" src="/static/images/20181024185055343.jpg" height="150" width="150" alt="Generic placeholder image">
+                    <div class="media-body pr-1" style="min-width: calc(100% - 180px);max-height: 150px;overflow: hidden;">
+                        <h5 class="mt-0 text-truncate">
+                            ${article.title}
+                        </h5>
+                        ${article.content}
+                    </div>
+                </div>
+                </#list>
                 <div id="pagination"></div>
 
             </div>
 
-            <div class="col-4 ">
+            <div class="col-3  ">
                 <!--<div style="height: 5px;"></div>-->
                 <div class="row">
 
@@ -116,7 +79,7 @@
                             </div>
                         </div>
                         <div class="col-8 blog-owner-info">
-                            <h1>LinDD</h1>
+                            <h1>Lin</h1>
                             <p>一个程序员的个人博客，心之所向，无所不能一个程序员的个人博客，心之所向，无所不能一个程序员的个人博客，心之所向，无所不能</p>
                         </div>
                         <div class="clearfix"></div>

@@ -4,6 +4,7 @@ import com.springboot.demo.entity.Article;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ArticleMapper {
     int deleteByPrimaryKey(Integer id);
@@ -12,7 +13,7 @@ public interface ArticleMapper {
 
     Article selectByPrimaryKey(Integer id);
 
-    List<Article> selectAll();
+    List<Article> selectAll(Map map);
 
     int updateByPrimaryKey(Article record);
 

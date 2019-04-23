@@ -1,5 +1,7 @@
 package com.springboot.demo.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.springboot.demo.entity.Article;
 import com.springboot.demo.service.ArticleService;
 import com.springboot.demo.service.ArticleTagService;
 import com.springboot.demo.service.TagService;
@@ -7,10 +9,11 @@ import com.springboot.demo.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Auther: mingweilin
@@ -28,11 +31,18 @@ public class IndexController {
     @Autowired
     private TypeService typeService;
     @RequestMapping("/")
-    public String  home(Model model) {
-        model.addAttribute("typeParent",typeService.list(0));
-        model.addAttribute("typeChild",typeService.list(1));
-        model.addAttribute("tag",tagService.list());
-        model.addAttribute("article",articleService.list());
+    public String  home(Model model, @RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum,
+                        @RequestParam(value = "pageSize",defaultValue = "10")Integer pageSize) {
+        model.addAttribute("typeParent",typeService.withChildren());
+        System.out.println(typeService.withChildren());
+        model.addAttribute("tags",tagService.list());
+//        PageHelper.startPage(pageNum,pageSize);
+        Map<String,String>  params = new HashMap<>();
+        params.put("order","look");
+        params.put("desc","desc");
+        List<Article> articles = articleService.list(params);
+
+        model.addAttribute("articles",articles);
         return "front/index";
     }
     @RequestMapping(value = "/index")
