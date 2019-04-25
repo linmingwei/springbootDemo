@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="/static/css/front/index.css">
 </@header>
 <div class="blog-body">
-    <div class="container  p-0 mw-80">
+    <div class="container  p-0 mw-100">
         <div class="row" style="margin-right: 0px;">
             <div class="col-9 ">
                 <div class="blog-banner">
@@ -131,35 +131,43 @@
                 </div>
                 <!--文章列表-->
                 <div class="blog-panel article-list">
-                    <div class="layui-tab">
-                        <ul class="layui-tab-title list-unstyled d-flex flex-row">
-                            <li class="layui-this"><i class="fa fa-th-list"></i> 网站设置</li>
-                            <li><i class="fa fa-thumbs-o-up"></i> 用户管理</li>
-                            <li><i class="fa fa-hand-peace-o"></i> 权限分配</li>
-                        </ul>
-                        <div class="layui-tab-content">
-                            <div class="layui-tab-item layui-show">
-                                <ul class="article-list">
-                                    <li>
-                                        <a href="#" class="text-truncate">Java是世界上最好的语言Java是世界上最好的语言Java是世界上最好的语言</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Java是世界上最好的语言</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Java是世界上最好的语言</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Java是世界上最好的语言</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Java是世界上最好的语言</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="layui-tab-item">内容2</div>
-                            <div class="layui-tab-item">内容3</div>
+                    <ul class="nav nav-tabs justify-content-around flex-nowrap" id="myTab" role="tablist" >
+                        <li class="nav-item">
+                            <a class="nav-link active border-0 text-dark" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
+                              <i class="fa fa-list"></i>  近期文章</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link border-0 text-dark" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
+                               <i class="fa fa-thumbs-up"></i> 站长推荐</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link border-0 text-dark" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">
+                               <i class="fa fa-hand-peace-o"></i> 随机文章</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <ul class="article-list list-unstyled ">
+                                <li>
+                                    <a href="#" class="text-truncate">Java是世界上最好的语言Java是世界上最好的语言Java是世界上最好的语言</a>
+                                </li>
+                                <li>
+                                    <a href="#">Java是世界上最好的语言</a>
+                                </li>
+                                <li>
+                                    <a href="#">Java是世界上最好的语言</a>
+                                </li>
+                                <li>
+                                    <a href="#">Java是世界上最好的语言</a>
+                                </li>
+                                <li>
+                                    <a href="#">Java是世界上最好的语言</a>
+                                </li>
+                            </ul>
+
                         </div>
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
                     </div>
                 </div>
                 <!--博客信息-->

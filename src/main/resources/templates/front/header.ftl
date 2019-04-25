@@ -1,5 +1,5 @@
 <header class="bg-white border-bottom py-1 ">
-    <div class="container px-0 mw-80">
+    <div class="container px-0 mw-100">
 
         <nav class="navbar navbar-expand-lg navbar-light px-0 py-2 ">
             <a class="navbar-brand" href="/">BLOG</a>
