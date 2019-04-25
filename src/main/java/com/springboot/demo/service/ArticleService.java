@@ -24,4 +24,6 @@ public interface ArticleService {
     void toPublish(Integer[] ids);
 
     int count();
+
+    List<Article> order();
 }

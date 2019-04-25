@@ -36,12 +36,11 @@ public class IndexController {
         model.addAttribute("typeParent",typeService.withChildren());
         System.out.println(typeService.withChildren());
         model.addAttribute("tags",tagService.list());
-//        PageHelper.startPage(pageNum,pageSize);
+        PageHelper.startPage(pageNum,pageSize);
         Map<String,String>  params = new HashMap<>();
         params.put("order","look");
-        params.put("desc","desc");
+        params.put("type","desc");
         List<Article> articles = articleService.list(params);
-
         model.addAttribute("articles",articles);
         return "front/index";
     }

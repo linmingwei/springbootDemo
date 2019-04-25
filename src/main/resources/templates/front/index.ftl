@@ -1,15 +1,15 @@
 <#include "/include/front.ftl"/>
 <@header >
-
+<link rel="stylesheet" href="/static/css/front/index.css">
 </@header>
 <div class="blog-body">
     <div class="container  p-0 mw-80">
-        <div class="blog-banner">
-            <i class="fa fa-volume-up" style="color:#007769">&nbsp;&nbsp;</i>
-            <a href="#banner" class="text-success">This is a Bannner</a>
-        </div>
         <div class="row" style="margin-right: 0px;">
             <div class="col-9 ">
+                <div class="blog-banner">
+                    <i class="fa fa-volume-up" style="color:#007769">&nbsp;&nbsp;</i>
+                    <a href="#banner" class="text-success">This is a Bannner</a>
+                </div>
                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
                         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -51,83 +51,80 @@
                 <#list articles as article>
 
                 <div class="media rounded p-3 bg-white shadow-sm mt-3">
-                    <img class="mr-3" src="/static/images/20181024185055343.jpg" height="150" width="150" alt="Generic placeholder image">
-                    <div class="media-body pr-1" style="min-width: calc(100% - 180px);max-height: 150px;overflow: hidden;">
+                    <img class="mr-3" src="/static/images/20181024185055343.jpg" height="150" width="150"
+                         alt="Generic placeholder image">
+                    <div class="media-body pr-1"
+                         style="min-width: calc(100% - 180px);max-height: 150px;overflow: hidden;">
                         <h5 class="mt-0 text-truncate">
-                            ${article.title}
+                            <a href="/article/${article.id}" class="text-dark">${article.title}</a>
                         </h5>
                         ${article.content}
                     </div>
                 </div>
                 </#list>
-                <div id="pagination"></div>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    </ul>
+                </nav>
 
             </div>
 
-            <div class="col-3  ">
+            <div class="col-3 mt-3 ">
                 <!--<div style="height: 5px;"></div>-->
-                <div class="row">
+                <div class="shadow-sm rounded bg-white ">
+                    <div class="panel-title pt-2 px-2">
+                        <h5>
+                            <i class="fa fa-tags" aria-hidden="true"></i>
+                            <span class="">关于我</span>
+                        </h5>
+                        <hr>
 
-                    <div class="blog-owner bg-white">
-                        <div class="col-4">
-
-                            <div class="head-photo text-center">
-                                <a href="#img">
-                                    <img src="/static/images/20181024185055343.jpg" alt="none">
-                                </a>
-
-                            </div>
-                        </div>
-                        <div class="col-8 blog-owner-info">
-                            <h1>Lin</h1>
-                            <p>一个程序员的个人博客，心之所向，无所不能一个程序员的个人博客，心之所向，无所不能一个程序员的个人博客，心之所向，无所不能</p>
-                        </div>
-                        <div class="clearfix"></div>
-                        <ul class="social ">
-                            <li><a href="#social-weixin" class="weixin-icon ">
-                                <i class="fa fa-weixin fa-2x" aria-hidden="true"></i>
-                            </a></li>
-                            <li><a href="#social-qq " class="qq-icon">
-                                <i class="fa fa-qq fa-2x" aria-hidden="true"></i>
-                            </a></li>
-                            <li><a href="#social-weibo" class="weibo-icon">
-                                <i class="fa fa-weibo fa-2x" aria-hidden="true"></i>
-                            </a></li>
-                            <li><a href="#social-github " class="github-icon">
-                                <i class="fa fa-github fa-2x" aria-hidden="true"></i>
-                            </a></li>
-                        </ul>
                     </div>
+                    <div class="media pl-3" style="font-size: 13px;">
+                        <img class="mr-3 rounded-circle" src="/static/images/20181024185055343.jpg" width="60" height="60" alt="avater">
+                        <div class="media-body">
+                            <h5 class="mt-0 text-dark">BLOG</h5>
+                            一个程序员的个人博客，心之所向，无所不能
+                        </div>
+                    </div>
+                    <ul class="social px-2 pb-3 justify-content-around d-flex flex-row list-unstyled ">
+                        <li><a href="#social-weixin" class="weixin-icon ">
+                            <i class="fa fa-weixin fa-2x" aria-hidden="true"></i>
+                        </a></li>
+                        <li><a href="#social-qq " class="qq-icon">
+                            <i class="fa fa-qq fa-2x" aria-hidden="true"></i>
+                        </a></li>
+                        <li><a href="#social-weibo" class="weibo-icon">
+                            <i class="fa fa-weibo fa-2x" aria-hidden="true"></i>
+                        </a></li>
+                        <li><a href="#social-github " class="github-icon">
+                            <i class="fa fa-github fa-2x" aria-hidden="true"></i>
+                        </a></li>
+                    </ul>
+
                 </div>
+
                 <!--标签云-->
                 <div class="blog-panel blog-tag bg-white">
                     <div class="panel-title">
                         <h5>
                             <i class="fa fa-tags" aria-hidden="true"></i>
-                            <span class="font-strong">文章标签</span>
+                            <span class="">文章标签</span>
                         </h5>
                         <hr>
 
                     </div>
                     <div class="tag-body">
                         <div class="tag-content">
-                            <a href="#tag" class="border-gray">Java</a>
-                            <a href="#tag" class="border-gray">Java</a>
-                            <a href="#tag" class="border-gray">Java</a>
-                            <a href="#tag" class="border-gray">Java</a>
-                            <a href="#tag" class="border-gray">Java</a>
-                            <a href="#tag" class="border-gray">Java</a>
-                            <a href="#tag" class="border-gray">Java</a>
-                            <a href="#tag" class="border-gray">god</a>
-                            <a href="#tag" class="border-gray">Java</a>
-                            <a href="#tag" class="border-gray">Java</a>
-                            <a href="#tag" class="border-gray">Java</a>
-                            <a href="#tag" class="border-gray">Java</a>
-                            <a href="#tag" class="border-gray">Java</a>
-                            <a href="#tag" class="border-gray">Java</a>
-                            <a href="#tag" class="border-gray">Java</a>
-                            <a href="#tag" class="border-gray">Java</a>
-                            <a href="#tag" class="border-gray">Java</a>
+                            <#list tags as tag>
+
+                            <a href="#tag" class="border-gray text-decoration-none">${tag.name}</a>
+                            </#list>
                         </div>
                     </div>
 
@@ -135,7 +132,7 @@
                 <!--文章列表-->
                 <div class="blog-panel article-list">
                     <div class="layui-tab">
-                        <ul class="layui-tab-title">
+                        <ul class="layui-tab-title list-unstyled d-flex flex-row">
                             <li class="layui-this"><i class="fa fa-th-list"></i> 网站设置</li>
                             <li><i class="fa fa-thumbs-o-up"></i> 用户管理</li>
                             <li><i class="fa fa-hand-peace-o"></i> 权限分配</li>
@@ -170,7 +167,7 @@
                     <div class="panel-title">
                         <h5>
                             <i class="fa fa-info-circle"></i>
-                            <span class="font-strong">博客信息</span>
+                            <span class="">博客信息</span>
                         </h5>
                         <hr>
                         <ul class="info-list">

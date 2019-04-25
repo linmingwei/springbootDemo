@@ -28,6 +28,11 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    public List<Article> order() {
+        return articleMapper.orderByLook();
+    }
+
+    @Override
     public int count() {
         return articleMapper.count();
     }
@@ -63,7 +68,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public List<Article> list(Map map) {
-        List<Article> articles = articleMapper.selectAll(null);
+        List<Article> articles = articleMapper.selectAll(map);
         return articles;
     }
 }
