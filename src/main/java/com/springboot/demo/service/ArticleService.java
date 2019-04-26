@@ -25,5 +25,4 @@ public interface ArticleService {
 
     int count();
 
-    List<Article> order();
 }

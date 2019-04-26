@@ -330,6 +330,7 @@ article:hover{
     display: block;
     line-height: 28px;
     margin: 5px 0;
+    color: #555;
 }
 .article-list a:hover{
     color: #009688;

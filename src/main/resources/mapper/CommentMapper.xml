@@ -52,4 +52,7 @@
     `status`
     from comment
   </select>
+  <select id="count" resultType="java.lang.Integer">
+    select count(*) from comment;
+  </select>
 </mapper>

@@ -110,102 +110,11 @@
                 </div>
 
                 <!--标签云-->
-                <div class="blog-panel blog-tag bg-white">
-                    <div class="panel-title">
-                        <h5>
-                            <i class="fa fa-tags" aria-hidden="true"></i>
-                            <span class="">文章标签</span>
-                        </h5>
-                        <hr>
-
-                    </div>
-                    <div class="tag-body">
-                        <div class="tag-content">
-                            <#list tags as tag>
-
-                            <a href="#tag" class="border-gray text-decoration-none">${tag.name}</a>
-                            </#list>
-                        </div>
-                    </div>
-
-                </div>
+                <@tagCart></@tagCart>
                 <!--文章列表-->
-                <div class="blog-panel article-list">
-                    <ul class="nav nav-tabs justify-content-around flex-nowrap" id="myTab" role="tablist" >
-                        <li class="nav-item">
-                            <a class="nav-link active border-0 text-dark" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
-                              <i class="fa fa-list"></i>  近期文章</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link border-0 text-dark" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
-                               <i class="fa fa-thumbs-up"></i> 站长推荐</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link border-0 text-dark" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">
-                               <i class="fa fa-hand-peace-o"></i> 随机文章</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            <ul class="article-list list-unstyled ">
-                                <li>
-                                    <a href="#" class="text-truncate">Java是世界上最好的语言Java是世界上最好的语言Java是世界上最好的语言</a>
-                                </li>
-                                <li>
-                                    <a href="#">Java是世界上最好的语言</a>
-                                </li>
-                                <li>
-                                    <a href="#">Java是世界上最好的语言</a>
-                                </li>
-                                <li>
-                                    <a href="#">Java是世界上最好的语言</a>
-                                </li>
-                                <li>
-                                    <a href="#">Java是世界上最好的语言</a>
-                                </li>
-                            </ul>
-
-                        </div>
-                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
-                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
-                    </div>
-                </div>
+                <@articlelistCart></@articlelistCart>
                 <!--博客信息-->
-                <div class="blog-panel">
-                    <div class="panel-title">
-                        <h5>
-                            <i class="fa fa-info-circle"></i>
-                            <span class="">博客信息</span>
-                        </h5>
-                        <hr>
-                        <ul class="info-list">
-                            <li>
-                                <i class="fa fa-file"></i>&nbsp;
-                                <span>文章总数：&nbsp; 124 篇</span>
-                            </li>
-                            <li>
-                                <i class="fa fa-tags"></i>&nbsp;
-                                <span>标签总数：&nbsp; 124 篇</span>
-                            </li>
-                            <li>
-                                <i class="fa fa-folder-open"></i>&nbsp;
-                                <span>分类总数：&nbsp; 124 篇</span>
-                            </li>
-                            <li>
-                                <i class="fa fa-comment"></i>&nbsp;
-                                <span>留言数量：&nbsp; 124 篇</span>
-                            </li>
-                            <li>
-                                <i class="fa fa-calendar-times-o"></i>&nbsp;
-                                <span>运行天数：&nbsp; 124 篇</span>
-                            </li>
-                            <li>
-                                <i class="fa fa-pencil-square"></i>&nbsp;
-                                <span>最后更新：&nbsp; 124 篇</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <@bloginfoCart></@bloginfoCart>
             </div>
         </div>
     </div>

@@ -193,3 +193,14 @@
     box-shadow: 3px 3px 3px #ebf1ed;
     /*box-shadow: 1px 0px 16px 1px #ddd;*/
 }
+.article-hot a{
+    color: #555555;
+}
+
+.article-hot a:hover {
+    color: #009a61;
+    text-decoration: none;
+}
+.article-tag a:hover{
+    text-decoration: none;
+}

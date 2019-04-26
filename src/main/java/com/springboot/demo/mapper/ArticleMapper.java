@@ -21,5 +21,4 @@ public interface ArticleMapper {
 //    @Select("select count(*) from article")
     int count();
 
-    List<Article> orderByLook();
 }

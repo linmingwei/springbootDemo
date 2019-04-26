@@ -2,6 +2,9 @@ package com.springboot.demo.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.springboot.demo.entity.Article;
+import com.springboot.demo.entity.ArticleTag;
+import com.springboot.demo.entity.Tag;
+import com.springboot.demo.entity.Type;
 import com.springboot.demo.service.ArticleService;
 import com.springboot.demo.service.ArticleTagService;
 import com.springboot.demo.service.TagService;
@@ -11,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.jws.WebParam;
+import javax.websocket.server.PathParam;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,10 +54,21 @@ public class IndexController {
         return "index";
     }
 
-    @RequestMapping("/good")
-    @ResponseBody
-    public String good() {
-        return "你好";
+    @RequestMapping("/article")
+    public String article() {
+        return "front/article";
+    }
+
+
+    @RequestMapping("/{tid}/{aid}")
+    public String articlePage(@PathVariable("tid") Integer tid, @PathVariable("aid") Integer aid,Model model) {
+        Article article = articleService.getById(aid);
+        List<Tag> tags = tagService.getByAid(aid);
+        model.addAttribute("article",article);
+        model.addAttribute("tags",tags);
+
+        return "front/article";
+
     }
 
 }

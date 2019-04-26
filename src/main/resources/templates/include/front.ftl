@@ -24,3 +24,14 @@
 </body>
 </html>
 </#macro>
+
+<#macro articlelistCart>
+    <#include "/layout/articlelistCart.ftl">
+
+</#macro><#macro bloginfoCart>
+    <#include "/layout/bloginfoCart.ftl">
+
+</#macro><#macro tagCart>
+    <#include "/layout/tagCart.ftl">
+
+</#macro>

@@ -15,6 +15,7 @@
         <result column="order" jdbcType="INTEGER" property="order"/>
         <result column="favorate" jdbcType="INTEGER" property="favorate"/>
         <result column="look" jdbcType="INTEGER" property="look"/>
+        <result column="contentHTML" jdbcType="VARCHAR" property="contentHTML"/>
     </resultMap>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from article
@@ -26,12 +27,12 @@
         </selectKey>
         insert into article (title, content, `status`,
         description, createTime, updateTime,
-        typeId, `comment`, `top`, `order`,`look`,`favorate`
+        typeId, `comment`, `top`, `order`,`look`,`favorate`,`contentHTML`
         )
         values (#{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},
         #{description,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
         #{typeId,jdbcType=INTEGER}, #{comment,jdbcType=BIT}, #{top,jdbcType=BIT}, #{order,jdbcType=INTEGER},
-        #{look,jdbcType=INTEGER}, #{favorate,jdbcType=INTEGER}
+        #{look,jdbcType=INTEGER}, #{favorate,jdbcType=INTEGER}, #{contentHTML,jdbcType=VARCHAR}
         )
     </insert>
     <update id="updateByPrimaryKey" parameterType="com.springboot.demo.entity.Article">
@@ -47,18 +48,19 @@
       `top` = #{top,jdbcType=BIT},
       `order` = #{order,jdbcType=INTEGER},
       `look` = #{look,jdbcType=INTEGER},
-      `favorate` = #{favorate,jdbcType=INTEGER}
+      `favorate` = #{favorate,jdbcType=INTEGER},
+      `contentHTML` = #{contentHTML,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select id, title, content, `status`, description, createTime, updateTime, typeId, 
-    `comment`, `top`, `order`,`look`,`favorate`
+    `comment`, `top`, `order`,`look`,`favorate`,contentHTML
     from article
     where id = #{id,jdbcType=INTEGER}
   </select>
     <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
         select id, title, content, `status`, description, createTime, updateTime, typeId,
-        `comment`, `top`, `order`,`look`,`favorate`
+        `comment`, `top`, `order`,`look`,`favorate`,contentHTML
         from article order by
         <choose>
             <when test="order!=null">
@@ -72,14 +74,11 @@
                 id asc
             </otherwise>
         </choose>
+        <if test="limit!=null">
+            limit ${limit}
+        </if>
     </select>
     <select id="count" resultType="java.lang.Integer">
       select COUNT(*) from article;
-    </select>
-    <select id="orderByLook" resultMap="BaseResultMap">
-    select id, title, content, `status`, description, createTime, updateTime, typeId,
-    `comment`, `top`, `order`,`look`,`favorate`
-    from article order by `look` desc
-
     </select>
 </mapper>

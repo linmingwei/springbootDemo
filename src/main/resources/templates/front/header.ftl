@@ -1,5 +1,5 @@
 <header class="bg-white border-bottom py-1 ">
-    <div class="container px-0 mw-100">
+    <div class="container  mw-100">
 
         <nav class="navbar navbar-expand-lg navbar-light px-0 py-2 ">
             <a class="navbar-brand" href="/">BLOG</a>
@@ -10,29 +10,34 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
-                    <#list typeParent?sort_by("order") as parent>
-                        <#if parent.children?size gt 0 >
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#"
-                               role="button"
-                               data-toggle="dropdown" aria-haspopup="true"
-                               aria-expanded="false" data-offset="10,60">
-                                ${parent.name}
-                            </a>
-                            <div class="dropdown-menu">
-                                <#list parent.children as child>
+                    <@customTag method="types">
+                        <#if types??>
+                            <#list types?sort_by("order") as parent>
+                                <#if parent.children?size gt 0 >
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#"
+                                       role="button"
+                                       data-toggle="dropdown" aria-haspopup="true"
+                                       aria-expanded="false" data-offset="10,60">
+                                        ${parent.name}
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <#list parent.children as child>
 
-                                <a class="dropdown-item" href="/${child.id}">${child.name}</a>
-                                </#list>
-                            </div>
-                        </li>
-                        <#else>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/${parent.id}">${parent.name}</a>
-                        </li>
+                                        <a class="dropdown-item" href="/${child.id}">${child.name}</a>
+                                        </#list>
+                                    </div>
+                                </li>
+                                <#else>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/${parent.id}">${parent.name}</a>
+                                </li>
+                                </#if>
+
+                            </#list>
+
                         </#if>
-
-                    </#list>
+                    </@customTag>
                     <li class="nav-item">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
                             <i class="fa fa-search"></i>

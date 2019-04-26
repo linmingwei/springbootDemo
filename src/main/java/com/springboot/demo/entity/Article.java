@@ -33,6 +33,15 @@ public class Article {
     private Integer look;
 
     private Integer favorate;
+    private String contentHTML;
+
+    public String getContentHTML() {
+        return contentHTML;
+    }
+
+    public void setContentHTML(String contentHTML) {
+        this.contentHTML = contentHTML;
+    }
 
     public Integer getLook() {
         return look;

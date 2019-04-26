@@ -4,6 +4,7 @@ import com.springboot.demo.entity.Article;
 import com.springboot.demo.mapper.ArticleMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.pegdown.PegDownProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -45,5 +46,13 @@ public class MapperTest {
         DateFormat format= new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
         System.out.println(format.format(article.getCreateTime()));
 
+    }
+
+    @Test
+    public void testMD() {
+        Article article = articleMapper.selectByPrimaryKey(110);
+        PegDownProcessor pdp = new PegDownProcessor(Integer.MAX_VALUE);
+        String html = pdp.markdownToHtml(article.getContent());
+        System.out.println(html);
     }
 }

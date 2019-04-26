@@ -6,6 +6,7 @@ import com.springboot.demo.entity.Article;
 import com.springboot.demo.service.ArticleService;
 import com.springboot.demo.service.ArticleTagService;
 import com.springboot.demo.vo.ResponseVo;
+import org.pegdown.PegDownProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,18 +26,25 @@ public class ArticleController {
     private ArticleService articleService;
     @Autowired
     private ArticleTagService articleTagService;
+    @Autowired
+    private PegDownProcessor peg;
 
     @PostMapping("/publish")
     @ResponseBody
     @Transactional
     public ResponseVo publishArticle(Article article, @RequestParam(value = "tagIds", required = false) Integer[] tagIds) {
         if (article.getId() == null) {
+            if (article.getContent() != null && !"".equals(article.getContent().trim())) {
+
+                article.setContentHTML(peg.markdownToHtml(article.getContent()));
+            }
             articleService.insert(article);
             if (tagIds != null && tagIds.length != 0) {
                 articleTagService.insert(article.getId(), tagIds);
 
             }
         } else {
+            article.setContentHTML(peg.markdownToHtml(article.getContent()));
             articleService.update(article);
             if (tagIds != null && tagIds.length != 0) {
                 articleTagService.deleteByAid(article.getId());

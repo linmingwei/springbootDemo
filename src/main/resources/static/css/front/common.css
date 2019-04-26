@@ -175,10 +175,12 @@ body{
     display: block;
     line-height: 28px;
     margin: 5px 0;
+    color: #555;
 }
 
 .article-list a:hover {
     color: #009688;
+    text-decoration: none;
 }
 
 /*-----------------------------------------article list*/
@@ -382,4 +384,7 @@ body{
 }
 .mw-80{
     max-width: 80%!important;
+}
+.text-decoration-none{
+    text-decoration: none!important;
 }
