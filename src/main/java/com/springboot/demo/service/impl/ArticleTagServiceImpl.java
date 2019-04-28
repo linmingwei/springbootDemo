@@ -40,6 +40,11 @@ public class ArticleTagServiceImpl implements ArticleTagService {
     }
 
     @Override
+    public List<ArticleTag> getByTid(Integer id) {
+        return articleTagMapper.selectByTid(id);
+    }
+
+    @Override
     public int deleteByAid(Integer id) {
         return articleTagMapper.deleteByAid(id);
     }

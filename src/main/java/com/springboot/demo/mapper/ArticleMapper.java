@@ -21,4 +21,6 @@ public interface ArticleMapper {
 //    @Select("select count(*) from article")
     int count();
 
+    List<Article> selectByExample(Map map);
+
 }

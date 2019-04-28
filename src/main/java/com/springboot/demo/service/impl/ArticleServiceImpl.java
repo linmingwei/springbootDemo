@@ -28,6 +28,11 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    public List<Article> findByExample(Map<String, Integer> params) {
+        return articleMapper.selectByExample(params);
+    }
+
+    @Override
     public int count() {
         return articleMapper.count();
     }

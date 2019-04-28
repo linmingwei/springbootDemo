@@ -178,13 +178,14 @@
                         评论
                     </h5>
                     <hr>
-                    <form action="/" class="layui-form" id="comment-form">
+                    <div  class="" id="comment-form">
+                        <input type="hidden" value="${article.id}">
                         <textarea name="" required placeholder="请输入" class="layui-textarea CodeMirror CodeMirror-scroll"
                                   id="comment-area">
                         </textarea>
-                        <button class="btn btn-primary pull-right" style="margin: 15px 0">提交评论</button>
+                        <button data-toggle="modal" data-target="#commentModal" class="btn btn-primary pull-right" style="margin: 15px 0">提交评论</button>
                         <div class="clearfix"></div>
-                    </form>
+                    </div>
 
                 </div>
                 <div class="panel-title">
@@ -222,10 +223,7 @@
                                 <i class="fa fa-thumbs-up"></i> 赞(0)
                             </a>
                             <i class="sepa"></i>
-                            <a href="">
-                                <i class="fa fa-thumbs-down"></i> 踩(0)
-                            </a>
-                            <i class="sepa"></i>
+
                             <a id="reply-A" class="" style="padding-right: 15px;cursor: pointer;">
                                 <i class="fa fa-reply"></i> 回复
                                 <!--<i class="fa fa-share"></i> 取消回复-->
@@ -292,6 +290,29 @@
             <@articlelistCart></@articlelistCart>
             <!--博客信息-->
             <@bloginfoCart></@bloginfoCart>
+        </div>
+        <div class="modal" tabindex="-1" role="dialog" id="commentModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">评论信息框</h5>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+
+                            <div class="form-group">
+                                <label for="">昵称</label>
+                                <input type="text" class="form-control" id="" aria-describedby="emailHelp" placeholder="" value="匿名">
+                            </div>
+                            <div class="form-group">
+                                <label for="">邮箱</label>
+                                <input type="email" class="form-control" id="" aria-describedby="emailHelp" placeholder="">
+                            </div>
+                            <button class="btn btn-primary">提交评论</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

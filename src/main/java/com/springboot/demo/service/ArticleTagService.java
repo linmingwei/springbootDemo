@@ -17,4 +17,6 @@ public interface ArticleTagService {
     void insert(Integer aid,Integer[] tids);
 
     int deleteByAid(Integer id);
+
+    List<ArticleTag> getByTid(Integer id);
 }

@@ -58,15 +58,16 @@
                         <h5 class="mt-0 text-truncate">
                             <a href="/${article.typeId}/${article.id}" class="text-dark">${article.title}</a>
                         </h5>
-                        ${article.content}
+                        ${article.description}
                     </div>
                 </div>
                 </#list>
+                <#if page.pages gt 1>
                 <nav aria-label="Page navigation example">
                     <ul class="pagination d-flex justify-content-end mt-4">
-                        <li class="page-item"><a class="page-link" href="/1">首页</a></li>
+                        <li class="page-item"><a class="page-link" href="${baseUrl!""}/1">首页</a></li>
                         <#if page.hasPreviousPage>
-                        <li class="page-item"><a class="page-link" href="/${page.pageNum-1}">上一页</a></li>
+                        <li class="page-item"><a class="page-link" href="${baseUrl!""}/${page.pageNum-1}">上一页</a></li>
                          <#else >
                         <li class="page-item disabled">
                             <span class="page-link">上一页</span>
@@ -74,23 +75,24 @@
                         </#if>
                         <#list page.navigatepageNums as num>
                         <#if num == page.pageNum>
-                            <li class="page-item active"><a class="page-link" href="/${num}">${num}</a></li>
+                            <li class="page-item active"><a class="page-link" href="${baseUrl!""}/${num}">${num}</a></li>
                         <#else >
-                        <li class="page-item"><a class="page-link" href="/${num}">${num}</a></li>
+                        <li class="page-item"><a class="page-link" href="${baseUrl!""}/${num}">${num}</a></li>
                         </#if>
 
                         </#list>
                         <#if page.hasNextPage>
-                        <li class="page-item"><a class="page-link" href="/${page.pageNum+1}">下一页</a></li>
+                        <li class="page-item"><a class="page-link" href="${baseUrl!""}/${page.pageNum+1}">下一页</a></li>
                          <#else >
                         <li class="page-item disabled">
                             <span class="page-link">下一页</span>
                         </li>
                         </#if>
-                        <li class="page-item"><a class="page-link" href="/${page.pages}">末页</a></li>
+                        <li class="page-item"><a class="page-link" href="${baseUrl!""}/${page.pages}">末页</a></li>
 
                     </ul>
                 </nav>
+                </#if>
 
             </div>
 

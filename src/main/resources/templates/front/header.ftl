@@ -24,7 +24,7 @@
                                     <div class="dropdown-menu">
                                         <#list parent.children as child>
 
-                                        <a class="dropdown-item" href="/${child.id}">${child.name}</a>
+                                        <a class="dropdown-item" href="/type/${child.id}/1">${child.name}</a>
                                         </#list>
                                     </div>
                                 </li>

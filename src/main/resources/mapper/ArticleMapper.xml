@@ -81,4 +81,15 @@
     <select id="count" resultType="java.lang.Integer">
       select COUNT(*) from article;
     </select>
+    <select id="selectByExample" parameterType="map" resultMap="BaseResultMap">
+        select id, title, content, `status`, description, createTime, updateTime, typeId,
+    `comment`, `top`, `order`,`look`,`favorate`,contentHTML
+    from article
+    <where>
+        <if test="typeId!=null">
+            typeId = #{typeId}
+        </if>
+
+    </where>
+    </select>
 </mapper>

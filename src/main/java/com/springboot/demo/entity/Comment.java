@@ -25,6 +25,16 @@ public class Comment {
 
     private Integer status;
 
+    private Integer favorate;
+
+    public Integer getFavorate() {
+        return favorate;
+    }
+
+    public void setFavorate(Integer favorate) {
+        this.favorate = favorate;
+    }
+
     public Integer getId() {
         return id;
     }
