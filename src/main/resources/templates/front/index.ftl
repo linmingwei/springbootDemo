@@ -48,7 +48,7 @@
                         <span class="sr-only">Next</span>
                     </a>
                 </div>
-                <#list articles as article>
+                <#list page.list as article>
 
                 <div class="media rounded p-3 bg-white shadow-sm mt-3">
                     <img class="mr-3" src="/static/images/20181024185055343.jpg" height="150" width="150"
@@ -56,19 +56,39 @@
                     <div class="media-body pr-1"
                          style="min-width: calc(100% - 180px);max-height: 150px;overflow: hidden;">
                         <h5 class="mt-0 text-truncate">
-                            <a href="/article/${article.id}" class="text-dark">${article.title}</a>
+                            <a href="/${article.typeId}/${article.id}" class="text-dark">${article.title}</a>
                         </h5>
                         ${article.content}
                     </div>
                 </div>
                 </#list>
                 <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    <ul class="pagination d-flex justify-content-end mt-4">
+                        <li class="page-item"><a class="page-link" href="/1">首页</a></li>
+                        <#if page.hasPreviousPage>
+                        <li class="page-item"><a class="page-link" href="/${page.pageNum-1}">上一页</a></li>
+                         <#else >
+                        <li class="page-item disabled">
+                            <span class="page-link">上一页</span>
+                        </li>
+                        </#if>
+                        <#list page.navigatepageNums as num>
+                        <#if num == page.pageNum>
+                            <li class="page-item active"><a class="page-link" href="/${num}">${num}</a></li>
+                        <#else >
+                        <li class="page-item"><a class="page-link" href="/${num}">${num}</a></li>
+                        </#if>
+
+                        </#list>
+                        <#if page.hasNextPage>
+                        <li class="page-item"><a class="page-link" href="/${page.pageNum+1}">下一页</a></li>
+                         <#else >
+                        <li class="page-item disabled">
+                            <span class="page-link">下一页</span>
+                        </li>
+                        </#if>
+                        <li class="page-item"><a class="page-link" href="/${page.pages}">末页</a></li>
+
                     </ul>
                 </nav>
 
@@ -120,5 +140,7 @@
     </div>
 </div>
 <@footer>
+<script>
 
+</script>
 </@footer>

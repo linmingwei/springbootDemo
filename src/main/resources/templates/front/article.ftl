@@ -1,8 +1,7 @@
 <#include "/include/front.ftl"/>
 <@header>
 <link rel="stylesheet" href="/static/css/simplemde.min.css"/>
-
-    <link rel="stylesheet" href="/static/css/front/article.css">
+<link rel="stylesheet" href="/static/css/front/article.css">
 </@header>
 <div class="container p-0" style="max-width: 88%;">
     <div class="row ">
@@ -22,7 +21,7 @@
                     <div class="pull-right">
                     <span class="article-meta">
                         <i class="layui-icon layui-icon-date"></i>
-                        <span class="inl">${(article.createTime)!""}</span>&nbsp;&nbsp;
+                        <span class="inl">${(article.createTime?datetime)!""}</span>&nbsp;&nbsp;
                         <i class="fa fa-eye" aria-hidden="true"></i>
                         <span>浏览(${(article.look)!"0"})</span>&nbsp;&nbsp;
                         <i class="fa fa-comments-o" aria-hidden="true"></i>
@@ -31,8 +30,8 @@
                     </div>
                     <div class="clearfix"></div>
                 </div>
-                <div class="article-content" id="content">
-                    ${(article.contentHTML)!""}
+                <div class="article-content markdown-body" id="content">
+                ${(article.contentHTML)!""}
 
                 </div>
                 <div class="hr text-center">
@@ -184,8 +183,8 @@
                                   id="comment-area">
                         </textarea>
                         <button class="btn btn-primary pull-right" style="margin: 15px 0">提交评论</button>
+                        <div class="clearfix"></div>
                     </form>
-                    <div class="clearfix"></div>
 
                 </div>
                 <div class="panel-title">
@@ -319,26 +318,6 @@
             $(this).removeClass('pull-right').html('<i class="fa fa-reply"></i> 回复');
         }
     });
-    console.log("goood");
-    var article = $('#demo2').text().split('\n');
-    var art = [];
-    var par = /^\s{4}/;
-    $.each(article, function (i, n) {
-        // console.log(n.match(par));
-        n = n.replace(/^\s{4}/, '');
-        // n= $.trim(n);
-        if (n != '') {
-            console.log("Item #" + i + ": " + n);
-            art.push(n);
-        }
-
-
-    });
-    console.log(art.join('\n'));
-    document.getElementById('content').innerHTML =
-            // marked('# 文章待填');
-            marked(art.join('\n'));
-    console.log(marked(art.join('\n')));
 
 </script>
 </@footer>

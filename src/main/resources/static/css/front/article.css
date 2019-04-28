@@ -149,12 +149,19 @@
 }
 .article-hot-text a:hover{
     color: #009a61;
+    text-decoration: none;
+
 }
 .article-rel a{
     display: inline-block;
     width: 48%;
     padding: 5px;
+    color: #555;
 
+}
+.article-rel a:hover{
+    color: #009a61;
+    text-decoration: none;
 }
 .CodeMirror, .CodeMirror-scroll {
     min-height:150px!important;

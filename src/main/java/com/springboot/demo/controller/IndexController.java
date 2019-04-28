@@ -1,6 +1,7 @@
 package com.springboot.demo.controller;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.springboot.demo.entity.Article;
 import com.springboot.demo.entity.ArticleTag;
 import com.springboot.demo.entity.Tag;
@@ -35,9 +36,17 @@ public class IndexController {
     private TagService tagService;
     @Autowired
     private TypeService typeService;
+
     @RequestMapping("/")
-    public String  home(Model model, @RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum,
+    public String index() {
+        return "redirect:/1";
+    }
+    @RequestMapping("/{pageNum}")
+    public String  home(Model model, @PathVariable(value = "pageNum",required = false)Integer pageNum,
                         @RequestParam(value = "pageSize",defaultValue = "10")Integer pageSize) {
+        if (pageNum == null || pageNum < 1) {
+            pageNum =1;
+        }
         model.addAttribute("typeParent",typeService.withChildren());
         System.out.println(typeService.withChildren());
         model.addAttribute("tags",tagService.list());
@@ -46,14 +55,10 @@ public class IndexController {
         params.put("order","look");
         params.put("type","desc");
         List<Article> articles = articleService.list(params);
-        model.addAttribute("articles",articles);
+        PageInfo<Article> pageInfo = new PageInfo<>(articles, 5);
+        model.addAttribute("page",pageInfo);
         return "front/index";
     }
-    @RequestMapping(value = "/index")
-    public String  index() {
-        return "index";
-    }
-
     @RequestMapping("/article")
     public String article() {
         return "front/article";
