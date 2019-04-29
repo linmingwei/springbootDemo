@@ -2,22 +2,15 @@ package com.springboot.demo.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.springboot.demo.entity.Article;
-import com.springboot.demo.entity.ArticleTag;
-import com.springboot.demo.entity.Tag;
-import com.springboot.demo.entity.Type;
-import com.springboot.demo.service.ArticleService;
-import com.springboot.demo.service.ArticleTagService;
-import com.springboot.demo.service.TagService;
-import com.springboot.demo.service.TypeService;
+import com.springboot.demo.entity.*;
+import com.springboot.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.jws.WebParam;
-import javax.websocket.server.PathParam;
+import javax.print.attribute.standard.JobState;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -38,6 +31,8 @@ public class IndexController {
     private TagService tagService;
     @Autowired
     private TypeService typeService;
+    @Autowired
+    private CommentService commentService;
 
     @RequestMapping("/")
     public String index() {
@@ -70,9 +65,13 @@ public class IndexController {
     @RequestMapping("/{tid}/{aid}")
     public String articlePage(@PathVariable("tid") Integer tid, @PathVariable("aid") Integer aid,Model model) {
         Article article = articleService.getById(aid);
+        Map<String, String> params = new HashMap<>();
+        params.put("aid",aid.toString());
+        List<Comment> comments = commentService.getByParams(params);
         List<Tag> tags = tagService.getByAid(aid);
         model.addAttribute("article",article);
         model.addAttribute("tags",tags);
+        model.addAttribute("comments",comments);
 
         return "front/article";
 
@@ -123,6 +122,7 @@ public class IndexController {
         return "front/index";
 
     }
+
 
 
 }

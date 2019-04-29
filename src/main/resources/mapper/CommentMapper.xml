@@ -56,4 +56,23 @@
   <select id="count" resultType="java.lang.Integer">
     select count(*) from comment;
   </select>
+  <select id="selectByMap" parameterType="map" resultMap="BaseResultMap">
+    select id, username, description, aid, createTime, updateTime, content, email, pid,
+    `status`,favorate from  comment
+    <where>
+      <if test="username!=null">
+        username = #{username}
+      </if>
+      <if test="aid!=null">
+        and aid = #{aid}
+      </if>
+      <if test="pid!=null">
+        and pid = #{pid}
+      </if>
+      <if test="email!=null">
+        and email = #{email}
+      </if>
+
+    </where>
+  </select>
 </mapper>

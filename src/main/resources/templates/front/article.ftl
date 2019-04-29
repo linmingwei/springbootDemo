@@ -21,7 +21,7 @@
                     <div class="pull-right">
                     <span class="article-meta">
                         <i class="layui-icon layui-icon-date"></i>
-                        <span class="inl">${(article.createTime?datetime)!""}</span>&nbsp;&nbsp;
+                        <span class="inl">${(article.createTime?datetime)!"未知时间"}</span>&nbsp;&nbsp;
                         <i class="fa fa-eye" aria-hidden="true"></i>
                         <span>浏览(${(article.look)!"0"})</span>&nbsp;&nbsp;
                         <i class="fa fa-comments-o" aria-hidden="true"></i>
@@ -178,12 +178,14 @@
                         评论
                     </h5>
                     <hr>
-                    <div  class="" id="comment-form">
+                    <div class="" id="commentContent">
                         <input type="hidden" value="${article.id}">
                         <textarea name="" required placeholder="请输入" class="layui-textarea CodeMirror CodeMirror-scroll"
                                   id="comment-area">
                         </textarea>
-                        <button data-toggle="modal" data-target="#commentModal" class="btn btn-primary pull-right" style="margin: 15px 0">提交评论</button>
+                        <button data-toggle="modal" data-target="#commentModal" class="btn btn-primary pull-right"
+                                style="margin: 15px 0">提交评论
+                        </button>
                         <div class="clearfix"></div>
                     </div>
 
@@ -191,46 +193,52 @@
                 <div class="panel-title">
                     <h5 class="h5">
                         <i class="fa fa-comments-o"></i>
-                        <em style="font-size: 18px;color: red;font-weight: 700;font-family: Georgia;">7</em>
+                        <em style="font-size: 18px;color: red;font-weight: 700;font-family: Georgia;">${comments?size!"0"}</em>
                         条评论
                     </h5>
                 </div>
                 <hr>
+                <#if comments??>
                 <ul class="list-unstyled">
-                    <li class="content-li">
-                        <div class="comment-header">
-                            <div class="user-img">
-                                <img src="/static/images/user.png" alt="">
-                            </div>
-                            <div class="user-info">
-                                <div class="nickname">
-                                    <a href="#" style="color: #009a61;"><strong>匿名</strong></a>
+                    <#list comments as comment>
 
+                        <li class="content-li">
+                            <div class="comment-header">
+                                <div class="user-img">
+                                    <img src="/static/images/user.png" alt="">
                                 </div>
-                                <div class="timer">
-                                    <i class="fa fa-clock-o"></i>
-                                    2018-11-6 17.07 &nbsp;
-                                    <i class="fa fa-map-marker"></i>
-                                    上海浦东新区
+                                <div class="user-info">
+                                    <div class="nickname">
+                                        <a href="#" style="color: #009a61;"><strong>${(comment.username)!"匿名"}</strong></a>
+
+                                    </div>
+                                    <div class="timer">
+                                        <i class="fa fa-clock-o"></i>
+                                        ${(comment.createTime?datetime)!"未知时间"} &nbsp;
+                                        <i class="fa fa-map-marker"></i>
+                                        上海浦东新区
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <hr>
-                        <div class="comment-content">test</div>
-                        <hr>
-                        <div class="content-meta" style="">
-                            <a href="#">
-                                <i class="fa fa-thumbs-up"></i> 赞(0)
-                            </a>
-                            <i class="sepa"></i>
+                            <hr>
+                            <div class="comment-content">${(comment.content)!""}</div>
+                            <hr>
+                            <div class="content-meta" style="">
+                                <a href="#">
+                                    <i class="fa fa-thumbs-up"></i> 赞(${(comment.favorate)!"0"})
+                                </a>
+                                <i class="sepa"></i>
 
-                            <a id="reply-A" class="" style="padding-right: 15px;cursor: pointer;">
-                                <i class="fa fa-reply"></i> 回复
-                                <!--<i class="fa fa-share"></i> 取消回复-->
-                            </a>
-                        </div>
-                    </li>
+                                <input type="hidden" name="id" value="${comment.id}">
+                                <a id="" class="reply-A" style="padding-right: 15px;cursor: pointer;">
+                                    <i class="fa fa-reply"></i> 回复
+                                    <!--<i class="fa fa-share"></i> 取消回复-->
+                                </a>
+                            </div>
+                        </li>
+                    </#list>
                 </ul>
+                </#if>
             </div>
         </div>
         <div class="col-3">
@@ -291,25 +299,30 @@
             <!--博客信息-->
             <@bloginfoCart></@bloginfoCart>
         </div>
-        <div class="modal" tabindex="-1" role="dialog" id="commentModal">
+        <div class="modal" tabindex="-1" data-backdrop="static" role="dialog" id="commentModal">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">评论信息框</h5>
                     </div>
                     <div class="modal-body">
-                        <form>
-
+                        <form id="commentForm">
+                            <input type="hidden" value="${article.id}" name="aid">
                             <div class="form-group">
                                 <label for="">昵称</label>
-                                <input type="text" class="form-control" id="" aria-describedby="emailHelp" placeholder="" value="匿名">
+                                <input type="text" name="username" class="form-control" id=""
+                                       aria-describedby="emailHelp" placeholder="" value="匿名">
                             </div>
                             <div class="form-group">
                                 <label for="">邮箱</label>
-                                <input type="email" class="form-control" id="" aria-describedby="emailHelp" placeholder="">
+                                <input type="email" name="email" class="form-control" id="" aria-describedby="emailHelp"
+                                       placeholder="">
                             </div>
-                            <button class="btn btn-primary">提交评论</button>
                         </form>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                            <button type="button" id="commentBtn" class="btn btn-primary">提交</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -329,8 +342,8 @@
         // showIcons: ['bold','italic','code','quote','preview','guide']
     });
     //回复点击逻辑
-    $('#reply-A').click(function () {
-        var comment_form = $('#comment-form');
+    $('.reply-A').click(function () {
+        var comment_form = $('#commentContent');
         if (!$(this).hasClass('pull-right')) {
             $(this).parent().after(comment_form);
             $(this).addClass('pull-right').html('<i class="fa fa-share"></i> 取消回复');
@@ -339,6 +352,25 @@
             $(this).removeClass('pull-right').html('<i class="fa fa-reply"></i> 回复');
         }
     });
+    //    评论提交
+    $('#commentBtn').click(function (e) {
+        e.preventDefault();
+        var content = simplemde.value();
+        console.log($('#commentForm').serialize() + '&content=' + simplemde.value());
+        var data = $('#commentForm').serialize() + '&content=' + simplemde.value();
+
+
+        $.post({
+            url: '/comment/add',
+            data: data,
+            success: function (res) {
+                $('#commentModal').modal('hide');
+                alert(res.msg);
+            }
+        })
+
+    })
+
 
 </script>
 </@footer>

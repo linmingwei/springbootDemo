@@ -58,7 +58,7 @@
                         <h5 class="mt-0 text-truncate">
                             <a href="/${article.typeId}/${article.id}" class="text-dark">${article.title}</a>
                         </h5>
-                        ${article.description}
+                        ${article.description                        }
                     </div>
                 </div>
                 </#list>
