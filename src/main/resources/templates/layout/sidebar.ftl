@@ -67,7 +67,7 @@
                     <div class="collapse" id="web-mng">
                         <ul class="d-flex flex-column list-unstyled pl-4 pt-2">
                             <li class="py-2 px-2">
-                                <a class="" href="#">
+                                <a class="" href="/admin/website/comment">
 
                                     <span class="d-inline-block ml-2">评论管理</span>
                                 </a>

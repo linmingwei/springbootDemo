@@ -1,15 +1,16 @@
 package com.springboot.demo.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.springboot.demo.entity.Comment;
 import com.springboot.demo.service.CommentService;
 import com.springboot.demo.vo.ResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 /**
  * @Auther: mingweilin
@@ -33,5 +34,14 @@ public class CommentController {
         }
         commentService.save(comment);
         return ResponseVo.success("评论成功");
+    }
+
+    @GetMapping("/page")
+    public PageInfo<Comment> list(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+                                  @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<Comment> list = commentService.list(null);
+        PageInfo<Comment> info = new PageInfo<>(list);
+        return info;
     }
 }

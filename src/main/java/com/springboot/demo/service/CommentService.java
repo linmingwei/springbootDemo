@@ -16,4 +16,6 @@ public interface CommentService {
     int save(Comment comment);
 
     List<Comment> getByParams(Map map);
+
+    List<Comment> list(Map map);
 }

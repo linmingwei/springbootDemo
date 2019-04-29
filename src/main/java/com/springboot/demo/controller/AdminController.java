@@ -77,4 +77,9 @@ public class AdminController {
 
     }
 
+    @GetMapping("/website/comment")
+    public String websiteComment() {
+        return "website/comment";
+    }
+
 }

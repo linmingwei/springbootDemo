@@ -22,6 +22,11 @@ public class CommentServiceImpl implements CommentService {
     private CommentMapper commentMapper;
 
     @Override
+    public List<Comment> list(Map map) {
+        return commentMapper.selectByMap(map);
+    }
+
+    @Override
     public List<Comment> getByParams(Map map) {
         return commentMapper.selectByMap(map);
 
