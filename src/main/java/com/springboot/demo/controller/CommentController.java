@@ -28,6 +28,9 @@ public class CommentController {
         if (comment.getCreateTime() == null) {
             comment.setCreateTime(new Timestamp(System.currentTimeMillis()));
         }
+        if (comment.getPid() == null) {
+            comment.setPid(0);
+        }
         commentService.save(comment);
         return ResponseVo.success("评论成功");
     }

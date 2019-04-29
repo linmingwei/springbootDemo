@@ -68,6 +68,16 @@ public class IndexController {
         Map<String, String> params = new HashMap<>();
         params.put("aid",aid.toString());
         List<Comment> comments = commentService.getByParams(params);
+        Map<Integer,Comment> parentComments = new HashMap<>();
+
+        for (Comment comment : comments) {
+            parentComments.put(comment.getId(),comment);
+        }
+        for (Comment comment : comments) {
+            if (comment.getPid() != null && comment.getPid() != 0) {
+                comment.setParent(parentComments.get(comment.getPid()));
+            }
+        }
         List<Tag> tags = tagService.getByAid(aid);
         model.addAttribute("article",article);
         model.addAttribute("tags",tags);

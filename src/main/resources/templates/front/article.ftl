@@ -221,7 +221,15 @@
                                 </div>
                             </div>
                             <hr>
-                            <div class="comment-content">${(comment.content)!""}</div>
+                            <div class="comment-content">
+                                <#if comment.parent??>
+                                    <a class="" href="#">@${(comment.parent.username)!""}</a>
+                                    <div class="alert alert-secondary" style="background-color: #eeeeee;border-color: white" role="alert">
+                                        ${(comment.parent.content)!""}
+                                    </div>
+
+                                </#if>
+                                ${(comment.content)!""}</div>
                             <hr>
                             <div class="content-meta" style="">
                                 <a href="#">
@@ -308,6 +316,7 @@
                     <div class="modal-body">
                         <form id="commentForm">
                             <input type="hidden" value="${article.id}" name="aid">
+                            <input type="hidden" name="pid">
                             <div class="form-group">
                                 <label for="">昵称</label>
                                 <input type="text" name="username" class="form-control" id=""
@@ -344,13 +353,17 @@
     //回复点击逻辑
     $('.reply-A').click(function () {
         var comment_form = $('#commentContent');
+        var pid = $(this).parent().find('input[name="id"]').val();
         if (!$(this).hasClass('pull-right')) {
             $(this).parent().after(comment_form);
+            $('#commentModal').find('input[name="pid"]').val(pid);
             $(this).addClass('pull-right').html('<i class="fa fa-share"></i> 取消回复');
         } else {
             $('#comment-post').after(comment_form);
             $(this).removeClass('pull-right').html('<i class="fa fa-reply"></i> 回复');
+            $('#commentModal').find('input[name="pid"]').val(0);
         }
+        console.log(pid);
     });
     //    评论提交
     $('#commentBtn').click(function (e) {
@@ -366,6 +379,7 @@
             success: function (res) {
                 $('#commentModal').modal('hide');
                 alert(res.msg);
+                window.location.reload();
             }
         })
 
