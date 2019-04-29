@@ -62,7 +62,7 @@
                     <#if tags??>
                         <#list tags as tag>
 
-                        <span><a href="#">${tag.name}</a></span>
+                        <span><a href="/tag/${tag.id}/1">${tag.name}</a></span>
                         </#list>
                     </#if>
                 </p>
