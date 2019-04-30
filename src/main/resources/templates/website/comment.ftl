@@ -60,6 +60,9 @@
         'click .comment-edit ': function (e, value, row, index) {
             e.preventDefault();
         },
+        'click .comment-check':function (e, value, row, index) {
+            e.preventDefault();
+        }
         'click .comment-delete': function (e, value, row, index) {
             e.preventDefault();
         }
@@ -76,7 +79,7 @@
     }, {
         field: 'username',
         title: '用户名',
-        // formatter: title_for
+        formatter: username_formatter
     }, {
         field: 'content',
         title: '内容'
@@ -131,11 +134,17 @@
 
         }
     }
+    //丰富username
+    function username_formatter(value, row, index) {
+        return[]
+    }
 
+    //添加操作按钮
     function addButton(value, row, index) {
         return [
-            '<button  class="btn comment-edit btn-primary btn-sm mr-3"><i class="fa fa-pencil" aria-hidden="true"></i></button>',
-            '<button class="btn comment-delete btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button>'
+            '<button  class="btn comment-edit btn-primary btn-sm mr-3"><i class="fa fa-pencil" aria-hidden="true"></i>回复</button>',
+            '<button  class="btn comment-check btn-info btn-sm mr-3"><i class="fa fa-pencil" aria-hidden="true"></i>审核</button>',
+            '<button class="btn comment-delete btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i>取消</button>'
         ].join('')
     }
     $('#save_btn').click(function () {
