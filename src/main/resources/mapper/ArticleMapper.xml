@@ -16,6 +16,7 @@
         <result column="favorate" jdbcType="INTEGER" property="favorate"/>
         <result column="look" jdbcType="INTEGER" property="look"/>
         <result column="contentHTML" jdbcType="VARCHAR" property="contentHTML"/>
+        <result column="image" jdbcType="VARCHAR" property="image"/>
     </resultMap>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from article
@@ -27,7 +28,7 @@
         </selectKey>
         insert into article (title, content, `status`,
         description, createTime, updateTime,
-        typeId, `comment`, `top`, `order`,`look`,`favorate`,`contentHTML`
+        typeId, `comment`, `top`, `order`,`look`,`favorate`,`contentHTML`,`image`
         )
         values (#{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},
         #{description,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
@@ -49,18 +50,19 @@
       `order` = #{order,jdbcType=INTEGER},
       `look` = #{look,jdbcType=INTEGER},
       `favorate` = #{favorate,jdbcType=INTEGER},
-      `contentHTML` = #{contentHTML,jdbcType=VARCHAR}
+      `contentHTML` = #{contentHTML,jdbcType=VARCHAR},
+      `image` = #{image,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select id, title, content, `status`, description, createTime, updateTime, typeId, 
-    `comment`, `top`, `order`,`look`,`favorate`,contentHTML
+    `comment`, `top`, `order`,`look`,`favorate`,contentHTML,`image`
     from article
     where id = #{id,jdbcType=INTEGER}
   </select>
     <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
         select id, title, content, `status`, description, createTime, updateTime, typeId,
-        `comment`, `top`, `order`,`look`,`favorate`,contentHTML
+        `comment`, `top`, `order`,`look`,`favorate`,contentHTML,`image`
         from article order by
         <choose>
             <when test="order!=null">
@@ -83,7 +85,7 @@
     </select>
     <select id="selectByExample" parameterType="map" resultMap="BaseResultMap">
         select id, title, content, `status`, description, createTime, updateTime, typeId,
-    `comment`, `top`, `order`,`look`,`favorate`,contentHTML
+    `comment`, `top`, `order`,`look`,`favorate`,contentHTML,`image`
     from article
     <where>
         <if test="typeId!=null">

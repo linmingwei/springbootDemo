@@ -4,11 +4,16 @@ import com.springboot.demo.entity.Article;
 import com.springboot.demo.entity.Tag;
 import com.springboot.demo.entity.Type;
 import com.springboot.demo.service.ArticleService;
+import com.springboot.demo.service.CommentService;
 import com.springboot.demo.service.TagService;
 import com.springboot.demo.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +33,9 @@ public class CustomTag extends BaseTag {
     private TypeService typeService;
     @Autowired
     private TagService tagService;
+
+    @Autowired
+    private CommentService commentService;
 
     public CustomTag() {
         super(CustomTag.class.getName());
@@ -59,5 +67,19 @@ public class CustomTag extends BaseTag {
         Map<String,String> params = new HashMap<>();
         params.put("limit","6");
         return articleService.list(params);
+    }
+    public Map<String,String> website(Map map) {
+        Map<String,String> info = new HashMap<>();
+        int articleNum = articleService.count();
+        int tagNum = tagService.count();
+        int typeNum = typeService.count();
+        int commentNum = commentService.count();
+        info.put("articleNum",String.valueOf(articleNum));
+        info.put("tagNum",String.valueOf(tagNum));
+        info.put("typeNum",String.valueOf(typeNum));
+        info.put("commentNum",String.valueOf(commentNum));
+        info.put("days", String.valueOf(ChronoUnit.DAYS.between(LocalDate.of(2018, 11, 1), LocalDate.now())));
+        info.put("updateTime", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy年M月dd日 HH点")));
+        return info;
     }
 }

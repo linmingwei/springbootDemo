@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 /**
  * @Auther: mingweilin
@@ -34,26 +36,24 @@ public class IndexController {
     @Autowired
     private CommentService commentService;
 
+//    @RequestMapping("/")
+//    public String index() {
+//        return "redirect:/1";
+//    }
     @RequestMapping("/")
-    public String index() {
-        return "redirect:/1";
-    }
-    @RequestMapping("/{pageNum}")
-    public String  home(Model model, @PathVariable(value = "pageNum",required = false)Integer pageNum,
-                        @RequestParam(value = "pageSize",defaultValue = "10")Integer pageSize) {
-        if (pageNum == null || pageNum < 1) {
-            pageNum =1;
-        }
+    public String  home(Model model) {
         model.addAttribute("typeParent",typeService.withChildren());
         System.out.println(typeService.withChildren());
         model.addAttribute("tags",tagService.list());
-        PageHelper.startPage(pageNum,pageSize);
         Map<String,String>  params = new HashMap<>();
         params.put("order","look");
         params.put("type","desc");
-        List<Article> articles = articleService.list(params);
-        PageInfo<Article> pageInfo = new PageInfo<>(articles, 5);
-        model.addAttribute("page",pageInfo);
+        params.put("limit","10");
+        List<Article> list = articleService.list(params);
+        List<Article> carouselArticles = list.stream().limit(3).collect(Collectors.toList());
+        List<Article> articles = list.stream().skip(3).collect(Collectors.toList());
+        model.addAttribute("carouselArticles",carouselArticles);
+        model.addAttribute("articles",articles);
         return "front/index";
     }
     @RequestMapping("/article")
@@ -108,7 +108,7 @@ public class IndexController {
         PageInfo<Article> pageInfo = new PageInfo<>(articles, 5);
         model.addAttribute("page",pageInfo);
         model.addAttribute("baseUrl","/type/"+id);
-        return "front/index";
+        return "front/list";
 
     }
     @RequestMapping("/tag/{id}/{pageNum}")
@@ -129,7 +129,7 @@ public class IndexController {
         PageInfo<Article> pageInfo = new PageInfo<>(articles, 5);
         model.addAttribute("page",pageInfo);
         model.addAttribute("baseUrl","/tag/"+id);
-        return "front/index";
+        return "front/list";
 
     }
 

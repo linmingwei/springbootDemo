@@ -33,7 +33,18 @@ public class Article {
     private Integer look;
 
     private Integer favorate;
+
     private String contentHTML;
+
+    private String image;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     public String getContentHTML() {
         return contentHTML;

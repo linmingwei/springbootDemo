@@ -54,7 +54,7 @@
                 </div>
             </div>
             <div class="article-footbar">
-                <p>所属分类： &nbsp;<a href="#Java" style="color: #009a61;font-size: 16px">Java</a></p>
+                <p>所属分类： &nbsp;<a href="/type/${article.typeId}/1" style="color: #009a61;font-size: 16px">Java</a></p>
             </div>
             <div class="blog-panel article-tag" style="margin-top: 15px;">
                 <p>

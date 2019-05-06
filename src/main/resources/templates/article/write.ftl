@@ -43,6 +43,15 @@
                        id="titleInput" placeholder="描述">
             </div>
         </div>
+        <div class="form-group row">
+            <label for="titleInput" class="col-sm-1 col-form-label">图片</label>
+            <div class="col-sm-11">
+                <div class="custom-file" style="cursor: pointer;">
+                    <input type="file" name="image" class="custom-file-input" id="customFile">
+                    <label class="custom-file-label" for="customFile" ></label>
+                </div>
+            </div>
+        </div>
 
         <div class="form-group row">
             <label for="comment" class="col-sm-1 col-form-label">评论</label>

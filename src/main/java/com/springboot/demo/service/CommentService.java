@@ -18,4 +18,6 @@ public interface CommentService {
     List<Comment> getByParams(Map map);
 
     List<Comment> list(Map map);
+
+    int count();
 }
