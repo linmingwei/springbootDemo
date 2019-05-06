@@ -87,15 +87,16 @@ CREATE TABLE `comment` (
   `id` int(22) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
-  `aid` int(22) unsigned zerofill NOT NULL,
+  `aid` int(22) unsigned NOT NULL,
   `createTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updateTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `content` varchar(255) DEFAULT NULL,
   `email` varchar(255) NOT NULL,
-  `pid` int(22) NOT NULL,
-  `status` int(10) unsigned DEFAULT '0',
+  `pid` int(22) DEFAULT '0',
+  `status` int(10) DEFAULT '0',
+  `favorate` int(22) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -104,6 +105,7 @@ CREATE TABLE `comment` (
 
 LOCK TABLES `comment` WRITE;
 /*!40000 ALTER TABLE `comment` DISABLE KEYS */;
+INSERT INTO `comment` VALUES (1,'匿名',NULL,152,NULL,NULL,'就是为了测试下\n# good \n## 二级标签','linmingwei001@163.com',NULL,NULL,NULL),(2,'匿名2',NULL,152,NULL,NULL,'就是为了测试下\n# good \n## 二级标签','test@163.com',NULL,NULL,NULL),(3,'匿名',NULL,152,NULL,NULL,'为了休息一下','teee@qq.com',NULL,NULL,NULL),(4,'nisdf',NULL,152,'2019-04-29 08:24:01','2019-04-29 08:21:05','sadfa','asdf',0,0,0),(7,'时间',NULL,152,'2019-04-29 00:45:51',NULL,'在测试下时间','shijian@qq.com',NULL,NULL,NULL),(8,'匿名',NULL,152,'2019-04-29 04:03:17',NULL,'test Pid 1','testpid1@qq.com',0,NULL,NULL),(9,'匿名',NULL,152,'2019-04-29 04:05:10',NULL,'这是 id为1的 自评论','id1@qq.com',1,NULL,NULL),(10,'good',NULL,152,'2019-04-29 04:24:27',NULL,'回复回复你   四手动阀撒','tswss@',4,NULL,NULL),(11,'邵磊',NULL,152,'2019-04-29 04:26:14',NULL,'在稍微评论下','youxiang',0,NULL,NULL),(12,'匿名',NULL,205,'2019-04-29 04:34:56',NULL,'测试下','a',0,NULL,NULL),(13,'匿名',NULL,205,'2019-04-29 04:35:12',NULL,'回复测试下','aaa',12,NULL,NULL);
 /*!40000 ALTER TABLE `comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -160,7 +162,7 @@ CREATE TABLE `type` (
 
 LOCK TABLES `type` WRITE;
 /*!40000 ALTER TABLE `type` DISABLE KEYS */;
-INSERT INTO `type` VALUES (1,'前端技术','没啥描述',0,'2019-04-23 03:24:50',NULL,10),(2,'后端技术',NULL,0,'2019-04-23 03:24:50',NULL,20),(3,'服务器',NULL,0,'2019-04-23 03:24:50',NULL,30),(4,'CSS',NULL,1,NULL,NULL,NULL),(5,'JS',NULL,1,NULL,NULL,NULL),(6,'VUE',NULL,1,NULL,NULL,NULL),(7,'Spring Boot',NULL,2,NULL,NULL,NULL),(8,'Java',NULL,2,NULL,NULL,NULL),(9,'并发',NULL,2,NULL,NULL,NULL),(10,'Linux',NULL,3,NULL,NULL,NULL),(11,'Shell',NULL,3,NULL,NULL,NULL),(12,'岁的法国',NULL,1,'2019-04-18 02:40:09','2019-04-18 02:40:09',NULL),(17,'首页',NULL,0,'2019-04-23 03:23:01','2019-04-23 03:23:01',0);
+INSERT INTO `type` VALUES (1,'前端技术','没啥描述',0,'2019-04-23 03:24:50',NULL,10),(2,'后端技术',NULL,0,'2019-04-23 03:24:50',NULL,20),(3,'服务器',NULL,0,'2019-04-23 03:24:50',NULL,30),(4,'CSS',NULL,1,NULL,NULL,NULL),(5,'JS',NULL,1,NULL,NULL,NULL),(6,'VUE',NULL,1,NULL,NULL,NULL),(7,'Spring Boot',NULL,2,NULL,NULL,NULL),(8,'Java',NULL,2,NULL,NULL,NULL),(9,'并发',NULL,2,NULL,NULL,NULL),(10,'Linux',NULL,3,NULL,NULL,NULL),(11,'Shell',NULL,3,NULL,NULL,NULL),(12,'岁的法国',NULL,1,'2019-04-18 02:40:09','2019-04-18 02:40:09',NULL);
 /*!40000 ALTER TABLE `type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -197,4 +199,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-26 20:06:07
+-- Dump completed on 2019-05-06 10:39:07
