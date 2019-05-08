@@ -329,8 +329,16 @@
     //初始化评论框
     var simplemde = new SimpleMDE({
         element: document.getElementById("comment-area"),
+        spellChecker: false,
+        autofocus: true,
         autoDownloadFontAwesome: false,
+        placeholder: "Type here...",
+        tabSize: 4,
         status: false,
+        lineWrapping: false,
+        renderingConfig: {
+            codeSyntaxHighlighting: true
+        },
         hideIcons: ['heading', 'unordered-list', 'ordered-list', 'link', 'image', 'fullscreen']
         // showIcons: ['bold','italic','code','quote','preview','guide']
     });

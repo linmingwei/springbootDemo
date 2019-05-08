@@ -209,7 +209,8 @@ article:hover{
 }
 .article-meta{
     position: absolute;
-    bottom: 10%;
+    bottom: 6%;
+    left: 21%;
     /*color: #999;*/
 
 }
@@ -357,3 +358,26 @@ article:hover{
     margin-bottom: 0!important;
 }
 /*-----------------------------------------footer*/
+.read-all{
+    line-height: 30px;
+    right: 0;
+    bottom: 6%;
+    width: 80px;
+    background-color: #009a61;
+    height: 30px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+.read-all:hover{
+    transform: translateY(-2px);
+    box-shadow: 10px 10px 30px -15px #80b38e;
+    transition: all .3s ease;
+}
+.read-all a{
+    color: whitesmoke;
+}
+.read-all a:hover{
+    text-decoration: none;
+    color: whitesmoke;
+}
