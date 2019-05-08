@@ -15,12 +15,12 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 @Configuration
 public class MainConfig {
 
-    @Bean
-    public MultipartResolver multipartResolver() {
-        CommonsMultipartResolver resolver = new CommonsMultipartResolver();
-        resolver.setMaxUploadSize(1000000);
-        return resolver;
-    }
+//    @Bean
+//    public MultipartResolver multipartResolver() {
+//        CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+//        resolver.setMaxUploadSize(1000000);
+//        return resolver;
+//    }
 
     @Bean
     public PegDownProcessor peg() {

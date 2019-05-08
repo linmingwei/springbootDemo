@@ -2,11 +2,16 @@
 <@header>
 <link rel="stylesheet" href="/static/css/simplemde.min.css"/>
 <link rel="stylesheet" href="/webjars/select2/4.0.5/css/select2.min.css">
+<style>
+    .custom-file-input:lang(en)~.custom-file-label::after {
+        content: "浏览";
+    }
+</style>
 </@header>
 <div class="shadow-sm bg-white rounded item px-4 pt-3 pb-2">
     <h4>文章发布</h4>
     <hr>
-    <form action="/article/publish" method="post" id="article_form">
+    <form action="/article/publish" method="post" id="article_form" multiple="multilple">
         <div class="form-group row">
             <label for="titleInput" class="col-sm-1 col-form-label">标题</label>
             <div class="col-sm-11">
@@ -46,9 +51,14 @@
         <div class="form-group row">
             <label for="titleInput" class="col-sm-1 col-form-label">图片</label>
             <div class="col-sm-11">
-                <div class="custom-file" style="cursor: pointer;">
-                    <input type="file" name="image" class="custom-file-input" id="customFile">
-                    <label class="custom-file-label" for="customFile" ></label>
+                <div class="input-group">
+                    <div class="custom-file">
+                        <input type="file" name="image" class="custom-file-input" id="article_img">
+                        <label class="custom-file-label" for="article_img">选择文件</label>
+                    </div>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary upload-image" type="button">上传</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -76,6 +86,7 @@
 <@footer>
 <script src="/static/js/simplemde.min.js"></script>
 <script src="/webjars/select2/4.0.5/js/select2.min.js"></script>
+<script src="/static/js/ajaxfileupload.js"></script>
 <script>
     var simplemde = new SimpleMDE({
         element: document.getElementById("article_editor"),
@@ -173,6 +184,50 @@
             })
 
         }
+    });
+    $('.custom-file-input').on('change',function(){
+        var fileName = $(this).val();
+        $(this).next('.custom-file-label').addClass("selected").html(fileName);
+    });
+    $('.upload-image').click(function (e) {
+        e.preventDefault();
+        var image = $('#article_img')[0].files[0];
+        if (image == undefined) {
+            alert("图片为空，请至少选择一张图片！");
+        }else {
+            var formData= new FormData();
+            formData.append('image',image);
+            // $.ajaxFileUpload({
+            //     url:'/upload/img',
+            //     type:"post",
+            //     // secureuri: false,
+            //     fileElementId: 'article_img',
+            //     contentType: false,
+            //     processData: false,
+            //     data:{pid:'0'},
+            //     dataType:'json',
+            //     success:function(res){
+            //         alert(res.msg);
+            //     },
+            //     error:function(data){
+            //         alert("上传出错。。。。");
+            //     }
+            // });
+            $.post({
+                url:'/upload/img',
+                data:formData,
+                contentType: false,
+                processData: false,
+                success:function (res) {
+                    console.log(res.msg);
+                },
+                error:function () {
+                    alert("上传失败，未知错误");
+                }
+
+            })
+        }
+
     })
 
 </script>
