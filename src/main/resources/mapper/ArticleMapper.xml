@@ -33,7 +33,7 @@
         values (#{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},
         #{description,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
         #{typeId,jdbcType=INTEGER}, #{comment,jdbcType=BIT}, #{top,jdbcType=BIT}, #{order,jdbcType=INTEGER},
-        #{look,jdbcType=INTEGER}, #{favorate,jdbcType=INTEGER}, #{contentHTML,jdbcType=VARCHAR}
+        #{look,jdbcType=INTEGER}, #{favorate,jdbcType=INTEGER}, #{contentHTML,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}
         )
     </insert>
     <update id="updateByPrimaryKey" parameterType="com.springboot.demo.entity.Article">

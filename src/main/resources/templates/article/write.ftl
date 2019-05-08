@@ -57,7 +57,7 @@
                         <label class="custom-file-label" for="article_img">选择文件</label>
                     </div>
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary upload-image" type="button">上传</button>
+                        <button class="btn btn-outline-success upload-image" type="button">上传</button>
                     </div>
                 </div>
             </div>
@@ -159,12 +159,15 @@
     function publish_article(ext){
         var data = $('#article_form').serialize();
         data += '&content=' + simplemde.value()+ext;
+        if ($('#article_img').attr('image-name') != undefined) {
+            data += '&image='+$('#article_img').attr('image-name');
+        }
         console.log(JSON.stringify(data));
         $.post({
             url: '/article/publish',
             data: data,
             success: function (res) {
-                alert("操作成功");
+                alert("发布文章成功");
                 window.location.href = '/admin/article/write';
             }
         })
@@ -188,47 +191,55 @@
     $('.custom-file-input').on('change',function(){
         var fileName = $(this).val();
         $(this).next('.custom-file-label').addClass("selected").html(fileName);
+        $('.upload-image').removeClass('btn-outline-success').removeClass('btn-outline-danger').addClass('btn-outline-success').text('上传');
     });
     $('.upload-image').click(function (e) {
         e.preventDefault();
-        var image = $('#article_img')[0].files[0];
-        if (image == undefined) {
-            alert("图片为空，请至少选择一张图片！");
-        }else {
-            var formData= new FormData();
-            formData.append('image',image);
-            // $.ajaxFileUpload({
-            //     url:'/upload/img',
-            //     type:"post",
-            //     // secureuri: false,
-            //     fileElementId: 'article_img',
-            //     contentType: false,
-            //     processData: false,
-            //     data:{pid:'0'},
-            //     dataType:'json',
-            //     success:function(res){
-            //         alert(res.msg);
-            //     },
-            //     error:function(data){
-            //         alert("上传出错。。。。");
-            //     }
-            // });
+        if ($(this).hasClass('btn-outline-success')) {
+            var image = $('#article_img')[0].files[0];
+            if (image == undefined) {
+                alert("图片为空，请至少选择一张图片！");
+            }else {
+                var formData= new FormData();
+                formData.append('image',image);
+                $.post({
+                    url:'/upload/img',
+                    data:formData,
+                    contentType: false,
+                    processData: false,
+                    success:function (res) {
+                        alert(res.msg);
+                        $('#article_img').attr('image-name',res.data);
+                        $('.upload-image').text("删除").removeClass('btn-outline-success').addClass('btn-outline-danger');
+                    },
+                    error:function () {
+                        alert("上传失败，未知错误");
+                    }
+
+                })
+            }
+        }else if ($(this).hasClass('btn-outline-danger')) {
+            var formData = new FormData();
+            formData.append("imgName", $('#article_img').attr('image-name'));
             $.post({
-                url:'/upload/img',
+                url:'/upload/deleteImg',
                 data:formData,
                 contentType: false,
                 processData: false,
                 success:function (res) {
-                    console.log(res.msg);
+                    alert(res.msg);
+                    $('#article_img').attr('image-name',"");
+                    $('.upload-image').text("上传").removeClass('btn-outline-danger').addClass('btn-outline-success');
                 },
                 error:function () {
-                    alert("上传失败，未知错误");
+                    alert("删除失败，未知错误");
                 }
 
             })
+
         }
 
-    })
+    });
 
 </script>
 </@footer>

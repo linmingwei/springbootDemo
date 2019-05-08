@@ -39,7 +39,7 @@
                 <#list articles as article>
 
                 <div class="media rounded p-3 bg-white shadow-sm mt-3">
-                    <img class="mr-3" src="/static/images/20181024185055343.jpg" height="150" width="150"
+                    <img class="mr-3" src="/${(article.image)!"static/images/20181024185055343.jpg"}" height="150" width="150"
                          alt="Generic placeholder image">
                     <div class="media-body pr-1"
                          style="min-width: calc(100% - 180px);max-height: 150px;overflow: hidden;">
