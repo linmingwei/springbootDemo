@@ -1,11 +1,11 @@
 <!--标签云-->
                 <div class="blog-panel blog-tag bg-white">
                     <div class="panel-title">
-                        <h5>
+                        <div class="h5">
                             <i class="fa fa-tags" aria-hidden="true"></i>
                             <span class="">文章标签</span>
-                        </h5>
-                        <hr>
+                        </div>
+                        <div class="hr"></div>
 
                     </div>
                     <div class="tag-body">

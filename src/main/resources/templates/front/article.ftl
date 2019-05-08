@@ -2,6 +2,7 @@
 <@header>
 <link rel="stylesheet" href="/static/css/simplemde.min.css"/>
 <link rel="stylesheet" href="/static/css/front/article.css">
+<link rel="stylesheet" href="/static/css/front/markdown.css">
 </@header>
 <div class="container p-0" style="max-width: 88%;">
     <div class="row ">
@@ -68,7 +69,7 @@
                 </p>
                 <p>
                     <strong>版权声明：</strong>
-                    本站原创文章，于2018年09月12日由张亚东发布，转载请注明出处
+                    本站原创文章，于2018年09月12日由BLOG发布，转载请注明出处
                 </p>
 
             </div>
@@ -87,12 +88,12 @@
             <div class="blog-panel">
                 <div class="panel-title">
 
-                    <h5 class="h5">
+                    <div class="h5">
                         <i class="fa fa-fire"></i>
                         热门推荐
-                    </h5>
+                    </div>
                 </div>
-                <hr>
+                <div class="hr"></div>
                 <ul class="article-hot list-unstyled">
                     <li>
                         <div class="article-hot-img ">
@@ -155,11 +156,11 @@
             </div>
             <div class="blog-panel article-rel">
                 <div class="panel-title">
-                    <h5 class="h5">
+                    <div class="h5">
                         <i class="fa fa-google-wallet"></i>
                         相关文章
-                    </h5>
-                    <hr>
+                    </div>
+                    <div class="hr"></div>
                     <a href="#" class="text-truncate link-green">Springboot + Freemarker项目中使用自定义注解Springboot +
                         Freemarker项目中使用自定义注解</a>
                     <a href="#" class="text-truncate link-green">Springboot + Freemarker项目中使用自定义注解Springboot +
@@ -173,11 +174,11 @@
             </div>
             <div class="blog-panel">
                 <div class="panel-title" id="comment-post">
-                    <h5 class="h5">
+                    <div class="h5">
                         <i class="fa fa-commenting-o"></i>
                         评论
-                    </h5>
-                    <hr>
+                    </div>
+                    <div class="hr"></div>
                     <div class="" id="commentContent">
                         <input type="hidden" value="${article.id}">
                         <textarea name="" required placeholder="请输入" class="layui-textarea CodeMirror CodeMirror-scroll"
@@ -191,13 +192,13 @@
 
                 </div>
                 <div class="panel-title">
-                    <h5 class="h5">
+                    <div class="h5">
                         <i class="fa fa-comments-o"></i>
                         <em style="font-size: 18px;color: red;font-weight: 700;font-family: Georgia;">${comments?size!"0"}</em>
                         条评论
-                    </h5>
+                    </div>
                 </div>
-                <hr>
+                <div class="hr"></div>
                 <#if comments??>
                 <ul class="list-unstyled">
                     <#list comments as comment>
@@ -220,7 +221,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <hr>
+                            <div class="hr"></div>
                             <div class="comment-content">
                                 <#if comment.parent??>
                                     <a class="" href="#">@${(comment.parent.username)!""}</a>
@@ -230,7 +231,7 @@
 
                                 </#if>
                                 ${(comment.content)!""}</div>
-                            <hr>
+                            <div class="hr"></div>
                             <div class="content-meta" style="">
                                 <a href="#">
                                     <i class="fa fa-thumbs-up"></i> 赞(${(comment.favorate)!"0"})
@@ -253,12 +254,12 @@
             <!--说给你听-->
             <div class="blog-panel mt-3">
                 <div class="panel-title">
-                    <h5>
+                    <div class="h5">
                         <i class="fa fa-hand-peace-o"></i>
                         说给你听
-                    </h5>
+                    </div>
                 </div>
-                <hr>
+                <div class="hr"></div>
                 <blockquote class="" style="border-left: none; ">
                     路一步一步走，坑一个一个踩。
                 </blockquote>
@@ -266,12 +267,12 @@
             <!--文章目录-->
             <div class="blog-panel ">
                 <div class="panel-title">
-                    <h5>
+                    <div class="h5">
                         <i class="fa fa-book"></i>
                         文章目录
-                    </h5>
+                    </div>
                 </div>
-                <hr>
+                <div class="hr"></div>
                 <ul class="list-unstyled">
                     <li>
                         <a href="#" class="text-green" style="padding: 0 10px;line-height: 2;">
@@ -311,7 +312,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">评论信息框</h5>
+                        <div class="h5 modal-title" id="exampleModalLabel">评论信息框</div>
                     </div>
                     <div class="modal-body">
                         <form id="commentForm">

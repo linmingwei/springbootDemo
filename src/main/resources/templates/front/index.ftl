@@ -19,7 +19,7 @@
                     <div class="carousel-inner">
                         <#list carouselArticles as carousel>
                         <div class="carousel-item ${(carousel?counter == 1)?then("active","")}">
-                            <img src="/static/images/item1.jpg" height="500px" class="d-block w-100" alt="...">
+                            <img src="/${(article.image)!"static/images/item1.jpg"}" height="500px" class="d-block w-100" alt="...">
                             <div class="carousel-caption d-none d-md-block">
                                 <h1>${carousel.title}</h1>
                                 <p>${carousel.description}</p>

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -38,6 +39,9 @@ public class ArticleController {
 
                 article.setContentHTML(peg.markdownToHtml(article.getContent()));
             }
+            if (article.getCreateTime() == null) {
+                article.setCreateTime(new Date());
+            }
             articleService.insert(article);
             if (tagIds != null && tagIds.length != 0) {
                 articleTagService.insert(article.getId(), tagIds);
@@ -45,6 +49,7 @@ public class ArticleController {
             }
         } else {
             article.setContentHTML(peg.markdownToHtml(article.getContent()));
+            article.setUpdateTime(new Date());
             articleService.update(article);
             if (tagIds != null && tagIds.length != 0) {
                 articleTagService.deleteByAid(article.getId());

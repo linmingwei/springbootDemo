@@ -156,9 +156,9 @@
     }
     function title_for(value, row, index) {
         if (row.status == 1) {
-            return '<span class="badge badge-danger">草稿</span> '+row.title;
+            return '<span class="badge badge-danger">草稿</span> '+'<a href="/'+row.typeId+'/'+row.id+'">'+row.title+'</a> ';
         }else if (row.status == 0) {
-            return '<span class="badge badge-success">已发布</span> '+row.title;
+            return '<span class="badge badge-success">已发布</span> '+'<a href="/'+row.typeId+'/'+row.id+'">'+row.title+'</a> ';
         }else{
             return row.title;
         }
