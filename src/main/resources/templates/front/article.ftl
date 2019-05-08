@@ -32,8 +32,10 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="article-content markdown-body" id="content">
-                ${(article.contentHTML)!""}
+                    <#--<div data-spy="scroll" data-target="#article-scroll" data-offset="0" class="scrollspy-example">-->
+                    ${(article.contentHTML)!""}
 
+                    <#--</div>-->
                 </div>
                 <div class="hr text-center">
                     <span>正文结束</span>
@@ -225,7 +227,8 @@
                             <div class="comment-content">
                                 <#if comment.parent??>
                                     <a class="" href="#">@${(comment.parent.username)!""}</a>
-                                    <div class="alert alert-secondary" style="background-color: #eeeeee;border-color: white" role="alert">
+                                    <div class="alert alert-secondary"
+                                         style="background-color: #eeeeee;border-color: white" role="alert">
                                         ${(comment.parent.content)!""}
                                     </div>
 
@@ -273,6 +276,12 @@
                     </div>
                 </div>
                 <div class="hr"></div>
+                <div id="article-scroll" class="list-group">
+                    <ul class="nav nav-tabs" role="tablist">
+
+                    </ul>
+                    <#--<a class="list-group-item list-group-item-action" href="#list-item-4">Item 4</a>-->
+                </div>
                 <ul class="list-unstyled">
                     <li>
                         <a href="#" class="text-green" style="padding: 0 10px;line-height: 2;">
@@ -384,6 +393,13 @@
             }
         })
 
+    });
+    //滚动监听功能实现
+    var mdhead = $('.markdown-body').children('h1,h2,h3,h4,h5');
+    $.each(mdhead,function (i, value) {
+        $(value).attr('id',$(value).prop('tagName')+i);
+        console.log($(value).prop('tagName')+': '+ $(value).text());
+        $('#article-scroll').find('ul').append('<a class="list-group-item list-group-item-action" href=#'+$(value).attr('id')+'>'+$(value).text()+'</a>')
     })
 
 

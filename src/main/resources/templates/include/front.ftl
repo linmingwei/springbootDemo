@@ -14,7 +14,7 @@
     <#nested >
     <title>Blog小站</title>
 </head>
-<body style="background-color: #f3f6f8;">
+<body data-spy="scroll" data-target="#article-scroll" style="position: relative;background-color: #f3f6f8;">
     <#include "/front/header.ftl">
 </#macro>
 
