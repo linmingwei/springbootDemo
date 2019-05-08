@@ -31,7 +31,7 @@
                     </div>
                     <div class="clearfix"></div>
                 </div>
-                <div class="article-content markdown-body" id="content">
+                <div class="article-content markdown-body border-bottom-0 border-left-0 border-right-0" id="content">
                     <#--<div data-spy="scroll" data-target="#article-scroll" data-offset="0" class="scrollspy-example">-->
                     ${(article.contentHTML)!""}
 
@@ -384,10 +384,10 @@
     var offsetA = $('#article-wrapper').offset();
     $(window).scroll(function () {
         if ($(window).scrollTop() > offsetA.top) {
-            $('#article-wrapper').css({position:'fixed',top:'50px',width:aw});
+            $('#article-wrapper').css({position:'fixed',top:'50px',width:aw*2/3,right:0});
             return;
         }else{
-            $('#article-wrapper').css({position:'static'});
+            $('#article-wrapper').css({position:'static',width:aw});
         }
         console.log($(window).scrollTop());
     })
