@@ -21,7 +21,7 @@
                     <span class="pull-left article-flag yc text-center">原创</span>
                     <div class="pull-right">
                     <span class="article-meta">
-                        <i class="layui-icon layui-icon-date"></i>
+                        <i class="fa fa-clock-o"></i>
                         <span class="inl">${(article.createTime?datetime)!"未知时间"}</span>&nbsp;&nbsp;
                         <i class="fa fa-eye" aria-hidden="true"></i>
                         <span>浏览(${(article.look)!"0"})</span>&nbsp;&nbsp;
@@ -263,12 +263,12 @@
                     </div>
                 </div>
                 <div class="hr"></div>
-                <blockquote class="" style="border-left: none; ">
+                <p class="mb-0 py-2 pl-2" style="border-left: none; background-color: #f5f5f5;">
                     路一步一步走，坑一个一个踩。
-                </blockquote>
+                </p>
             </div>
             <!--文章目录-->
-            <div class="blog-panel ">
+            <div class="blog-panel " id="article-wrapper">
                 <div class="panel-title">
                     <div class="h5">
                         <i class="fa fa-book"></i>
@@ -277,37 +277,11 @@
                 </div>
                 <div class="hr"></div>
                 <div id="article-scroll" class="list-group">
-                    <ul class="nav nav-tabs" role="tablist">
+                    <ul class="nav " role="tablist">
 
                     </ul>
                     <#--<a class="list-group-item list-group-item-action" href="#list-item-4">Item 4</a>-->
                 </div>
-                <ul class="list-unstyled">
-                    <li>
-                        <a href="#" class="text-green" style="padding: 0 10px;line-height: 2;">
-                            <i class="fa fa-angle-right"></i>
-                            &nbsp;前言
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="text-green" style="padding: 0 10px;line-height: 2;">
-                            <i class="fa fa-angle-right"></i>
-                            &nbsp;前言
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="text-green" style="padding: 0 10px;line-height: 2;">
-                            <i class="fa fa-angle-right"></i>
-                            &nbsp;前言
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="text-green" style="padding: 0 10px;line-height: 2;">
-                            <i class="fa fa-angle-right"></i>
-                            &nbsp;前言
-                        </a>
-                    </li>
-                </ul>
             </div>
 
             <!--标签云-->
@@ -398,8 +372,24 @@
     var mdhead = $('.markdown-body').children('h1,h2,h3,h4,h5');
     $.each(mdhead,function (i, value) {
         $(value).attr('id',$(value).prop('tagName')+i);
-        console.log($(value).prop('tagName')+': '+ $(value).text());
-        $('#article-scroll').find('ul').append('<a class="list-group-item list-group-item-action" href=#'+$(value).attr('id')+'>'+$(value).text()+'</a>')
+        // console.log($(value).prop('tagName')+': '+ $(value).text());
+        $('#article-scroll').find('ul').append('<a class="px-3 py-1 border-0 list-group-item list-group-item-action" href=#'+$(value).attr('id')+'>'+$(value).text()+'</a>')
+    });
+    var dh = $(document).height();
+    var vh = $(window).height();
+    var sHeight = dh -vh;
+    var ah = $('#article-wrapper').height();
+    var aw = $('#article-wrapper').innerWidth();
+    console.log('dh:'+dh+'; vh:' + vh+';ah:'+ah);
+    var offsetA = $('#article-wrapper').offset();
+    $(window).scroll(function () {
+        if ($(window).scrollTop() > offsetA.top) {
+            $('#article-wrapper').css({position:'fixed',top:'50px',width:aw});
+            return;
+        }else{
+            $('#article-wrapper').css({position:'static'});
+        }
+        console.log($(window).scrollTop());
     })
 
 
