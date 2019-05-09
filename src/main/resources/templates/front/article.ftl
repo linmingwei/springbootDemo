@@ -26,16 +26,16 @@
                         <i class="fa fa-eye" aria-hidden="true"></i>
                         <span>浏览(${(article.look)!"0"})</span>&nbsp;&nbsp;
                         <i class="fa fa-comments-o" aria-hidden="true"></i>
-                        <span>0</span>
+                        <span>${comments?size!"0"}</span>
                     </span>
                     </div>
                     <div class="clearfix"></div>
                 </div>
                 <div class="article-content markdown-body border-bottom-0 border-left-0 border-right-0" id="content">
-                    <#--<div data-spy="scroll" data-target="#article-scroll" data-offset="0" class="scrollspy-example">-->
-                    ${(article.contentHTML)!""}
+                <#--<div data-spy="scroll" data-target="#article-scroll" data-offset="0" class="scrollspy-example">-->
+                ${(article.contentHTML)!""}
 
-                    <#--</div>-->
+                <#--</div>-->
                 </div>
                 <div class="hr text-center">
                     <span>正文结束</span>
@@ -77,14 +77,30 @@
             </div>
             <div class="blog-panel">
                 <div class="meta-nav text-center">
-                    <a href="#" style="border-right: 1px solid rgba(0,0,0,0.1);">
-                        <i class="fa fa-angle-left"></i>&nbsp;上一篇 <br>
-                        DBlog开源博客改名为OneBlog
-                    </a>
-                    <a href="#">
-                        <i class="fa fa-angle-left"></i>&nbsp;下一篇 <br>
-                        DBlog开源博客改名为OneBlog
-                    </a>
+                    <#if beforeArticle?? && beforeArticle?size gt 0>
+                        <#list beforeArticle as before>
+                        <a href="/${before.typeId}/${before.id}" style="border-right: 1px solid rgba(0,0,0,0.1);">
+                            <i class="fa fa-angle-left"></i>&nbsp;上一篇 <br>
+                            ${before.title}
+                        </a>
+                        </#list>
+                    <#else>
+                    <span class="text-secondary" style="border-right: 1px solid rgba(0,0,0,0.1);">已经是<br>第一篇了</span>
+                    </#if>
+                    <#if afterArticle?? && afterArticle?size gt 0>
+                        <#list afterArticle as after>
+                        <a href="/${after.typeId}/${after.id}" >
+                            <i class="fa fa-angle-right"></i>&nbsp;下一篇 <br>
+                            ${after.title}
+                        </a>
+                        </#list>
+                    <#else>
+                    <span class="text-secondary">已经是<br>最后一篇了</span>
+                    </#if>
+                    <#--<a href="#">-->
+                        <#--<i class="fa fa-angle-right"></i>&nbsp;下一篇 <br>-->
+                        <#--DBlog开源博客改名为OneBlog-->
+                    <#--</a>-->
                 </div>
             </div>
             <div class="blog-panel">
@@ -97,62 +113,24 @@
                 </div>
                 <div class="hr"></div>
                 <ul class="article-hot list-unstyled">
-                    <li>
-                        <div class="article-hot-img ">
+                    <#list hotArticles as hotArticle>
+                        <li>
+                            <div class="article-hot-img ">
 
-                            <img src="/static/images/springboot.png" alt="">
-                        </div>
-                        <div class="article-hot-text text-truncate">
-                            <a href="#">Springboot + Freemarker项目中使用自定义注解Springboot + Freemarker项目中使用自定义注解</a>
-                            <p>
+                                <img src="/${(hotArticle.image)!"static/images/springboot.png"}" width="50" height="50"
+                                     alt="">
+                            </div>
+                            <div class="article-hot-text text-truncate">
+                                <a class="mb-2" href="/${hotArticle.typeId}/${hotArticle.id}">${hotArticle.title}</a>
+                                <p class="mb-1" style="color:#7c7676; font-size: 12px">
 
-                                <span>浏览（3367）</span>
-                                <span>评论 (0)</span>
-                            </p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="article-hot-img">
+                                    <span>浏览（${(hotArticle.look)!"0"}）</span>
+                                    <span>评论 (${(hotArticle.commentNum)!"0"})</span>
+                                </p>
+                            </div>
+                        </li>
 
-                            <img src="/static/images/springboot.png" alt="">
-                        </div>
-                        <div class="article-hot-text text-truncate">
-                            <a href="#">Springboot + Freemarker项目中使用自定义注解Springboot + Freemarker项目中使用自定义注解</a>
-                            <p>
-
-                                <span>浏览（3367）</span>
-                                <span>评论 (0)</span>
-                            </p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="article-hot-img">
-
-                            <img src="/static/images/springboot.png" alt="">
-                        </div>
-                        <div class="article-hot-text text-truncate">
-                            <a href="#">Springboot + Freemarker项目中使用自定义注解Springboot + Freemarker项目中使用自定义注解</a>
-                            <p>
-
-                                <span>浏览（3367）</span>
-                                <span>评论 (0)</span>
-                            </p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="article-hot-img">
-
-                            <img src="/static/images/springboot.png" alt="">
-                        </div>
-                        <div class="article-hot-text text-truncate">
-                            <a href="#">Springboot + Freemarker项目中使用自定义注解Springboot + Freemarker项目中使用自定义注解</a>
-                            <p>
-
-                                <span>浏览（3367）</span>
-                                <span>评论 (0)</span>
-                            </p>
-                        </div>
-                    </li>
+                    </#list>
                 </ul>
                 <div class="clearfix"></div>
             </div>
@@ -163,14 +141,10 @@
                         相关文章
                     </div>
                     <div class="hr"></div>
-                    <a href="#" class="text-truncate link-green">Springboot + Freemarker项目中使用自定义注解Springboot +
-                        Freemarker项目中使用自定义注解</a>
-                    <a href="#" class="text-truncate link-green">Springboot + Freemarker项目中使用自定义注解Springboot +
-                        Freemarker项目中使用自定义注解</a>
-                    <a href="#" class="text-truncate link-green">Springboot + Freemarker项目中使用自定义注解Springboot +
-                        Freemarker项目中使用自定义注解</a>
-                    <a href="#" class="text-truncate link-green">Springboot + Freemarker项目中使用自定义注解Springboot +
-                        Freemarker项目中使用自定义注解</a>
+                    <#list relativeArticles as relativeArticle>
+                    <a href="/${relativeArticle.typeId}/${relativeArticle.id}"
+                       class="text-truncate link-green">${(relativeArticle.title)!""}</a>
+                    </#list>
 
                 </div>
             </div>
@@ -280,7 +254,7 @@
                     <ul class="nav " role="tablist">
 
                     </ul>
-                    <#--<a class="list-group-item list-group-item-action" href="#list-item-4">Item 4</a>-->
+                <#--<a class="list-group-item list-group-item-action" href="#list-item-4">Item 4</a>-->
                 </div>
             </div>
 
@@ -330,10 +304,10 @@
     var simplemde = new SimpleMDE({
         element: document.getElementById("comment-area"),
         spellChecker: false,
-        autofocus: true,
+        autofocus: false,
         autoDownloadFontAwesome: false,
         placeholder: "Type here...",
-        tabSize: 4,
+        // tabSize: 4,
         status: false,
         lineWrapping: false,
         renderingConfig: {
@@ -378,24 +352,24 @@
     });
     //滚动监听功能实现
     var mdhead = $('.markdown-body').children('h1,h2,h3,h4,h5');
-    $.each(mdhead,function (i, value) {
-        $(value).attr('id',$(value).prop('tagName')+i);
+    $.each(mdhead, function (i, value) {
+        $(value).attr('id', $(value).prop('tagName') + i);
         // console.log($(value).prop('tagName')+': '+ $(value).text());
-        $('#article-scroll').find('ul').append('<a class="px-3 py-1 border-0 list-group-item list-group-item-action" href=#'+$(value).attr('id')+'>'+$(value).text()+'</a>')
+        $('#article-scroll').find('ul').append('<a class="px-3 py-1 border-0 list-group-item list-group-item-action" href=#' + $(value).attr('id') + '>' + $(value).text() + '</a>')
     });
     var dh = $(document).height();
     var vh = $(window).height();
-    var sHeight = dh -vh;
+    var sHeight = dh - vh;
     var ah = $('#article-wrapper').height();
     var aw = $('#article-wrapper').innerWidth();
-    console.log('dh:'+dh+'; vh:' + vh+';ah:'+ah);
+    console.log('dh:' + dh + '; vh:' + vh + ';ah:' + ah);
     var offsetA = $('#article-wrapper').offset();
     $(window).scroll(function () {
         if ($(window).scrollTop() > offsetA.top) {
-            $('#article-wrapper').css({position:'fixed',top:'50px',width:aw*2/3,right:0});
+            $('#article-wrapper').css({position: 'fixed', top: '50px', width: aw * 2 / 3, right: 0});
             return;
-        }else{
-            $('#article-wrapper').css({position:'static',width:aw});
+        } else {
+            $('#article-wrapper').css({position: 'static', width: aw});
         }
         console.log($(window).scrollTop());
     })

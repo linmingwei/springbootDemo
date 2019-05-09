@@ -28,7 +28,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<Article> findByExample(Map<String, Integer> params) {
+    public List<Article> findByExample(Map<String, String> params) {
         return articleMapper.selectByExample(params);
     }
 

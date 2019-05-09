@@ -113,14 +113,14 @@
     background-color: #009a61;
     color: #ffffff;
 }
-.meta-nav a{
+.meta-nav a,.meta-nav span{
     display: inline-block;
     color: #009a61;
     width:49%;
 
 }
 .article-hot li{
-    margin-bottom: 5px;
+    /*margin-bottom: 5px;*/
     width: 49%;
     float: left;
     /*border-right: 1px solid rgba(0,0,0,0.1);*/
@@ -136,16 +136,16 @@
 }
 .article-hot-img{
     float: left;
-    width: 15%;
+    width: 12%;
 }
 .article-hot-text{
     width: 84%;
     position: relative;
 }
 .article-hot-text a{
-    margin: 3px 0 10px 0;
+    /*margin: 3px 0 10px 0;*/
     display: inline-block;
-    font-size: 15px;
+    font-size: 17px;
 }
 .article-hot-text a:hover{
     color: #009a61;

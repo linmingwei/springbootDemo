@@ -22,6 +22,11 @@ public class CommentServiceImpl implements CommentService {
     private CommentMapper commentMapper;
 
     @Override
+    public int countArticleComment(Integer aid) {
+        return commentMapper.countArticleComment(aid);
+    }
+
+    @Override
     public int count() {
         return commentMapper.count();
     }

@@ -12,7 +12,7 @@
                 </div>
                 <#list page.list as article>
 
-                <div class="media rounded p-3 bg-white shadow-sm mt-3">
+                <div class="media position-relative rounded p-3 bg-white shadow-sm mt-3">
                     <img class="mr-3" src="/${(article.image)!"static/images/20181024185055343.jpg"}" height="150" width="150"
                          alt="Generic placeholder image">
                     <div class="media-body pr-1"
@@ -22,6 +22,22 @@
                         </h5>
                         ${(article.description)!""}
                     </div>
+                    <div class="media-footer">
+                        <span class="article-meta">
+                            <i class="fa fa-calendar-o"></i>
+                            <span class="inl">${(article.createTime?datetime)!"未知时间"}</span>&nbsp;&nbsp;
+                            <i class="fa fa-eye" aria-hidden="true"></i>
+                            <span>浏览(${(article.look)!"0"})</span>&nbsp;&nbsp;
+                            <i class="fa fa-comments-o" aria-hidden="true"></i>
+                            <span>0</span>
+                        </span>
+                        <div class="read-all position-absolute text-center">
+                            <a href="/${article.typeId}/${article.id}" >
+                                阅读全文</a>
+                        </div>
+
+                    </div>
+
                 </div>
                 </#list>
                 <#if page.pages gt 1>

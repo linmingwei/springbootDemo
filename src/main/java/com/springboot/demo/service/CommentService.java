@@ -20,4 +20,6 @@ public interface CommentService {
     List<Comment> list(Map map);
 
     int count();
+
+    int countArticleComment(Integer aid);
 }

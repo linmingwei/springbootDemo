@@ -25,5 +25,5 @@ public interface ArticleService {
 
     int count();
 
-    List<Article> findByExample(Map<String, Integer> params);
+    List<Article> findByExample(Map<String, String> params);
 }

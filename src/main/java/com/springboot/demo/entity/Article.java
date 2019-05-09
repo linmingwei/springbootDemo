@@ -32,11 +32,21 @@ public class Article {
 
     private Integer look;
 
-    private Integer favorate;
+    private Integer favorite;
 
     private String contentHTML;
 
     private String image;
+
+    private Integer commentNum;
+
+    public Integer getCommentNum() {
+        return commentNum;
+    }
+
+    public void setCommentNum(Integer commentNum) {
+        this.commentNum = commentNum;
+    }
 
     public String getImage() {
         return image;
@@ -62,12 +72,12 @@ public class Article {
         this.look = look;
     }
 
-    public Integer getFavorate() {
-        return favorate;
+    public Integer getFavorite() {
+        return favorite;
     }
 
-    public void setFavorate(Integer favorate) {
-        this.favorate = favorate;
+    public void setFavorite(Integer favorite) {
+        this.favorite = favorite;
     }
 
     public Integer getId() {

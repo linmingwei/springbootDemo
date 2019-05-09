@@ -78,10 +78,43 @@ public class IndexController {
                 comment.setParent(parentComments.get(comment.getPid()));
             }
         }
+        Map<String,String>  hotParams = new HashMap<>();
+        hotParams.put("order","look");
+        hotParams.put("type","desc");
+        hotParams.put("limit","8");
+        List<Article> hotArticles = articleService.list(hotParams);
+        for (Article a : hotArticles) {
+            a.setCommentNum(commentService.countArticleComment(a.getId()));
+        }
+        Map<String,String> relativeParams = new HashMap<>();
+        relativeParams.put("typeId",String.valueOf(article.getTypeId()));
+        relativeParams.put("noid",String.valueOf(article.getId()));
+        relativeParams.put("limit","4");
+        List<Article> relativeArticles = articleService.findByExample(relativeParams);
+        Map<String,String> beforeParams = new HashMap<>();
+        beforeParams.put("typeId",String.valueOf(article.getTypeId()));
+        beforeParams.put("ltid",String.valueOf(article.getId()));
+        beforeParams.put("limit","1");
+        beforeParams.put("order","id");
+        beforeParams.put("type","desc");
+        List<Article> beforeArticle = articleService.findByExample(beforeParams);
+        Map<String,String> afterParams = new HashMap<>();
+        afterParams.put("typeId",String.valueOf(article.getTypeId()));
+        afterParams.put("gtid",String.valueOf(article.getId()));
+        afterParams.put("limit","1");
+        afterParams.put("order","id");
+        afterParams.put("type","asc");
+        List<Article> afterArticle = articleService.findByExample(afterParams);
+        int articleComments = commentService.countArticleComment(aid);
         List<Tag> tags = tagService.getByAid(aid);
         model.addAttribute("article",article);
+        model.addAttribute("hotArticles",hotArticles);
         model.addAttribute("tags",tags);
         model.addAttribute("comments",comments);
+        model.addAttribute("articleComments",articleComments);
+        model.addAttribute("relativeArticles",relativeArticles);
+        model.addAttribute("beforeArticle",beforeArticle);
+        model.addAttribute("afterArticle",afterArticle);
 
         return "front/article";
 
@@ -101,8 +134,8 @@ public class IndexController {
         if (pageNum == null || pageNum < 1) {
             pageNum  = 1;
         }
-        Map<String,Integer> params = new HashMap<>();
-        params.put("typeId",id);
+        Map<String,String> params = new HashMap<>();
+        params.put("typeId",String.valueOf(id));
         PageHelper.startPage(pageNum,pageSize);
         List<Article> articles = articleService.findByExample(params);
         PageInfo<Article> pageInfo = new PageInfo<>(articles, 5);

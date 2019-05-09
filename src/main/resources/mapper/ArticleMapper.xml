@@ -13,7 +13,7 @@
         <result column="comment" jdbcType="BIT" property="comment"/>
         <result column="top" jdbcType="BIT" property="top"/>
         <result column="order" jdbcType="INTEGER" property="order"/>
-        <result column="favorate" jdbcType="INTEGER" property="favorate"/>
+        <result column="favorite" jdbcType="INTEGER" property="favorite"/>
         <result column="look" jdbcType="INTEGER" property="look"/>
         <result column="contentHTML" jdbcType="VARCHAR" property="contentHTML"/>
         <result column="image" jdbcType="VARCHAR" property="image"/>
@@ -28,12 +28,12 @@
         </selectKey>
         insert into article (title, content, `status`,
         description, createTime, updateTime,
-        typeId, `comment`, `top`, `order`,`look`,`favorate`,`contentHTML`,`image`
+        typeId, `comment`, `top`, `order`,`look`,`favorite`,`contentHTML`,`image`
         )
         values (#{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},
         #{description,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
         #{typeId,jdbcType=INTEGER}, #{comment,jdbcType=BIT}, #{top,jdbcType=BIT}, #{order,jdbcType=INTEGER},
-        #{look,jdbcType=INTEGER}, #{favorate,jdbcType=INTEGER}, #{contentHTML,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}
+        #{look,jdbcType=INTEGER}, #{favorite,jdbcType=INTEGER}, #{contentHTML,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}
         )
     </insert>
     <update id="updateByPrimaryKey" parameterType="com.springboot.demo.entity.Article">
@@ -49,20 +49,20 @@
       `top` = #{top,jdbcType=BIT},
       `order` = #{order,jdbcType=INTEGER},
       `look` = #{look,jdbcType=INTEGER},
-      `favorate` = #{favorate,jdbcType=INTEGER},
+      `favorite` = #{favorite,jdbcType=INTEGER},
       `contentHTML` = #{contentHTML,jdbcType=VARCHAR},
       `image` = #{image,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select id, title, content, `status`, description, createTime, updateTime, typeId, 
-    `comment`, `top`, `order`,`look`,`favorate`,contentHTML,`image`
+    `comment`, `top`, `order`,`look`,`favorite`,contentHTML,`image`
     from article
     where id = #{id,jdbcType=INTEGER}
   </select>
     <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
         select id, title, content, `status`, description, createTime, updateTime, typeId,
-        `comment`, `top`, `order`,`look`,`favorate`,contentHTML,`image`
+        `comment`, `top`, `order`,`look`,`favorite`,contentHTML,`image`
         from article order by
         <choose>
             <when test="order!=null">
@@ -85,13 +85,41 @@
     </select>
     <select id="selectByExample" parameterType="map" resultMap="BaseResultMap">
         select id, title, content, `status`, description, createTime, updateTime, typeId,
-    `comment`, `top`, `order`,`look`,`favorate`,contentHTML,`image`
+    `comment`, `top`, `order`,`look`,`favorite`,contentHTML,`image`
     from article
     <where>
         <if test="typeId!=null">
-            typeId = #{typeId}
+            and typeId = #{typeId}
         </if>
-
+        <if test="noid!=null">
+            and id != #{noid}
+        </if>
+        <if test="id!=null">
+            and id = #{id}
+        </if>
+        <if test="gtid!=null">
+            and id &gt; #{gtid}
+        </if>
+        <if test="ltid!=null">
+            and id &lt; #{ltid}
+        </if>
     </where>
+    order by
+    <choose>
+        <when test="order!=null">
+            ${order}
+            <if test="type!=null">
+                ${type}
+            </if>
+
+        </when>
+        <otherwise>
+            id asc
+        </otherwise>
+    </choose>
+
+    <if test="limit!=null">
+        limit ${limit}
+    </if>
     </select>
 </mapper>

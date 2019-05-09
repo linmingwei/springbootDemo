@@ -12,6 +12,9 @@
     <h4>文章发布</h4>
     <hr>
     <form action="/article/publish" method="post" id="article_form" multiple="multilple">
+        <input type="hidden" name="look" value="${(article.look?c)!"0"}">
+        <input type="hidden" name="order" value="${(article.order)!"0"}">
+        <input type="hidden" name="favorite" value="${(article.favorite)!"0"}">
         <div class="form-group row">
             <label for="titleInput" class="col-sm-1 col-form-label">标题</label>
             <div class="col-sm-11">
@@ -53,7 +56,7 @@
             <div class="col-sm-11">
                 <div class="input-group">
                     <div class="custom-file">
-                        <input type="file" name="image" class="custom-file-input" id="article_img">
+                        <input type="file" name="image"  class="custom-file-input" id="article_img" image-name="${(article.image)!""}">
                         <label class="custom-file-label" for="article_img">选择文件</label>
                     </div>
                     <div class="input-group-append">
@@ -187,6 +190,14 @@
             })
 
         }
+    });
+    $(function () {
+        var image_name = $('#article_img').attr('image-name');
+        if (image_name != undefined && image_name != "") {
+            // $('#article_img').val(image_name);
+            $('#article_img').next('.custom-file-label').addClass("selected").html(image_name);
+        }
+
     });
     $('.custom-file-input').on('change',function(){
         var fileName = $(this).val();
