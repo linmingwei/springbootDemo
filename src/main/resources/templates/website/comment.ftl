@@ -17,52 +17,48 @@
     </form>
 </div>
 <!-- Modal -->
+
 <div class="modal fade" data-backdrop="static" id="comment_modal" tabindex="-1" role="dialog"
      aria-labelledby="comment_modalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="comment_modalLabel">新增评论</h5>
+                <h5 class="modal-title" id="comment_modalLabel">回复评论</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form class="mx-4 my-1" id="tag_form">
+                <form class="mx-4 my-1" id="type_form">
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">名称</label>
                         <div class="col-sm-10">
                             <input type="hidden" name="id">
-                            <input type="text" name="name" class="form-control" placeholder="">
+                            <textarea type="text" name="content" class="form-control" placeholder="">
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">描述</label>
-                        <div class="col-sm-10">
-                            <input type="text" name="description" class="form-control" placeholder="">
-                        </div>
-                    </div>
-
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-                <button type="button" id="save_btn" class="btn btn-primary">保存</button>
+                <button type="button" id="save_btn" class="btn btn-primary">回复</button>
             </div>
         </div>
     </div>
 </div>
 
+
 <@footer>
 <script src="/static/js/bootstrap-table.min.js"></script>
 <script>
     window.operateEvents = {
-        'click .comment-edit ': function (e, value, row, index) {
+        'click .comment-reply ': function (e, value, row, index) {
             e.preventDefault();
+            $('#comment_modal').modal('show');
         },
         'click .comment-check':function (e, value, row, index) {
             e.preventDefault();
-        }
+        },
         'click .comment-delete': function (e, value, row, index) {
             e.preventDefault();
         }
@@ -82,10 +78,19 @@
         formatter: username_formatter
     }, {
         field: 'content',
-        title: '内容'
+        title: '内容',
+        formatter: content_formatter
     }, {
         field: 'createTime',
         title: '创建时间'
+    }, {
+        field: 'favorite',
+        title: '赞',
+        formatter:favorite_formatter
+    }, {
+        field: 'status',
+        title: '状态',
+        formatter:status_formatter
     }, {
         field: 'operate',
         title: '操作',
@@ -136,16 +141,55 @@
     }
     //丰富username
     function username_formatter(value, row, index) {
-        return[]
+        if (row.ipaddr == null) {
+            row.ipaddr = '未知';
+        }
+        if (row.local == null) {
+            row.local = '未知';
+        }
+
+        return[
+            '<span class="text-primary">'+row.username+'</span><br>'+
+            '<span style="font-size:13px" class="text-secondary"><i class="fa fa-address-book"></i>&nbsp;'+row.ipaddr+' |&nbsp;'+row.local+'</span>'
+
+        ]
+    }
+    //丰富content
+    function content_formatter(value,row, index) {
+        return[
+            '<p class="border-bottom mb-2">评论自：<a class="text-primary" href="/'+row.article.typeId+'/'+row.article.id+'">'+row.article.title+'</a></p>' +
+            '<span style="font-size: 13px" class="text-secondary">'+row.content+'</span>'
+
+        ]
+
+    }
+    //丰富赞
+    function favorite_formatter(value,row, index) {
+        if (row.favorite == null) {
+            row.favorite = 0;
+        }
+        return row.favorite;
+    }
+    //丰富状态
+    function status_formatter(value, row, index) {
+        if (row.status == null) {
+            return '<span class="badge badge-danger">未知错误</span>'
+        }else if (row.status == 0) {
+            return '<span class="badge badge-success">审核通过</span>'
+        }else if (row.status == 1) {
+            return '<span class="badge badge-info">正在审核</span>'
+        }else if (row.status == 2) {
+            return '<span class="badge badge-danger">审核失败</span>'
+        }
     }
 
     //添加操作按钮
     function addButton(value, row, index) {
         return [
-            '<button  class="btn comment-edit btn-primary btn-sm mr-3"><i class="fa fa-pencil" aria-hidden="true"></i>回复</button>',
+            '<button  class="btn comment-reply btn-primary btn-sm mr-3"><i class="fa fa-pencil" aria-hidden="true"></i>回复</button>',
             '<button  class="btn comment-check btn-info btn-sm mr-3"><i class="fa fa-pencil" aria-hidden="true"></i>审核</button>',
-            '<button class="btn comment-delete btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i>取消</button>'
-        ].join('')
+            '<button class="btn comment-delete btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i>删除</button>'
+        ].join('');
     }
     $('#save_btn').click(function () {
         $.post({
