@@ -59,7 +59,7 @@ public class IndexController {
     }
     @RequestMapping("/article")
     public String article() {
-        return "front/article";
+        return "front/404";
     }
 
 

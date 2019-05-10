@@ -89,7 +89,6 @@
 <@footer>
 <script src="/static/js/simplemde.min.js"></script>
 <script src="/webjars/select2/4.0.5/js/select2.min.js"></script>
-<script src="/static/js/ajaxfileupload.js"></script>
 <script>
     var simplemde = new SimpleMDE({
         element: document.getElementById("article_editor"),
