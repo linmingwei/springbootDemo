@@ -49,6 +49,7 @@ public class IndexController {
         params.put("order","look");
         params.put("type","desc");
         params.put("limit","10");
+        params.put("status","0");
         List<Article> list = articleService.list(params);
         List<Article> carouselArticles = list.stream().limit(3).collect(Collectors.toList());
         List<Article> articles = list.stream().skip(3).collect(Collectors.toList());
@@ -67,8 +68,10 @@ public class IndexController {
         Article article = articleService.getById(aid);
         Map<String, String> params = new HashMap<>();
         params.put("aid",aid.toString());
+        params.put("status","0");
         List<Comment> comments = commentService.getByParams(params);
         Map<Integer,Comment> parentComments = new HashMap<>();
+        Type articleType = typeService.getById(tid);
 
         for (Comment comment : comments) {
             parentComments.put(comment.getId(),comment);
@@ -82,6 +85,7 @@ public class IndexController {
         hotParams.put("order","look");
         hotParams.put("type","desc");
         hotParams.put("limit","8");
+        hotParams.put("status","0");
         List<Article> hotArticles = articleService.list(hotParams);
         for (Article a : hotArticles) {
             a.setCommentNum(commentService.countArticleComment(a.getId()));
@@ -90,6 +94,7 @@ public class IndexController {
         relativeParams.put("typeId",String.valueOf(article.getTypeId()));
         relativeParams.put("noid",String.valueOf(article.getId()));
         relativeParams.put("limit","4");
+        relativeParams.put("status","0");
         List<Article> relativeArticles = articleService.findByExample(relativeParams);
         Map<String,String> beforeParams = new HashMap<>();
         beforeParams.put("typeId",String.valueOf(article.getTypeId()));
@@ -97,6 +102,7 @@ public class IndexController {
         beforeParams.put("limit","1");
         beforeParams.put("order","id");
         beforeParams.put("type","desc");
+        beforeParams.put("status","0");
         List<Article> beforeArticle = articleService.findByExample(beforeParams);
         Map<String,String> afterParams = new HashMap<>();
         afterParams.put("typeId",String.valueOf(article.getTypeId()));
@@ -104,10 +110,12 @@ public class IndexController {
         afterParams.put("limit","1");
         afterParams.put("order","id");
         afterParams.put("type","asc");
+        afterParams.put("status","0");
         List<Article> afterArticle = articleService.findByExample(afterParams);
         int articleComments = commentService.countArticleComment(aid);
         List<Tag> tags = tagService.getByAid(aid);
         model.addAttribute("article",article);
+        model.addAttribute("articleType",articleType);
         model.addAttribute("hotArticles",hotArticles);
         model.addAttribute("tags",tags);
         model.addAttribute("comments",comments);
@@ -136,6 +144,7 @@ public class IndexController {
         }
         Map<String,String> params = new HashMap<>();
         params.put("typeId",String.valueOf(id));
+        params.put("status","0");
         PageHelper.startPage(pageNum,pageSize);
         List<Article> articles = articleService.findByExample(params);
         PageInfo<Article> pageInfo = new PageInfo<>(articles, 5);

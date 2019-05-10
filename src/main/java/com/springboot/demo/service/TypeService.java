@@ -1,5 +1,6 @@
 package com.springboot.demo.service;
 
+import com.springboot.demo.entity.Article;
 import com.springboot.demo.entity.Type;
 
 import java.util.List;
@@ -21,4 +22,6 @@ public interface TypeService {
     int count();
 
     List<Type> withChildren();
+
+    Type getById(Integer tid);
 }

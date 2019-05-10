@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="/webjars/font-awesome/4.7.0/css/font-awesome.min.css"/>
         <link rel="stylesheet" href="/webjars/bootstrap/4.1.3/css/bootstrap.min.css"/>
         <script src="/webjars/jquery/3.2.1/jquery.min.js"></script>
+        <script src="/static/js/jquery.cookie.js"></script>
         <script src="/webjars/bootstrap/4.1.3/js/bootstrap.bundle.js"></script>
         <#nested>
         <title>Document</title>
@@ -36,10 +37,11 @@
     </body>
     <script>
         <#--点击sidebar激活样式-->
-
-        $('#side-menu').children('li').click(function () {
-
-            $(this).addClass("active").siblings('li').removeClass('active');
+        $(function () {
+            var urls =  window.location.pathname.split('/');
+            var pli = urls[urls.length-2], sli = urls[urls.length-1];
+            $('#'+pli+'_li').addClass('active').find('.collapse').addClass('show');
+            $('#'+pli+'_'+sli).addClass('active-li');
         })
     </script>
     <#nested>

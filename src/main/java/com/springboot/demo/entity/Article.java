@@ -12,7 +12,7 @@ public class Article {
     private String title;
 
     private String content;
-
+    //0：文章发布；  1：存草稿；
     private Integer status;
 
     private String description;

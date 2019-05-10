@@ -63,7 +63,13 @@
     <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
         select id, title, content, `status`, description, createTime, updateTime, typeId,
         `comment`, `top`, `order`,`look`,`favorite`,contentHTML,`image`
-        from article order by
+        from article
+        <where>
+            <if test="status!=null">
+                and status = #{status}
+            </if>
+        </where>
+        order by
         <choose>
             <when test="order!=null">
                 ${order}

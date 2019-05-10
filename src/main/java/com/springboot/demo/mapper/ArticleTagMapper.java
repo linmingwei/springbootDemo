@@ -18,6 +18,6 @@ public interface ArticleTagMapper {
     int updateByPrimaryKey(ArticleTag record);
 
     int deleteByAid(Integer aid);
-    @Select("select * from article_tag where tid = #{id}")
+    @Select("select * from article_tag where tid = #{id} and status = 0")
     List<ArticleTag> selectByTid(Integer id);
 }

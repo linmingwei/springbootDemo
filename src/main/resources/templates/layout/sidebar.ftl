@@ -16,13 +16,13 @@
         </div>
         <div id="sidebar-menu">
             <ul class="d-flex flex-column" id="side-menu">
-                <li class=" py-2">
+                <li class=" py-2" id="home_li">
                     <a class="" href="/admin/home">
                         <i class="fa fa-home" aria-hidden="true"></i>
                         <span class="d-inline-block ml-2">首页</span>
                     </a>
                 </li>
-                <li class=" py-2 ">
+                <li class=" py-2 " id="article_li">
                     <a data-toggle="collapse" href="#article-mng" role="button" aria-expanded="false"
                        aria-controls="article-mng">
                         <i class="fa fa-list" aria-hidden="true"></i>
@@ -30,26 +30,26 @@
                     </a>
                     <div class="collapse" id="article-mng">
                         <ul class="d-flex flex-column list-unstyled pl-4 pt-2">
-                            <li class="py-2 px-2">
+                            <li class="py-2 px-2" id="article_write">
                                 <a class="" href="/admin/article/write">
 
                                     <span class="d-inline-block ml-2">写文章</span>
                                 </a>
                             </li>
-                            <li class="py-2 px-2">
-                                <a class="" href="/admin/article/list">
+                            <li class="py-2 px-2" id="article_list">
+                                <a class="" href="/admin/article/list" >
 
                                     <span class="d-inline-block ml-2">文章列表</span>
                                 </a>
                             </li>
-                            <li class="py-2 px-2">
+                            <li class="py-2 px-2" id="article_type">
                                 <a class="" href="/admin/article/type">
 
                                     <span class="d-inline-block ml-2">分类列表</span>
                                 </a>
                             </li>
 
-                            <li class="py-2 px-2">
+                            <li class="py-2 px-2" id="article_tag">
                                 <a class="" href="/admin/article/tag">
 
                                     <span class="d-inline-block ml-2">标签列表</span>
@@ -58,7 +58,7 @@
                         </ul>
                     </div>
                 </li>
-                <li class=" py-2">
+                <li class=" py-2" id="website_li">
                     <a data-toggle="collapse" href="#web-mng" role="button" aria-expanded="false"
                        aria-controls="web-mng">
                         <i class="fa fa-globe" aria-hidden="true"></i>
@@ -66,13 +66,13 @@
                     </a>
                     <div class="collapse" id="web-mng">
                         <ul class="d-flex flex-column list-unstyled pl-4 pt-2">
-                            <li class="py-2 px-2">
+                            <li class="py-2 px-2" id="website_comment">
                                 <a class="" href="/admin/website/comment">
 
                                     <span class="d-inline-block ml-2">评论管理</span>
                                 </a>
                             </li>
-                            <li class="py-2 px-2">
+                            <li class="py-2 px-2" id="website_link">
                                 <a class="" href="#">
 
                                     <span class="d-inline-block ml-2">友情链接</span>
@@ -107,7 +107,7 @@
                         </ul>
                     </div>
                 </li>
-                <li class=" py-2">
+                <li class=" py-2" id="auth_li">
                     <a data-toggle="collapse" href="#auth-mng" role="button" aria-expanded="false"
                        aria-controls="auth-mng">
                         <i class="fa fa-cogs" aria-hidden="true"></i>

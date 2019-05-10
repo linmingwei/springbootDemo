@@ -13,7 +13,7 @@
                             <@customTag method="tags">
                                 <#if tags??>
                                     <#list tags as tag>
-                                        <a href="/tag/${tag.id}/1" class="text-secondary border-gray text-decoration-none">${tag.name}</a>
+                                        <a href="/tag/${tag.id}/1" class=" border-gray text-decoration-none">${tag.name}</a>
                                     </#list>
                                 </#if>
                             </@customTag>

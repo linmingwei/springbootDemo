@@ -20,6 +20,11 @@ public class TypeServiceImpl implements TypeService {
     private TypeMapper typeMapper;
 
     @Override
+    public Type getById(Integer tid) {
+        return typeMapper.selectByPrimaryKey(tid);
+    }
+
+    @Override
     public List<Type> withChildren() {
         List<Type> types = this.list(0);
         for (Type parent : types) {

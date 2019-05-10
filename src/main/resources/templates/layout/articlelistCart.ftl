@@ -18,7 +18,7 @@
                         </li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active pb-1" id="home" role="tabpanel"
+                        <div class="tab-pane fade show active " id="home" role="tabpanel"
                              aria-labelledby="home-tab">
                             <ul class="article-list list-unstyled ">
                                 <@customTag method="recentArticle">

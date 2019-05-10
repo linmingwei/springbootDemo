@@ -191,3 +191,6 @@ body{
 .check-switch-anim:checked:before {
     transition: left 0.3s;
 }
+.active-li a{
+    color: #02c0ce!important;
+}

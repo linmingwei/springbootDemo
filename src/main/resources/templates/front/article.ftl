@@ -9,18 +9,19 @@
 
         <div class="col-9">
             <div class="blog-banner">
-        <span class="layui-breadcrumb">
-          <a href="/"><i class="fa fa-home"></i>&nbsp; 首页 </a>
-          <a href="">国际新闻</a>
-          <a href="">亚太地区</a>
-          <a><cite>正文</cite></a>
-        </span>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb p-0 m-0" style="background-color: #fff;">
+                        <li class="breadcrumb-item"><a class="text-success" href="/"><i class="fa fa-home"></i>&nbsp;首页</a></li>
+                        <li class="breadcrumb-item"><a class="text-success" href="/${article.typeId}/${article.id}">${articleType.name}</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">正文</li>
+                    </ol>
+                </nav>
             </div>
             <div class="blog-panel">
                 <div class="article-banner">
                     <span class="pull-left article-flag yc text-center">原创</span>
                     <div class="pull-right">
-                    <span class="article-meta">
+                    <span class="article-meta" style="color:#2a763c">
                         <i class="fa fa-clock-o"></i>
                         <span class="inl">${(article.createTime?datetime)!"未知时间"}</span>&nbsp;&nbsp;
                         <i class="fa fa-eye" aria-hidden="true"></i>
@@ -42,16 +43,16 @@
                 </div>
                 <div class="article-foot text-center">
                     <span class="like">
-                        <a href="#like"><i class="fa fa-thumbs-up"></i>&nbsp; 赞</a>
+                        <a class="text-decoration-none" href="#like"><i class="fa fa-thumbs-up"></i>&nbsp; 赞</a>
                     </span>
 
                     <span class="reward">
                             <span class="reward-empty"></span>
                             <span></span>
-                            <a href="#reward" class="layui-circle">赏</a>
+                            <a class="text-decoration-none" href="#reward" class="layui-circle">赏</a>
                         </span>
                     <span class="share">
-                        <a href="#share"><i class="fa fa-share-alt"></i>&nbsp; 分享</a>
+                        <a class="text-decoration-none" href="#share"><i class="fa fa-share-alt"></i>&nbsp; 分享</a>
                     </span>
                     <div class="clearfix"></div>
                 </div>
