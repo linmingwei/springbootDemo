@@ -57,4 +57,75 @@ public class CommentController {
         PageInfo<Comment> info = new PageInfo<>(list);
         return info;
     }
+    @PostMapping("/reply")
+    @ResponseBody
+    @Transactional
+    public ResponseVo reply(@RequestParam("content")String content,@RequestParam("pid")Integer pid) {
+        if (content == null || "".equals(content)) {
+            return ResponseVo.fail("内容为空，请重试");
+        }
+        if (pid == null) {
+            return ResponseVo.fail();
+        }
+        Comment parentComment = commentService.getById(pid);
+        if (parentComment == null) {
+            return ResponseVo.fail("该评论不存在");
+        }
+        Comment comment = new Comment();
+        comment.setStatus(0);
+        comment.setCreateTime(new Date());
+        comment.setPid(pid);
+        comment.setUsername("超级管理员");
+        comment.setContent(content);
+        comment.setAid(parentComment.getAid());
+        comment.setEmail("admin@admin.com");
+        commentService.save(comment);
+        return ResponseVo.success("回复评论成功");
+    }
+    @PostMapping("/check")
+    @ResponseBody
+    @Transactional
+    public ResponseVo check(@RequestParam("content")String content,@RequestParam("pid")Integer pid,
+                            @RequestParam("status")Integer status) {
+        if (status == null) {
+            return ResponseVo.fail("状态有错");
+        }
+        if (pid == null) {
+            return ResponseVo.fail();
+        }
+        Comment comment = commentService.getById(pid);
+        if (comment == null) {
+            return ResponseVo.fail("该评论不存在");
+        } else {
+            comment.setStatus(status);
+        }
+        if (content == null || "".equals(content)) {
+            commentService.update(comment);
+            return ResponseVo.success("审核成功");
+
+        }else {
+            Comment releyComment = Comment.builder().aid(comment.getAid()).content(content)
+                    .createTime(new Date()).email("admin@admin.com")
+                    .pid(comment.getId()).username("超级管理员").build();
+            commentService.save(comment);
+            return ResponseVo.success("审核并回复成功");
+
+
+        }
+    }
+
+    @PostMapping("/delete")
+    @ResponseBody
+    @Transactional
+    public ResponseVo delete(@RequestParam("ids") Integer[] ids) {
+        if (ids == null || ids.length == 0) {
+            return ResponseVo.fail("id为空");
+        }
+        for (Integer id  : ids) {
+            commentService.delete(id);
+        }
+        return  ResponseVo.success("删除评论成功");
+
+    }
+
 }

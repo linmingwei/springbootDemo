@@ -1,9 +1,16 @@
 package com.springboot.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.Date;
-
+@ToString
+@AllArgsConstructor
+@Builder
+@NoArgsConstructor
 public class Comment {
     private Integer id;
 

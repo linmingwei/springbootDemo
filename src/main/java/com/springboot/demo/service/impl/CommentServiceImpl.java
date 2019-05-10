@@ -22,6 +22,21 @@ public class CommentServiceImpl implements CommentService {
     private CommentMapper commentMapper;
 
     @Override
+    public int delete(Integer id) {
+        return commentMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public int update(Comment comment) {
+        return commentMapper.updateByPrimaryKey(comment);
+    }
+
+    @Override
+    public Comment getById(Integer pid) {
+        return commentMapper.selectByPrimaryKey(pid);
+    }
+
+    @Override
     public int countArticleComment(Integer aid) {
         return commentMapper.countArticleComment(aid);
     }

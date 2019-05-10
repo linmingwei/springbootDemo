@@ -17,7 +17,73 @@
     </form>
 </div>
 <!-- Modal -->
+<div class="modal" id="reply_modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">回复审核</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="reply_form" method="post">
+                    <input type="hidden" name="pid">
 
+                    <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">评论</label>
+                    <div class="col-sm-10">
+                        <textarea name="content"  rows="6"  class="form-control" placeholder="请输入评论"></textarea>
+                    </div>
+                </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="reply_btn">回复</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="check_modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">审核评论</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="check_form" method="post">
+                    <input type="hidden" name="pid">
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">状态</label>
+                    <div class="col-sm-10">
+                        <select class="custom-select" name="status">
+                            <option selected>请选择</option>
+                            <option value="0">审核通过</option>
+                            <option value="2">审核失败</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">回复该评论</label>
+                    <div class="col-sm-10">
+                        <textarea name="content"  rows="6"  class="form-control" placeholder="请输入评论"></textarea>
+                    </div>
+                </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="check_btn">提交审核</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
@@ -27,13 +93,19 @@
     window.operateEvents = {
         'click .comment-reply ': function (e, value, row, index) {
             e.preventDefault();
-            $('#comment_modal').modal('show');
+            $('#reply_form').find('input[name="pid"]').val(row.id);
+            $('#reply_modal').modal('show');
         },
         'click .comment-check':function (e, value, row, index) {
             e.preventDefault();
+            $('#check_form').find('input[name="pid"]').val(row.id);
+            $('#check_modal').modal('show');
         },
         'click .comment-delete': function (e, value, row, index) {
             e.preventDefault();
+            var ids = [];
+            ids[0] = row.id;
+            deleteComment(ids);
         }
     };
 
@@ -152,7 +224,7 @@
         }else if (row.status == 1) {
             return '<span class="badge badge-info">正在审核</span>'
         }else if (row.status == 2) {
-            return '<span class="badge badge-danger">审核失败</span>'
+            return '<span class="badge badge-danger">审核未通过</span>'
         }
     }
 
@@ -164,21 +236,43 @@
             '<button class="btn comment-delete btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i>删除</button>'
         ].join('');
     }
-    $('#save_btn').click(function () {
+    //回复评论
+    $('#reply_btn').click(function (e) {
+        e.preventDefault();
+        general_comment('/comment/reply',$('#reply_form'), $('#reply_modal'));
+    });
+    //审核评论
+    $('#check_btn').click(function (e) {
+        e.preventDefault();
+        if ($('#check_form').find('select').val() == '请选择') {
+            alert("请选择审核状态");
+            return;
+        }
+
+        general_comment('/comment/check',$('#check_form'),$('#check_modal'));
+    });
+
+    function general_comment(url, form, modal) {
         $.post({
-            url:'/tag/add',
-            data:$('#tag_form').serialize(),
-            dataType:'json',
+            url:url,
+            data:form.serialize(),
             success:function (res) {
-                $('#comment_modal').modal('hide');
+                modal.modal('hide');
                 alert(res.msg);
                 $('button[name="refresh"]').click();
+            },
+            error:function () {
+                alert("出现未知错误，请重试！");
             }
         });
-    });
-    function deleteTag(ids) {
+
+    }
+
+
+
+    function deleteComment(ids) {
         $.post({
-            url:'/tag/delete',
+            url:'/comment/delete',
             data:{ids:ids},
             dataType:'json',
             traditional: true,
@@ -194,7 +288,7 @@
         $.each(rows,function (i, value) {
             ids[i] =value.id;
         });
-        deleteTag(ids);
+        deleteComment(ids);
     });
 
 </script>

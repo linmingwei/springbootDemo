@@ -22,4 +22,10 @@ public interface CommentService {
     int count();
 
     int countArticleComment(Integer aid);
+
+    Comment getById(Integer pid);
+
+    int update(Comment comment);
+
+    int delete(Integer id);
 }
