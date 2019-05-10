@@ -18,34 +18,7 @@
 </div>
 <!-- Modal -->
 
-<div class="modal fade" data-backdrop="static" id="comment_modal" tabindex="-1" role="dialog"
-     aria-labelledby="comment_modalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="comment_modalLabel">回复评论</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form class="mx-4 my-1" id="type_form">
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">名称</label>
-                        <div class="col-sm-10">
-                            <input type="hidden" name="id">
-                            <textarea type="text" name="content" class="form-control" placeholder="">
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-                <button type="button" id="save_btn" class="btn btn-primary">回复</button>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 
 <@footer>

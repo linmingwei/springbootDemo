@@ -35,7 +35,7 @@ CREATE TABLE `article` (
   `top` tinyint(1) unsigned DEFAULT '0',
   `order` int(10) unsigned DEFAULT '0',
   `look` int(11) DEFAULT '0',
-  `favorate` int(11) DEFAULT '0',
+  `favorite` int(11) DEFAULT '0',
   `contentHTML` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=207 DEFAULT CHARSET=utf8mb4;
@@ -94,7 +94,7 @@ CREATE TABLE `comment` (
   `email` varchar(255) NOT NULL,
   `pid` int(22) DEFAULT '0',
   `status` int(10) DEFAULT '0',
-  `favorate` int(22) DEFAULT '0',
+  `favorite` int(22) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;

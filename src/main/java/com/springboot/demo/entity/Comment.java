@@ -23,9 +23,38 @@ public class Comment {
 
     private Integer pid;
 
+    //0： 审核通过； 1：正在审核； 2：审核不通过
     private Integer status;
 
-    private Integer favorate;
+    private Integer favorite;
+
+    private String ipaddr;
+    private String local;
+    private Article article;
+
+    public Article getArticle() {
+        return article;
+    }
+
+    public void setArticle(Article article) {
+        this.article = article;
+    }
+
+    public String getIpaddr() {
+        return ipaddr;
+    }
+
+    public void setIpaddr(String ipaddr) {
+        this.ipaddr = ipaddr;
+    }
+
+    public String getLocal() {
+        return local;
+    }
+
+    public void setLocal(String local) {
+        this.local = local;
+    }
 
     private Comment parent;
 
@@ -37,12 +66,12 @@ public class Comment {
         this.parent = parent;
     }
 
-    public Integer getFavorate() {
-        return favorate;
+    public Integer getFavorite() {
+        return favorite;
     }
 
-    public void setFavorate(Integer favorate) {
-        this.favorate = favorate;
+    public void setFavorite(Integer favorite) {
+        this.favorite = favorite;
     }
 
     public Integer getId() {

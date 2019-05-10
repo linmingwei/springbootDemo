@@ -211,7 +211,7 @@
                             <div class="hr"></div>
                             <div class="content-meta" style="">
                                 <a href="#">
-                                    <i class="fa fa-thumbs-up"></i> 赞(${(comment.favorate)!"0"})
+                                    <i class="fa fa-thumbs-up"></i> 赞(${(comment.favorite)!"0"})
                                 </a>
                                 <i class="sepa"></i>
 

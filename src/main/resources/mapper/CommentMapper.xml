@@ -23,10 +23,11 @@
     </selectKey>
     insert into comment (username, description, aid, 
       createTime, updateTime, content, 
-      email, pid, `status`,`favorate`)
+      email, pid, `status`,`favorite`,`ipaddr`,`local`)
     values (#{username,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{aid,jdbcType=INTEGER}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{content,jdbcType=VARCHAR}, 
-      #{email,jdbcType=VARCHAR}, #{pid,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{favorate,jdbcType=INTEGER})
+      #{email,jdbcType=VARCHAR}, #{pid,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{favorite,jdbcType=INTEGER}
+    , #{ipaddr,jdbcType=VARCHAR}, #{local,jdbcType=VARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.springboot.demo.entity.Comment">
     update comment
@@ -39,18 +40,20 @@
       email = #{email,jdbcType=VARCHAR},
       pid = #{pid,jdbcType=INTEGER},
       `status` = #{status,jdbcType=INTEGER},
-      `favorate` = #{favorate,jdbcType=INTEGER}
+      `favorite` = #{favorite,jdbcType=INTEGER},
+      `ipaddr` = #{ipaddr,jdbcType=VARCHAR},
+      `local` = #{local,jdbcType=VARCHAR},
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select id, username, description, aid, createTime, updateTime, content, email, pid, 
-    `status`, `favorate`
+    `status`, `favorite`, `ipaddr`, `local`
     from comment
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
     select id, username, description, aid, createTime, updateTime, content, email, pid, 
-    `status`,favorate
+    `status`,favorite, `ipaddr`, `local`
     from comment
   </select>
   <select id="count" resultType="java.lang.Integer">
@@ -58,7 +61,7 @@
   </select>
   <select id="selectByMap" parameterType="map" resultMap="BaseResultMap">
     select id, username, description, aid, createTime, updateTime, content, email, pid,
-    `status`,favorate from  comment
+    `status`,favorite, `ipaddr`, `local` from  comment
     <where>
       <if test="username!=null">
         username = #{username}

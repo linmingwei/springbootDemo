@@ -18,14 +18,14 @@
             <ul class="d-flex flex-column" id="side-menu">
                 <li class=" py-2">
                     <a class="" href="/admin/home">
-                        <i class="fa fa-television" aria-hidden="true"></i>
+                        <i class="fa fa-home" aria-hidden="true"></i>
                         <span class="d-inline-block ml-2">首页</span>
                     </a>
                 </li>
                 <li class=" py-2 ">
                     <a data-toggle="collapse" href="#article-mng" role="button" aria-expanded="false"
                        aria-controls="article-mng">
-                        <i class="fa fa-television" aria-hidden="true"></i>
+                        <i class="fa fa-list" aria-hidden="true"></i>
                         <span class="d-inline-block ml-2">文章管理</span>
                     </a>
                     <div class="collapse" id="article-mng">
@@ -61,7 +61,7 @@
                 <li class=" py-2">
                     <a data-toggle="collapse" href="#web-mng" role="button" aria-expanded="false"
                        aria-controls="web-mng">
-                        <i class="fa fa-television" aria-hidden="true"></i>
+                        <i class="fa fa-globe" aria-hidden="true"></i>
                         <span class="d-inline-block ml-2">网站管理</span>
                     </a>
                     <div class="collapse" id="web-mng">
@@ -110,7 +110,7 @@
                 <li class=" py-2">
                     <a data-toggle="collapse" href="#auth-mng" role="button" aria-expanded="false"
                        aria-controls="auth-mng">
-                        <i class="fa fa-television" aria-hidden="true"></i>
+                        <i class="fa fa-cogs" aria-hidden="true"></i>
                         <span class="d-inline-block ml-2">权限管理</span>
                     </a>
                     <div class="collapse" id="auth-mng">

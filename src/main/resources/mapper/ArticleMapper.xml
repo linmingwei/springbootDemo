@@ -91,6 +91,9 @@
         <if test="typeId!=null">
             and typeId = #{typeId}
         </if>
+        <if test="status!=null">
+            and status = #{status}
+        </if>
         <if test="noid!=null">
             and id != #{noid}
         </if>
