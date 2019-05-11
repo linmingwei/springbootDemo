@@ -199,9 +199,9 @@
             data:$('#type_form').serialize(),
             dataType:'json',
             success:function (res) {
-                $('#type_modal').modal('hide');
+                // $('#type_modal').modal('hide');
                 alert(res.msg);
-                $('button[name="refresh"]').click();
+                // $('button[name="refresh"]').click();
             }
         });
     });

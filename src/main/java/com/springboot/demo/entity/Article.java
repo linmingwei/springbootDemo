@@ -3,14 +3,17 @@ package com.springboot.demo.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.ToString;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @ToString
 public class Article {
     private Integer id;
 
+    @NotBlank(message = "文章标题不能为空")
     private String title;
-
+    @NotBlank(message = "文章内容不能为空")
     private String content;
     //0：文章发布；  1：存草稿；
     private Integer status;
@@ -22,6 +25,7 @@ public class Article {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateTime;
 
+    @NotNull(message = "请至少选择一个分类")
     private Integer typeId;
 
     private Boolean comment;

@@ -3,14 +3,18 @@ package com.springboot.demo.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.ToString;
 
+import javax.validation.constraints.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 @ToString
 public class Type {
     private Integer id;
-
+    @NotNull
+    @NotBlank(message = "分类名字不能为空")
+    @Size(message = "分类名不宜过长",min = 2,max = 8)
     private String name;
+
 
     private String description;
 
@@ -20,6 +24,8 @@ public class Type {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date updateTime;
 
+    @Min(message = "排序数值最小为1",value = 1)
+    @Max(message = "排序数值最大为9999",value = 9999)
     private Integer order;
 
     private Type parent;

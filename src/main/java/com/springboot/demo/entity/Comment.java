@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import javax.validation.constraints.*;
 import java.util.Date;
 @ToString
 @AllArgsConstructor
@@ -14,6 +15,8 @@ import java.util.Date;
 public class Comment {
     private Integer id;
 
+    @NotBlank(message = "请填写一个用户名")
+    @Size(message = "用户名不宜过长",min = 2,max = 8)
     private String username;
 
     private String description;
@@ -24,8 +27,11 @@ public class Comment {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date updateTime;
 
+    @NotNull
+    @NotBlank(message = "请写点内容在评论吧")
     private String content;
 
+    @Email(message = "请填写正确的邮箱")
     private String email;
 
     private Integer pid;

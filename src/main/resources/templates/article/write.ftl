@@ -169,8 +169,11 @@
             url: '/article/publish',
             data: data,
             success: function (res) {
-                alert("发布文章成功");
-                window.location.href = '/admin/article/write';
+                alert(res.msg);
+                // window.location.href = '/admin/article/write';
+            },
+            error:function (res) {
+                alert(res.msg);
             }
         })
 

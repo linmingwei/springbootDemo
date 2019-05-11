@@ -7,8 +7,11 @@ import com.springboot.demo.service.TypeService;
 import com.springboot.demo.vo.ResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,7 +58,7 @@ public class TypeController {
         return ResponseVo.success(list);
     }
     @PostMapping("/add")
-    public ResponseVo addType(Type type){
+    public ResponseVo addType(@Valid Type type){
         if (type.getId() == null) {
             typeService.insert(type);
         }else {

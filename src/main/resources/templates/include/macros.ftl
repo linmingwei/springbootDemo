@@ -40,9 +40,19 @@
         $(function () {
             var urls =  window.location.pathname.split('/');
             var pli = urls[urls.length-2], sli = urls[urls.length-1];
-            $('#'+pli+'_li').addClass('active').find('.collapse').addClass('show');
-            $('#'+pli+'_'+sli).addClass('active-li');
-        })
+            if (sli == 'home') {
+                $('#home_li').addClass('active');
+            } else {
+                $('#'+pli+'_li').addClass('active').find('.collapse').addClass('show');
+                $('#'+pli+'_'+sli).addClass('active-li');
+
+            }
+        });
+        $('#sidebar-menu').find('li').click(function () {
+            $(this).addClass('active');
+            $(this).siblings('li').removeClass('active').find('.collapse').removeClass('show');
+        });
+
     </script>
     <#nested>
     </html>

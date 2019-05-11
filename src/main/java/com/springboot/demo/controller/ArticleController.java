@@ -10,8 +10,11 @@ import org.pegdown.PegDownProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 
@@ -22,6 +25,7 @@ import java.util.List;
  **/
 @Controller
 @RequestMapping("/article")
+@Validated
 public class ArticleController {
     @Autowired
     private ArticleService articleService;
@@ -33,7 +37,8 @@ public class ArticleController {
     @PostMapping("/publish")
     @ResponseBody
     @Transactional
-    public ResponseVo publishArticle(Article article, @RequestParam(value = "tagIds", required = false) Integer[] tagIds) {
+    public ResponseVo publishArticle(@Valid Article article,
+                 @RequestParam(value = "tagIds",required = false) @NotNull(message = "请至少选择一个标签") Integer[] tagIds) {
         if (article.getId() == null) {
             if (article.getContent() != null && !"".equals(article.getContent().trim())) {
 
@@ -58,7 +63,7 @@ public class ArticleController {
             }
         }
 
-        return ResponseVo.success();
+        return ResponseVo.success("文章操作成功");
 
     }
 
