@@ -1,8 +1,8 @@
--- MySQL dump 10.16  Distrib 10.1.30-MariaDB, for CYGWIN (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.20, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: bootdemo
 -- ------------------------------------------------------
--- Server version	5.6.35-log
+-- Server version	5.7.20
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -99,7 +99,7 @@ CREATE TABLE `comment` (
   `ipaddr` varchar(45) DEFAULT NULL,
   `local` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -108,7 +108,7 @@ CREATE TABLE `comment` (
 
 LOCK TABLES `comment` WRITE;
 /*!40000 ALTER TABLE `comment` DISABLE KEYS */;
-INSERT INTO `comment` VALUES (1,'匿名',NULL,152,NULL,NULL,'就是为了测试下\n# good \n## 二级标签','linmingwei001@163.com',NULL,0,NULL,NULL,NULL),(2,'匿名2',NULL,152,NULL,NULL,'就是为了测试下\n# good \n## 二级标签','test@163.com',NULL,0,NULL,NULL,NULL),(3,'匿名',NULL,152,NULL,NULL,'为了休息一下','teee@qq.com',NULL,0,NULL,NULL,NULL),(4,'nisdf',NULL,152,'2019-04-29 08:24:01','2019-04-29 08:21:05','sadfa','asdf',0,2,0,NULL,NULL),(7,'时间',NULL,152,'2019-04-29 00:45:51',NULL,'在测试下时间','shijian@qq.com',NULL,NULL,NULL,NULL,NULL),(8,'匿名',NULL,152,'2019-04-29 04:03:17',NULL,'test Pid 1','testpid1@qq.com',0,NULL,NULL,NULL,NULL),(9,'匿名',NULL,152,'2019-04-29 04:05:10',NULL,'这是 id为1的 自评论','id1@qq.com',1,NULL,NULL,NULL,NULL),(10,'good',NULL,152,'2019-04-29 04:24:27',NULL,'回复回复你   四手动阀撒','tswss@',4,NULL,NULL,NULL,NULL),(11,'邵磊',NULL,152,'2019-04-29 04:26:14',NULL,'在稍微评论下','youxiang',0,NULL,NULL,NULL,NULL),(12,'匿名',NULL,205,'2019-04-29 04:34:56',NULL,'测试下','a',0,NULL,NULL,NULL,NULL),(13,'匿名',NULL,205,'2019-04-29 04:35:12',NULL,'回复测试下','aaa',12,NULL,NULL,NULL,NULL),(14,'匿名',NULL,110,'2019-05-05 18:58:17',NULL,'没有评论','mingweilin@contractor.ea.com',0,NULL,NULL,NULL,NULL),(15,'匿名',NULL,110,'2019-05-05 18:58:37',NULL,'真的没有','linmingwei001@163.com',14,NULL,NULL,NULL,NULL),(16,'匿名',NULL,204,'2019-05-06 01:59:38',NULL,'asdfsdf','asdfg@',0,NULL,NULL,NULL,NULL),(17,'匿名',NULL,204,'2019-05-06 01:59:47',NULL,'asdfasdf','bhefrg',16,NULL,NULL,NULL,NULL),(18,'匿名',NULL,204,'2019-05-06 02:00:00',NULL,'sedgfasdg','dfhbdfh',17,NULL,NULL,NULL,NULL),(19,'匿名',NULL,204,'2019-05-06 02:00:11',NULL,'e5u4444','tkj',18,NULL,NULL,NULL,NULL),(20,'匿名',NULL,204,'2019-05-06 02:00:20',NULL,'1325r4213','dfh',19,NULL,NULL,NULL,NULL),(21,'eehdv',NULL,204,'2019-05-06 02:00:36',NULL,'236534656','s3wer5',20,NULL,NULL,NULL,NULL),(22,'匿名',NULL,152,'2019-05-08 19:28:04',NULL,'测试下评论','as',0,NULL,NULL,NULL,NULL),(23,'匿名',NULL,143,'2019-05-08 19:39:33',NULL,'给你稍微来个评论','aaa',0,NULL,NULL,NULL,NULL),(24,'匿名',NULL,114,'2019-05-09 03:50:30',NULL,'测试一下','',0,NULL,NULL,NULL,NULL);
+INSERT INTO `comment` VALUES (1,'匿名',NULL,152,NULL,NULL,'就是为了测试下\n# good \n## 二级标签','linmingwei001@163.com',NULL,0,NULL,NULL,NULL),(2,'匿名2',NULL,152,NULL,NULL,'就是为了测试下\n# good \n## 二级标签','test@163.com',NULL,0,NULL,NULL,NULL),(3,'匿名',NULL,152,NULL,NULL,'为了休息一下','teee@qq.com',NULL,0,NULL,NULL,NULL),(4,'nisdf',NULL,152,'2019-04-29 08:24:01','2019-04-29 08:21:05','sadfa','asdf',0,2,0,NULL,NULL),(7,'时间',NULL,152,'2019-04-29 00:45:51',NULL,'在测试下时间','shijian@qq.com',NULL,NULL,NULL,NULL,NULL),(8,'匿名',NULL,152,'2019-04-29 04:03:17',NULL,'test Pid 1','testpid1@qq.com',0,NULL,NULL,NULL,NULL),(9,'匿名',NULL,152,'2019-04-29 04:05:10',NULL,'这是 id为1的 自评论','id1@qq.com',1,NULL,NULL,NULL,NULL),(10,'good',NULL,152,'2019-04-29 04:24:27',NULL,'回复回复你   四手动阀撒','tswss@',4,NULL,NULL,NULL,NULL),(11,'邵磊',NULL,152,'2019-04-29 04:26:14',NULL,'在稍微评论下','youxiang',0,NULL,NULL,NULL,NULL),(12,'匿名',NULL,205,'2019-04-29 04:34:56',NULL,'测试下','a',0,NULL,NULL,NULL,NULL),(13,'匿名',NULL,205,'2019-04-29 04:35:12',NULL,'回复测试下','aaa',12,NULL,NULL,NULL,NULL),(14,'匿名',NULL,110,'2019-05-05 18:58:17',NULL,'没有评论','mingweilin@contractor.ea.com',0,NULL,NULL,NULL,NULL),(15,'匿名',NULL,110,'2019-05-05 18:58:37',NULL,'真的没有','linmingwei001@163.com',14,NULL,NULL,NULL,NULL),(16,'匿名',NULL,204,'2019-05-06 01:59:38',NULL,'asdfsdf','asdfg@',0,NULL,NULL,NULL,NULL),(17,'匿名',NULL,204,'2019-05-06 01:59:47',NULL,'asdfasdf','bhefrg',16,NULL,NULL,NULL,NULL),(18,'匿名',NULL,204,'2019-05-06 02:00:00',NULL,'sedgfasdg','dfhbdfh',17,NULL,NULL,NULL,NULL),(19,'匿名',NULL,204,'2019-05-06 02:00:11',NULL,'e5u4444','tkj',18,NULL,NULL,NULL,NULL),(20,'匿名',NULL,204,'2019-05-06 02:00:20',NULL,'1325r4213','dfh',19,NULL,NULL,NULL,NULL),(21,'eehdv',NULL,204,'2019-05-06 02:00:36',NULL,'236534656','s3wer5',20,NULL,NULL,NULL,NULL),(22,'匿名',NULL,152,'2019-05-08 19:28:04',NULL,'测试下评论','as',0,NULL,NULL,NULL,NULL),(23,'匿名',NULL,143,'2019-05-08 19:39:33',NULL,'给你稍微来个评论','aaa',0,NULL,NULL,NULL,NULL),(24,'匿名',NULL,114,'2019-05-09 03:50:30',NULL,'测试一下','',0,NULL,NULL,NULL,NULL),(28,'匿名',NULL,149,'2019-05-11 18:45:49',NULL,'asdf','',0,0,NULL,'0:0:0:0:0:0:0:1',NULL),(29,'匿名',NULL,141,'2019-05-11 19:43:41',NULL,'asdf','good@qq.com',0,0,NULL,'0:0:0:0:0:0:0:1',NULL);
 /*!40000 ALTER TABLE `comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -156,7 +156,7 @@ CREATE TABLE `type` (
   `updateTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `order` int(10) unsigned DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -202,4 +202,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-10 21:45:02
+-- Dump completed on 2019-05-12  7:31:36
