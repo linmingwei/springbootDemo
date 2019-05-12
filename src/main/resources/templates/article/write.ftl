@@ -173,7 +173,7 @@
                 // window.location.href = '/admin/article/write';
             },
             error:function (res) {
-                alert(res.msg);
+                alert(res.responseJSON.msg);
             }
         })
 

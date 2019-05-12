@@ -8,6 +8,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import java.util.List;
@@ -22,21 +23,24 @@ import java.util.Set;
 public class ExceptionHandlerController {
 
     @ExceptionHandler(value = BindException.class)
-    public ResponseVo bindException(BindException e) {
+    public ResponseVo bindException(BindException e, HttpServletResponse response) {
         StringBuilder sb = new StringBuilder();
         List<ObjectError> allErrors = e.getBindingResult().getAllErrors();
         for (ObjectError error : allErrors) {
             sb.append(error.getDefaultMessage()).append("；");
         }
+        response.setStatus(HttpServletResponse.SC_CONFLICT);
+
         return ResultUtil.error(409, sb.toString());
     }
     @ExceptionHandler(value = ConstraintViolationException.class)
-    public ResponseVo constraintViolationException(ConstraintViolationException e) {
+    public ResponseVo constraintViolationException(ConstraintViolationException e, HttpServletResponse response) {
         StringBuilder sb = new StringBuilder();
         Set<ConstraintViolation<?>> constraintViolations = e.getConstraintViolations();
         for (ConstraintViolation c : constraintViolations) {
             sb.append(c.getMessage()).append("；");
         }
+        response.setStatus(HttpServletResponse.SC_CONFLICT);
         return ResultUtil.error(409, sb.toString());
     }
 }

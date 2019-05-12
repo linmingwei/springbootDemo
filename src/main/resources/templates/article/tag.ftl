@@ -159,6 +159,9 @@
                 $('#tag_modal').modal('hide');
                 alert(res.msg);
                 $('button[name="refresh"]').click();
+            },
+            error:function (res) {
+                alert(res.responseJSON.msg);
             }
         });
     });

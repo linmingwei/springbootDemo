@@ -9,3 +9,6 @@ scp target/bootdemo.jar mwl@192.168.41.133:~/github;
 echo "------------------------------update bootdemo database begin---------------------------------"
 scp boot.sql mwl@192.168.41.133:~/github;
 mysql -h 192.168.41.133 -uroot -pmysql123 bootdemo < boot.sql;
+# 启动bootdemo
+ssh mwl@192.168.41.133 "cd ~/github; java -jar bootdemo.jar --spring.profiles.active=dev"
+

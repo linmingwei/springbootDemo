@@ -338,8 +338,6 @@
         var content = simplemde.value();
         console.log($('#commentForm').serialize() + '&content=' + simplemde.value());
         var data = $('#commentForm').serialize() + '&content=' + simplemde.value();
-
-
         $.post({
             url: '/comment/add',
             data: data,
@@ -347,6 +345,9 @@
                 $('#commentModal').modal('hide');
                 alert(res.msg);
                 window.location.reload();
+            },
+            error:function (res) {
+                alert(res.responseJSON.msg);
             }
         })
 

@@ -31,6 +31,8 @@ public class Comment {
     @NotBlank(message = "请写点内容在评论吧")
     private String content;
 
+    @NotNull(message = "邮箱不能为空")
+    @NotBlank(message = "邮箱不能为空")
     @Email(message = "请填写正确的邮箱")
     private String email;
 

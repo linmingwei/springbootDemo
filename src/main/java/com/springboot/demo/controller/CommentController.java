@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
@@ -31,7 +32,7 @@ public class CommentController {
 
     @PostMapping("/add")
     @Transactional
-    public ResponseVo save(Comment comment, HttpServletRequest request) {
+    public ResponseVo save(@Valid Comment comment, HttpServletRequest request) {
         if (comment.getCreateTime() == null) {
             comment.setCreateTime(new Timestamp(System.currentTimeMillis()));
         }
@@ -42,7 +43,7 @@ public class CommentController {
 //        comment.setCreateTime(new Date());
         comment.setStatus(0);
         // TODO: 5/9/2019  敏感词过滤
-        commentService.save(comment);
+//        commentService.save(comment);
         return ResponseVo.success("评论成功");
     }
 
