@@ -43,7 +43,7 @@ public class CommentController {
 //        comment.setCreateTime(new Date());
         comment.setStatus(0);
         // TODO: 5/9/2019  敏感词过滤
-//        commentService.save(comment);
+        commentService.save(comment);
         return ResponseVo.success("评论成功");
     }
 

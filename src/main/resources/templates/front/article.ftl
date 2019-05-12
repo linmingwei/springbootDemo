@@ -23,7 +23,7 @@
                     <div class="pull-right">
                     <span class="article-meta" style="color:#2a763c">
                         <i class="fa fa-clock-o"></i>
-                        <span class="inl">${(article.createTime?datetime)!"未知时间"}</span>&nbsp;&nbsp;
+                        <span class="inl">${(article.createTime?date)!"未知时间"}</span>&nbsp;&nbsp;
                         <i class="fa fa-eye" aria-hidden="true"></i>
                         <span>浏览(${(article.look)!"0"})</span>&nbsp;&nbsp;
                         <i class="fa fa-comments-o" aria-hidden="true"></i>
@@ -72,7 +72,7 @@
                 </p>
                 <p>
                     <strong>版权声明：</strong>
-                    本站原创文章，于2018年09月12日由BLOG发布，转载请注明出处
+                    本站原创文章，于${(article.createTime?date)!"未知时间"}由BLOG发布，转载请注明出处
                 </p>
 
             </div>
@@ -308,7 +308,7 @@
         autofocus: false,
         autoDownloadFontAwesome: false,
         placeholder: "Type here...",
-        // tabSize: 4,
+        tabSize: 4,
         status: false,
         lineWrapping: false,
         renderingConfig: {

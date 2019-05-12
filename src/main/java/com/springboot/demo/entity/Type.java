@@ -19,9 +19,9 @@ public class Type {
     private String description;
 
     private Integer pid;
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+    @JsonFormat(pattern="yyyy-MM-dd HH",timezone="GMT+8")
     private Date createTime;
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+    @JsonFormat(pattern="yyyy-MM-dd HH",timezone="GMT+8")
     private Date updateTime;
 
     @Min(message = "排序数值最小为1",value = 1)
