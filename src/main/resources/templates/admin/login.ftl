@@ -23,17 +23,32 @@
 </head>
 <body class="bg-light">
 <div  class="d-flex justify-content-center align-items-center form-box">
-    <form class="wh-100" novalidate>
+    <form class="wh-100" novalidate id="login_form">
         <div class="form-group">
             <label for="usernameInput">用户名</label>
             <input type="text" class="form-control" id="usernameInput" name="username" placeholder="请输入用户名" required>
         </div>
         <div class="form-group">
             <label for="passwordInput">密码</label>
-            <input type="password" class="form-control" id="passwordInput" placeholder="请输入密码" required>
+            <input type="password" class="form-control" name="password" id="passwordInput" placeholder="请输入密码" required>
         </div>
-        <button type="submit" class="btn btn-block btn-primary" style="margin-top: 30px;">登录</button>
+        <button type="submit" class="btn btn-block btn-primary" id="login_btn" style="margin-top: 30px;">登录</button>
     </form>
 </div>
 </body>
+<script>
+    $('#login_btn').click(function (e) {
+        e.preventDefault();
+        $.post({
+            url:'/admin/login',
+            data:$('#login_form').serialize(),
+            success:function (res) {
+                window.location.href='/admin/home';
+            },
+            error:function (res) {
+                alert(res.responseJSON.msg);
+            }
+        })
+    });
+</script>
 </html>

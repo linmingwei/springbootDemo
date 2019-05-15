@@ -7,11 +7,15 @@ import com.springboot.demo.service.ArticleService;
 import com.springboot.demo.service.ArticleTagService;
 import com.springboot.demo.service.TagService;
 import com.springboot.demo.service.TypeService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.websocket.server.PathParam;
@@ -36,8 +40,16 @@ public class AdminController {
     @Autowired
     private TypeService typeService;
     @GetMapping("")
-    public String login() {
+    public String toLogin() {
         return "admin/login";
+    }
+
+    @PostMapping("/login")
+    public String login(String username, String password) {
+        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+        Subject subject = SecurityUtils.getSubject();
+        subject.login(token);
+        return "redirect:/admin/home";
     }
 
     @GetMapping("/home")

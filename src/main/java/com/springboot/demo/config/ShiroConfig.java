@@ -41,8 +41,12 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setLoginUrl("/admin");
         shiroFilterFactoryBean.setSuccessUrl("/admin/home");
         Map<String ,String > filterMap = new LinkedHashMap<>();
-        filterMap.put("/","anon");
+        filterMap.put("/static/**","anon");
+        filterMap.put("/webjars/**","anon");
+        filterMap.put("/admin/login","anon");
+        filterMap.put("/**","anon");
         filterMap.put("/admin/**","authc");
+//        filterMap.put("/admin/**","authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
         return shiroFilterFactoryBean;
     }

@@ -69,7 +69,8 @@ public class ArticleController {
 
     @GetMapping("/list")
     @ResponseBody
-    public PageInfo<Article> list(@RequestParam(value = "pageNo", defaultValue = "1") int pageNo, @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
+    public PageInfo<Article> list(@RequestParam(value = "pageNo", defaultValue = "1") int pageNo
+            , @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
         PageHelper.startPage(pageNo, pageSize);
         List<Article> rows = articleService.list(null);
         PageInfo<Article> pageInfo = new PageInfo<>(rows);
