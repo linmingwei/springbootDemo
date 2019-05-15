@@ -4,7 +4,8 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
-    <classPathEntry location="C:\Users\mingweilin\.m2\repository\mysql\mysql-connector-java\8.0.15\mysql-connector-java-8.0.15.jar" />
+    <!--<classPathEntry location="C:\Users\mingweilin\.m2\repository\mysql\mysql-connector-java\8.0.15\mysql-connector-java-8.0.15.jar" />-->
+    <classPathEntry location="C:\Users\linmi\.m2\repository\mysql\mysql-connector-java\8.0.15\mysql-connector-java-8.0.15.jar" />
 
     <context id="bootdemo" targetRuntime="MyBatis3Simple" defaultModelType="flat">
         <property name="autoDelimitKeywords" value="true"/>
@@ -32,7 +33,15 @@
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.springboot.demo.mapper"  targetProject="src\main\java">
         </javaClientGenerator>
 
-        <table  tableName="type"   >
+        <table  tableName="user_role"   >
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="id" sqlStatement="MySQL" identity="true" />
+        </table>
+        <table  tableName="role_resources"   >
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="id" sqlStatement="MySQL" identity="true" />
+        </table>
+        <table  tableName="resources"   >
             <property name="useActualColumnNames" value="true"/>
             <generatedKey column="id" sqlStatement="MySQL" identity="true" />
         </table>
