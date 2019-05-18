@@ -55,7 +55,7 @@ public class RetryLimitCredentialsMatcher extends HashedCredentialsMatcher {
         }
         boolean matches = super.doCredentialsMatch(token, info);
         if (!matches) {
-            String msg = retryCount <= 0 ? "您的账号已被锁定，30分钟内禁止登录" : "您还剩" + retryCount + "次重试的机会";
+            String msg = retryCount <= 0 ? "您的账号已被锁定，30分钟内禁止登录" : "用户名或密码错误，您还剩" + retryCount + "次重试的机会";
             throw new ExcessiveAttemptsException(msg);
         }
         //清空登录计数
