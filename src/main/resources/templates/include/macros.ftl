@@ -14,7 +14,7 @@
         <script src="/static/js/jquery.cookie.js"></script>
         <script src="/webjars/bootstrap/4.1.3/js/bootstrap.bundle.js"></script>
         <#nested>
-        <title>Document</title>
+        <title>BLOG后台管理</title>
     </head>
     <body>
     <div class="wrapper">

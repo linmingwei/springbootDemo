@@ -57,7 +57,7 @@ public class IndexController {
         model.addAttribute("articles",articles);
         return "front/index";
     }
-    @RequestMapping("/article")
+    @GetMapping("/article")
     public String article() {
         return "front/404";
     }

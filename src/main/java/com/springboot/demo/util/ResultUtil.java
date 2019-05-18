@@ -29,4 +29,10 @@ public class ResultUtil {
     public static ResponseVo vo(int code, String msg,Object data) {
         return new ResponseVo(code,msg,data);
     }
+    public static ResponseVo success() {
+        return new ResponseVo(200,"操作成功",null);
+    }
+    public static ResponseVo success(String msg) {
+        return new ResponseVo(200,msg,null);
+    }
 }

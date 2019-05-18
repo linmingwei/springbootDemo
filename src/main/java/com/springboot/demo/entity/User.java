@@ -1,7 +1,9 @@
 package com.springboot.demo.entity;
 
-import java.util.Date;
+import lombok.ToString;
 
+import java.util.Date;
+@ToString
 public class User {
     private Integer id;
 

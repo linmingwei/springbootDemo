@@ -2,6 +2,7 @@ package com.springboot.demo.controller;
 
 import com.springboot.demo.util.ResultUtil;
 import com.springboot.demo.vo.ResponseVo;
+import org.apache.shiro.authc.*;
 import org.springframework.validation.BindException;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
@@ -33,6 +34,7 @@ public class ExceptionHandlerController {
 
         return ResultUtil.error(409, sb.toString());
     }
+
     @ExceptionHandler(value = ConstraintViolationException.class)
     public ResponseVo constraintViolationException(ConstraintViolationException e, HttpServletResponse response) {
         StringBuilder sb = new StringBuilder();
@@ -42,5 +44,11 @@ public class ExceptionHandlerController {
         }
         response.setStatus(HttpServletResponse.SC_CONFLICT);
         return ResultUtil.error(409, sb.toString());
+    }
+
+    @ExceptionHandler(value = AuthenticationException.class)
+    public ResponseVo authenticationException(AuthenticationException e, HttpServletResponse response) {
+        return ResultUtil.error(409, e.getMessage());
+
     }
 }

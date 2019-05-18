@@ -53,9 +53,9 @@
                         <p class="d-inline">Maxine K</p>
                     </a>
                     <div class="dropdown-menu animated dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">账户设置</a>
                         <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" href="/logout">登出</a>
                     </div>
                 </div>
             </li>
