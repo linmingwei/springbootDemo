@@ -53,6 +53,7 @@ public class ShiroConfig {
         filterMap.put("/webjars/**","anon");
         filterMap.put("/toLogin","anon");
         filterMap.put("/admin/**","authc");
+//        filterMap.put("/admin/**","authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
         return shiroFilterFactoryBean;
     }

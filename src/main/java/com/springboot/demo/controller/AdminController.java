@@ -5,16 +5,17 @@ import com.springboot.demo.service.ArticleService;
 import com.springboot.demo.service.ArticleTagService;
 import com.springboot.demo.service.TagService;
 import com.springboot.demo.service.TypeService;
-import com.springboot.demo.util.ResultUtil;
-import com.springboot.demo.vo.ResponseVo;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 
 /**
  * @author ldd
@@ -32,8 +33,13 @@ public class AdminController {
     private TagService tagService;
     @Autowired
     private TypeService typeService;
-
-
+    @PostMapping("/login")
+    public String login(String username, String password) {
+        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+        Subject subject = SecurityUtils.getSubject();
+        subject.login(token);
+        return "redirect:/admin/home";
+    }
 
     @GetMapping("/home")
     public String home(Model model) {

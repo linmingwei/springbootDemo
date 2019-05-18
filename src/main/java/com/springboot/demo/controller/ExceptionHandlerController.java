@@ -2,12 +2,11 @@ package com.springboot.demo.controller;
 
 import com.springboot.demo.util.ResultUtil;
 import com.springboot.demo.vo.ResponseVo;
-import org.apache.shiro.authc.*;
+import org.apache.shiro.authc.AuthenticationException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.ObjectError;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolation;
@@ -52,3 +51,4 @@ public class ExceptionHandlerController {
 
     }
 }
+
