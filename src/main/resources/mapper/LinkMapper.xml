@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springboot.demo.mapper.LinkMapper">
+  <resultMap id="BaseResultMap" type="com.springboot.demo.entity.Link">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="qq" jdbcType="VARCHAR" property="qq" />
+    <result column="favicon" jdbcType="VARCHAR" property="favicon" />
+    <result column="status" jdbcType="BIT" property="status" />
+    <result column="home_page_display" jdbcType="BIT" property="home_page_display" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="source" jdbcType="CHAR" property="source" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="create_time" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="update_time" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from link
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.springboot.demo.entity.Link">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into link (url, `name`, description, 
+      email, qq, favicon, 
+      `status`, home_page_display, remark, 
+      `source`, create_time, update_time
+      )
+    values (#{url,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{favicon,jdbcType=VARCHAR}, 
+      #{status,jdbcType=BIT}, #{home_page_display,jdbcType=BIT}, #{remark,jdbcType=VARCHAR}, 
+      #{source,jdbcType=CHAR}, #{create_time,jdbcType=TIMESTAMP}, #{update_time,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.springboot.demo.entity.Link">
+    update link
+    set url = #{url,jdbcType=VARCHAR},
+      `name` = #{name,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      qq = #{qq,jdbcType=VARCHAR},
+      favicon = #{favicon,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=BIT},
+      home_page_display = #{home_page_display,jdbcType=BIT},
+      remark = #{remark,jdbcType=VARCHAR},
+      `source` = #{source,jdbcType=CHAR},
+      create_time = #{create_time,jdbcType=TIMESTAMP},
+      update_time = #{update_time,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, url, `name`, description, email, qq, favicon, `status`, home_page_display, 
+    remark, `source`, create_time, update_time
+    from link
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, url, `name`, description, email, qq, favicon, `status`, home_page_display, 
+    remark, `source`, create_time, update_time
+    from link
+  </select>
+</mapper>

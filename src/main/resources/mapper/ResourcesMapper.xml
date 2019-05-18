@@ -14,26 +14,18 @@
     <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
     <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from resources
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.springboot.demo.entity.Resources">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into resources (`name`, `type`, url, 
-      permission, pid, sort, 
-      available, icon, createTime, 
-      updateTime)
-    values (#{name,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
-      #{permission,jdbcType=VARCHAR}, #{pid,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, 
-      #{available,jdbcType=TINYINT}, #{icon,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP})
-  </insert>
-  <update id="updateByPrimaryKey" parameterType="com.springboot.demo.entity.Resources">
-    update resources
-    set `name` = #{name,jdbcType=VARCHAR},
+  <sql id="baseParams">
+    id, `name`, `type`, url, permission, pid, sort, available, icon, createTime,
+    updateTime, `alias`
+  </sql>
+  <sql id="insertParams">
+    #{name,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR},
+      #{permission,jdbcType=VARCHAR}, #{pid,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER},
+      #{available,jdbcType=TINYINT}, #{icon,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+      #{updateTime,jdbcType=TIMESTAMP},#{alias,jdbcType=VARCHAR}
+  </sql>
+  <sql id="updateParams">
+    `name` = #{name,jdbcType=VARCHAR},
       `type` = #{type,jdbcType=VARCHAR},
       url = #{url,jdbcType=VARCHAR},
       permission = #{permission,jdbcType=VARCHAR},
@@ -42,18 +34,36 @@
       available = #{available,jdbcType=TINYINT},
       icon = #{icon,jdbcType=VARCHAR},
       createTime = #{createTime,jdbcType=TIMESTAMP},
-      updateTime = #{updateTime,jdbcType=TIMESTAMP}
+      updateTime = #{updateTime,jdbcType=TIMESTAMP},
+      `alias` = #{alias,jdbcType=VARCHAR}
+  </sql>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from resources
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.springboot.demo.entity.Resources">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into resources (
+    <include refid="baseParams"/>
+    )
+    values (
+    <include refid="insertParams"/>
+  )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.springboot.demo.entity.Resources">
+    update resources
+    set  <include refid="updateParams"/>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select id, `name`, `type`, url, permission, pid, sort, available, icon, createTime, 
-    updateTime
+    select <include refid="baseParams"/>
     from resources
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select id, `name`, `type`, url, permission, pid, sort, available, icon, createTime, 
-    updateTime
+    select <include refid="baseParams"/>
     from resources
   </select>
 </mapper>

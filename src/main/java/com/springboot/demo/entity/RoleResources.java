@@ -1,7 +1,11 @@
 package com.springboot.demo.entity;
 
-import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
+import java.util.Date;
+@NoArgsConstructor
+@AllArgsConstructor
 public class RoleResources {
     private Integer id;
 
@@ -12,6 +16,11 @@ public class RoleResources {
     private Date createTime;
 
     private Date updateTime;
+
+    public RoleResources(Integer roleId, Integer resourcesId) {
+        this.roleId = roleId;
+        this.resourcesId = resourcesId;
+    }
 
     public Integer getId() {
         return id;

@@ -33,14 +33,6 @@ public class AdminController {
     private TagService tagService;
     @Autowired
     private TypeService typeService;
-    @PostMapping("/login")
-    public String login(String username, String password) {
-        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
-        Subject subject = SecurityUtils.getSubject();
-        subject.login(token);
-        return "redirect:/admin/home";
-    }
-
     @GetMapping("/home")
     public String home(Model model) {
         model.addAttribute("articleCount", articleService.count());
@@ -81,9 +73,29 @@ public class AdminController {
 
     }
 
-    @GetMapping("/website/comment")
-    public String websiteComment() {
-        return "website/comment";
+    @GetMapping("/article/comment")
+    public String articleComment() {
+        return "article/comment";
+    }
+    @GetMapping("/website/link")
+    public String websiteLink() {
+        return "website/link";
+    }
+    @GetMapping("/website/notice")
+    public String websiteNotice() {
+        return "website/notice";
+    }
+    @GetMapping("/perms/resource")
+    public String permsResources() {
+        return "perms/resource";
+    }
+    @GetMapping("/perms/role")
+    public String permsRole() {
+        return "perms/role";
+    }
+    @GetMapping("/users/list")
+    public String usersList() {
+        return "users/list";
     }
 
 }

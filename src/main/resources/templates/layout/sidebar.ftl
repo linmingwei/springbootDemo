@@ -22,115 +22,33 @@
                         <span class="d-inline-block ml-2">首页</span>
                     </a>
                 </li>
-                <li class=" py-2 " id="article_li">
-                    <a data-toggle="collapse" href="#article-mng" role="button" aria-expanded="false"
-                       aria-controls="article-mng">
-                        <i class="fa fa-list" aria-hidden="true"></i>
-                        <span class="d-inline-block ml-2">文章管理</span>
-                    </a>
-                    <div class="collapse" id="article-mng">
-                        <ul class="d-flex flex-column list-unstyled pl-4 pt-2">
-                            <li class="py-2 px-2" id="article_write">
-                                <a class="" href="/admin/article/write">
+                <@customTag method="resources">
+                    <#if resources??>
+                        <#list resources as resource>
+                        <li class=" py-2 " id="${(resource.alias)!""}_li">
+                            <a data-toggle="collapse" href="#${(resource.alias)!""}-mng" role="button" aria-expanded="false"
+                               aria-controls="article-mng">
+                                <i class="${(resource.icon)!""}" aria-hidden="true"></i>
+                                <span class="d-inline-block ml-2">${(resource.name)!""}</span>
+                            </a>
+                            <div class="collapse" id="${(resource.alias)!""}-mng">
+                            <#if resource.children?? && resource.children?size gt 0>
+                                <ul class="d-flex flex-column list-unstyled pl-4 pt-2">
+                                    <#list resource.children as child>
+                                     <li class="py-2 px-2" id="${(resource.alias)!""}_${(child.alias)!""}">
+                                         <a class="" href="${(child.url)!""}">
+                                             <span class="d-inline-block ml-2">${(child.name)!""}</span>
+                                         </a>
+                                     </li>
+                                    </#list>
+                                </ul>
+                            </#if>
+                            </div>
+                        </li>
 
-                                    <span class="d-inline-block ml-2">写文章</span>
-                                </a>
-                            </li>
-                            <li class="py-2 px-2" id="article_list">
-                                <a class="" href="/admin/article/list" >
-
-                                    <span class="d-inline-block ml-2">文章列表</span>
-                                </a>
-                            </li>
-                            <li class="py-2 px-2" id="article_type">
-                                <a class="" href="/admin/article/type">
-
-                                    <span class="d-inline-block ml-2">分类列表</span>
-                                </a>
-                            </li>
-
-                            <li class="py-2 px-2" id="article_tag">
-                                <a class="" href="/admin/article/tag">
-
-                                    <span class="d-inline-block ml-2">标签列表</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class=" py-2" id="website_li">
-                    <a data-toggle="collapse" href="#web-mng" role="button" aria-expanded="false"
-                       aria-controls="web-mng">
-                        <i class="fa fa-globe" aria-hidden="true"></i>
-                        <span class="d-inline-block ml-2">网站管理</span>
-                    </a>
-                    <div class="collapse" id="web-mng">
-                        <ul class="d-flex flex-column list-unstyled pl-4 pt-2">
-                            <li class="py-2 px-2" id="website_comment">
-                                <a class="" href="/admin/website/comment">
-
-                                    <span class="d-inline-block ml-2">评论管理</span>
-                                </a>
-                            </li>
-                            <li class="py-2 px-2" id="website_link">
-                                <a class="" href="#">
-
-                                    <span class="d-inline-block ml-2">友情链接</span>
-                                </a>
-                            </li>
-                            <li class="py-2 px-2">
-                                <a class="" href="#">
-
-                                    <span class="d-inline-block ml-2">模板管理</span>
-                                </a>
-                            </li>
-
-                            <li class="py-2 px-2">
-                                <a class="" href="#">
-
-                                    <span class="d-inline-block ml-2">更新日志</span>
-                                </a>
-                            </li>
-                            <li class="py-2 px-2">
-                                <a class="" href="#">
-
-                                    <span class="d-inline-block ml-2">公告管理</span>
-                                </a>
-                            </li>
-                            <li class="py-2 px-2">
-                                <a class="" href="#">
-
-                                    <span class="d-inline-block ml-2">文件管理</span>
-                                </a>
-                            </li>
-
-                        </ul>
-                    </div>
-                </li>
-                <li class=" py-2" id="auth_li">
-                    <a data-toggle="collapse" href="#auth-mng" role="button" aria-expanded="false"
-                       aria-controls="auth-mng">
-                        <i class="fa fa-cogs" aria-hidden="true"></i>
-                        <span class="d-inline-block ml-2">权限管理</span>
-                    </a>
-                    <div class="collapse" id="auth-mng">
-                        <ul class="d-flex flex-column list-unstyled pl-4 pt-2">
-                            <li class="py-2 px-2">
-                                <a class="" href="#">
-
-                                    <span class="d-inline-block ml-2">资源管理</span>
-                                </a>
-                            </li>
-                            <li class="py-2 px-2">
-                                <a class="" href="#">
-
-                                    <span class="d-inline-block ml-2">角色管理</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
+                        </#list>
+                    </#if>
+                </@customTag>
             </ul>
         </div>
 

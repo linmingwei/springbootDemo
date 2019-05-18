@@ -1,7 +1,12 @@
 package com.springboot.demo.entity;
 
-import java.util.Date;
+import lombok.ToString;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+@ToString
 public class Resources {
     private Integer id;
 
@@ -24,6 +29,26 @@ public class Resources {
     private Date createTime;
 
     private Date updateTime;
+
+    private String alias;
+
+    public String getAlias() {
+        return alias;
+    }
+
+    public void setAlias(String alias) {
+        this.alias = alias;
+    }
+
+    private List<Resources> children = new ArrayList<>();
+
+    public List<Resources> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<Resources> children) {
+        this.children = children;
+    }
 
     public Integer getId() {
         return id;

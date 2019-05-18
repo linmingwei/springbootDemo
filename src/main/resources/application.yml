@@ -8,10 +8,20 @@ spring:
       enabled: true
 
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    url: jdbc:mysql://localhost:3306/bootdemo?serverTimezone=GMT
-    password: mysql123
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    username: root
+#    url: jdbc:mysql://localhost:3306/bootdemo?serverTimezone=GMT
+#    password: mysql123
+    hikari:
+      maximum-pool-size: 15
+      username: root
+      password: mysql123
+      jdbc-url: jdbc:mysql://localhost:3306/bootdemo?serverTimezone=GMT
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      minimum-idle: 8
+      auto-commit: true
+      connection-test-query: SELECT 1
+
   mvc:
     static-path-pattern: /static/**
   resources:

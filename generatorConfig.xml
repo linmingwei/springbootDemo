@@ -33,15 +33,11 @@
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.springboot.demo.mapper"  targetProject="src\main\java">
         </javaClientGenerator>
 
-        <table  tableName="user_role"   >
+        <table  tableName="link"   >
             <property name="useActualColumnNames" value="true"/>
             <generatedKey column="id" sqlStatement="MySQL" identity="true" />
         </table>
-        <table  tableName="role_resources"   >
-            <property name="useActualColumnNames" value="true"/>
-            <generatedKey column="id" sqlStatement="MySQL" identity="true" />
-        </table>
-        <table  tableName="resources"   >
+        <table  tableName="notice"   >
             <property name="useActualColumnNames" value="true"/>
             <generatedKey column="id" sqlStatement="MySQL" identity="true" />
         </table>

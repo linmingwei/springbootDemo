@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!--<link rel="stylesheet" href="/plugin/layui/css/layui.css">-->
-    <!--<link rel="stylesheet" href="/plugin/font-awesome-4.7.0/css/font-awesome.min.css">-->
+    <!--<link.ftl rel="stylesheet" href="/plugin/layui/css/layui.css">-->
+    <!--<link.ftl rel="stylesheet" href="/plugin/font-awesome-4.7.0/css/font-awesome.min.css">-->
 
-    <!--<link rel="stylesheet" href="/css/index.css">-->
+    <!--<link.ftl rel="stylesheet" href="/css/index.css">-->
     <!--<script src="/plugin/layui/layui.js"></script>-->
     <link rel="stylesheet" href="/static/plugin/layui/css/layui.css">
     <link rel="stylesheet" href="/static/plugin/font-awesome-4.7.0/css/font-awesome.min.css">

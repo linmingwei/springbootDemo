@@ -1,12 +1,10 @@
 package com.springboot.demo.framework.tag;
 
 import com.springboot.demo.entity.Article;
+import com.springboot.demo.entity.Resources;
 import com.springboot.demo.entity.Tag;
 import com.springboot.demo.entity.Type;
-import com.springboot.demo.service.ArticleService;
-import com.springboot.demo.service.CommentService;
-import com.springboot.demo.service.TagService;
-import com.springboot.demo.service.TypeService;
+import com.springboot.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -33,6 +31,8 @@ public class CustomTag extends BaseTag {
     private TypeService typeService;
     @Autowired
     private TagService tagService;
+    @Autowired
+    private ResourceService resourceService;
 
     @Autowired
     private CommentService commentService;
@@ -81,5 +81,8 @@ public class CustomTag extends BaseTag {
         info.put("days", String.valueOf(ChronoUnit.DAYS.between(LocalDate.of(2018, 11, 1), LocalDate.now())));
         info.put("updateTime", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy年M月dd日 HH点")));
         return info;
+    }
+    public List<Resources> resources(Map map) {
+        return resourceService.getParentWithChildren();
     }
 }

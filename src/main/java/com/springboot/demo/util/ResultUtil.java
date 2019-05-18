@@ -25,6 +25,9 @@ public class ResultUtil {
     public static ResponseVo error(int code, String msg) {
         return new ResponseVo(code,msg);
     }
+    public static ResponseVo error( String msg) {
+        return new ResponseVo(500,msg);
+    }
 
     public static ResponseVo vo(int code, String msg,Object data) {
         return new ResponseVo(code,msg,data);
