@@ -165,8 +165,10 @@
     }
     function addButton(value, row, index) {
         return [
+            '<div class="d-inline-flex">',
             '<button  class="btn article-edit btn-primary btn-sm mr-3"><i class="fa fa-pencil" aria-hidden="true"></i></button>',
-            '<button class="btn article-delete btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button>'
+            '<button class="btn article-delete btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button>',
+            '</div>'
         ].join('')
     }
 

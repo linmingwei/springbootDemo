@@ -5,7 +5,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="description" jdbcType="VARCHAR" property="description" />
-    <result column="avaliable" jdbcType="TINYINT" property="avaliable" />
+    <result column="available" jdbcType="TINYINT" property="available" />
     <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
     <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
@@ -17,27 +17,27 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into role (`name`, description, avaliable, 
+    insert into role (`name`, description, available,
       createTime, updateTime)
-    values (#{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{avaliable,jdbcType=TINYINT}, 
+    values (#{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{available,jdbcType=TINYINT},
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.springboot.demo.entity.Role">
     update role
     set `name` = #{name,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR},
-      avaliable = #{avaliable,jdbcType=TINYINT},
+      available = #{available,jdbcType=TINYINT},
       createTime = #{createTime,jdbcType=TIMESTAMP},
       updateTime = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select id, `name`, description, avaliable, createTime, updateTime
+    select id, `name`, description, available, createTime, updateTime
     from role
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select id, `name`, description, avaliable, createTime, updateTime
+    select id, `name`, description, available, createTime, updateTime
     from role
   </select>
 </mapper>

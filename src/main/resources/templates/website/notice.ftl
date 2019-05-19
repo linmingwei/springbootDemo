@@ -35,21 +35,21 @@
             <div class="modal-body">
                 <form class="mx-4 my-1" id="notice_form">
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">标题</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-3 col-form-label">标题</label>
+                        <div class="flex-fill">
                             <input type="hidden" name="id">
                             <input type="text" name="title" class="form-control" placeholder="">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">内容</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-3 col-form-label">内容</label>
+                        <div class="flex-fill">
                             <input type="text" name="content" class="form-control" placeholder="">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">状态</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-3 col-form-label">状态</label>
+                        <div class="flex-fill">
                             <div class="custom-control custom-radio custom-control-inline">
                                 <input type="radio" id="customRadioInline1" value="true" name="status"
                                        class="custom-control-input">
@@ -177,8 +177,10 @@
     }
     function addButton(value, row, index) {
         return [
+            '<div class="d-inline-flex">',
             '<button  class="btn notice-edit btn-primary btn-sm mr-3"><i class="fa fa-pencil" aria-hidden="true"></i></button>',
-            '<button class="btn notice-delete btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button>'
+            '<button class="btn notice-delete btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button>',
+            '</div>'
         ].join('')
     }
 

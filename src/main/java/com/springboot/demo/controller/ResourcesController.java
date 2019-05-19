@@ -64,5 +64,10 @@ public class ResourcesController {
         List<Resources> list = resourcesService.getParents();
         return ResponseVo.success(list);
     }
+    @GetMapping("/resources/tree")
+    public ResponseVo tree() {
+        List<Resources> list = resourcesService.getParentWithChildren();
+        return ResponseVo.success(list);
+    }
 
 }

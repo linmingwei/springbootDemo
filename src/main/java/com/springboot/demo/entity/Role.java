@@ -9,7 +9,7 @@ public class Role {
 
     private String description;
 
-    private Byte avaliable;
+    private Byte available;
 
     private Date createTime;
 
@@ -39,12 +39,12 @@ public class Role {
         this.description = description == null ? null : description.trim();
     }
 
-    public Byte getAvaliable() {
-        return avaliable;
+    public Byte getAvailable() {
+        return available;
     }
 
-    public void setAvaliable(Byte avaliable) {
-        this.avaliable = avaliable;
+    public void setAvailable(Byte available) {
+        this.available = available;
     }
 
     public Date getCreateTime() {

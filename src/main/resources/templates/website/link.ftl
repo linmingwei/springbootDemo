@@ -35,28 +35,27 @@
             <div class="modal-body">
                 <form class="mx-4 my-1" id="link_form">
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">网址</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-3 col-form-label">网址</label>
+                        <div class="flex-fill">
                             <input type="hidden" name="id">
                             <input type="text" name="url" class="form-control" placeholder="">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">名称</label>
-                        <div class="col-sm-10">
-                            <input type="hidden" name="id">
+                        <label class="col-sm-3 col-form-label">名称</label>
+                        <div class="flex-fill">
                             <input type="text" name="name" class="form-control" placeholder="">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">描述</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-3 col-form-label">描述</label>
+                        <div class="flex-fill">
                             <input type="text" name="description" class="form-control" placeholder="">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">状态</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-3 col-form-label">状态</label>
+                        <div class="flex-fill">
                             <div class="custom-control custom-radio custom-control-inline">
                                 <input type="radio" id="customRadioInline1" value="true" name="status"
                                        class="custom-control-input">
@@ -70,8 +69,8 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">主页显示</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-3 col-form-label">主页显示</label>
+                        <div class="flex-fill">
                             <div class="custom-control custom-radio custom-control-inline">
                                 <input type="radio" id="customRadioInline11" value="true" name="home_page_display"
                                        class="custom-control-input">
@@ -85,26 +84,26 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">LOGO</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-3 col-form-label">LOGO</label>
+                        <div class="flex-fill">
                             <input type="text" name="favicon" class="form-control" placeholder="">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">邮箱</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-3 col-form-label">邮箱</label>
+                        <div class="flex-fill">
                             <input type="email" name="email" class="form-control" placeholder="">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">QQ</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-3 col-form-label">QQ</label>
+                        <div class="flex-fill">
                             <input type="email" name="qq" class="form-control" placeholder="">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">备注</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-3 col-form-label">备注</label>
+                        <div class="flex-fill">
                             <textarea class="form-control" name="remark" id="" cols="30" rows=3></textarea>
                         </div>
                     </div>
@@ -235,8 +234,10 @@
 
     function addButton(value, row, index) {
         return [
+            '<div class="d-inline-flex">',
             '<button  class="btn link-edit btn-primary btn-sm mr-3"><i class="fa fa-pencil" aria-hidden="true"></i></button>',
-            '<button class="btn link-delete btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button>'
+            '<button class="btn link-delete btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button>',
+            '</div>'
         ].join('')
     }
 

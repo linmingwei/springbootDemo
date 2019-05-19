@@ -31,8 +31,8 @@
                     <input type="hidden" name="pid">
 
                     <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">评论</label>
-                    <div class="col-sm-10">
+                    <label class="col-sm-3 col-form-label">评论</label>
+                    <div class="flex-fill">
                         <textarea name="content"  rows="6"  class="form-control" placeholder="请输入评论"></textarea>
                     </div>
                 </div>
@@ -59,8 +59,8 @@
                 <form id="check_form" method="post">
                     <input type="hidden" name="pid">
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">状态</label>
-                    <div class="col-sm-10">
+                    <label class="col-sm-3 col-form-label">状态</label>
+                    <div class="flex-fill">
                         <select class="custom-select" name="status">
                             <option selected>请选择</option>
                             <option value="0">审核通过</option>
@@ -69,8 +69,8 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">回复该评论</label>
-                    <div class="col-sm-10">
+                    <label class="col-sm-3 col-form-label">回复该评论</label>
+                    <div class="flex-fill">
                         <textarea name="content"  rows="6"  class="form-control" placeholder="请输入评论"></textarea>
                     </div>
                 </div>
@@ -231,9 +231,11 @@
     //添加操作按钮
     function addButton(value, row, index) {
         return [
+            '<div class="d-inline-flex">',
             '<button  class="btn comment-reply btn-primary btn-sm mr-3"><i class="fa fa-pencil" aria-hidden="true"></i>回复</button>',
             '<button  class="btn comment-check btn-info btn-sm mr-3"><i class="fa fa-pencil" aria-hidden="true"></i>审核</button>',
-            '<button class="btn comment-delete btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i>删除</button>'
+            '<button class="btn comment-delete btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i>删除</button>',
+            '</div>'
         ].join('');
     }
     //回复评论

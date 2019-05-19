@@ -11,7 +11,6 @@
         <link rel="stylesheet" href="/webjars/font-awesome/4.7.0/css/font-awesome.min.css"/>
         <link rel="stylesheet" href="/webjars/bootstrap/4.1.3/css/bootstrap.min.css"/>
         <script src="/webjars/jquery/3.2.1/jquery.min.js"></script>
-        <script src="/static/js/jquery.cookie.js"></script>
         <script src="/webjars/bootstrap/4.1.3/js/bootstrap.bundle.js"></script>
         <#nested>
         <title>BLOG后台管理</title>

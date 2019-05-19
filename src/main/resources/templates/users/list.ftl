@@ -35,15 +35,15 @@
             <div class="modal-body">
                 <form class="mx-4 my-1" id="tag_form">
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">名称</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-3 col-form-label">名称</label>
+                        <div class="flex-fill">
                             <input type="hidden" name="id">
                             <input type="text" name="name" class="form-control" placeholder="">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">描述</label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-3 col-form-label">描述</label>
+                        <div class="flex-fill">
                             <input type="text" name="description" class="form-control" placeholder="">
                         </div>
                     </div>
@@ -146,8 +146,10 @@
 
     function addButton(value, row, index) {
         return [
+            '<div class="d-inline-flex">',
             '<button  class="btn tag-edit btn-primary btn-sm mr-3"><i class="fa fa-pencil" aria-hidden="true"></i></button>',
-            '<button class="btn tag-delete btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button>'
+            '<button class="btn tag-delete btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button>',
+            '</div>'
         ].join('')
     }
     $('#save_btn').click(function () {
