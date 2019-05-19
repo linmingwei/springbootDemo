@@ -186,5 +186,6 @@
         deleteTag(ids);
     });
 
+
 </script>
 </@footer>

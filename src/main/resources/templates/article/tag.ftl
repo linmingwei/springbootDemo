@@ -185,6 +185,12 @@
         });
         deleteTag(ids);
     });
+    $('#tag_modal').on('hidden.bs.modal',function (e) {
+        $.each($(this).find(':input'),function (i, v) {
+            $(v).val('');
+        })
+    });
+
 
 </script>
 </@footer>

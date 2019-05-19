@@ -4,47 +4,62 @@
     <link rel="stylesheet" href="/static/css/article_list.css">
 </@header>
 <div class="shadow-sm bg-white rounded item px-4 pt-3 pb-2">
-    <h4>标签列表</h4>
+    <h4>公告管理</h4>
     <hr>
     <form action="/">
         <div class="form-group">
             <div id="toolbar" class="btn-group">
-                <button id="add_btn" type="button" data-toggle="modal" data-target="#tag_modal"
+                <button id="add_btn" type="button" data-toggle="modal" data-target="#notice_modal"
                         class="btn btn-light">
-                    <i class="fa fa-plane" aria-hidden="true"></i> 新增标签
+                    <i class="fa fa-plane" aria-hidden="true"></i> 新增公告
                 </button>
                 <button id="batch_delete" type="button" class="btn btn-light">
                     <i class="fa fa-minus" aria-hidden="true"></i> 批量删除
                 </button>
             </div>
-            <table id="tag_table"></table>
+            <table id="notice_table"></table>
         </div>
     </form>
 </div>
 <!-- Modal -->
-<div class="modal fade" data-backdrop="static" id="tag_modal" tabindex="-1" role="dialog"
-     aria-labelledby="tag_modalLabel" aria-hidden="true">
+<div class="modal fade" data-backdrop="static" id="notice_modal" tabindex="-1" role="dialog"
+     aria-labelledby="notice_modalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="tag_modalLabel">新增分类</h5>
+                <h5 class="modal-title" id="notice_modalLabel">新增公告</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form class="mx-4 my-1" id="tag_form">
+                <form class="mx-4 my-1" id="notice_form">
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">名称</label>
+                        <label class="col-sm-2 col-form-label">标题</label>
                         <div class="col-sm-10">
                             <input type="hidden" name="id">
-                            <input type="text" name="name" class="form-control" placeholder="">
+                            <input type="text" name="title" class="form-control" placeholder="">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">描述</label>
+                        <label class="col-sm-2 col-form-label">内容</label>
                         <div class="col-sm-10">
-                            <input type="text" name="description" class="form-control" placeholder="">
+                            <input type="text" name="content" class="form-control" placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">状态</label>
+                        <div class="col-sm-10">
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="customRadioInline1" value="true" name="status"
+                                       class="custom-control-input">
+                                <label class="custom-control-label" for="customRadioInline1">已发布</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="customRadioInline2" value="false" name="status"
+                                       class="custom-control-input">
+                                <label class="custom-control-label" for="customRadioInline2">未发布</label>
+                            </div>
                         </div>
                     </div>
 
@@ -62,21 +77,25 @@
 <script src="/static/js/bootstrap-table.min.js"></script>
 <script>
     window.operateEvents = {
-        'click .tag-edit ': function (e, value, row, index) {
+        'click .notice-edit ': function (e, value, row, index) {
             e.preventDefault();
-            var $tagModal = $('#tag_modal');
-            $tagModal.find('input[name="id"]').val(row.id);
-            $tagModal.find('input[name="name"]').val(row.name);
-            $tagModal.find('input[name="description"]').val(row.description);
-            $tagModal.modal('show');
+            var $noticeModal = $('#notice_modal');
+            $noticeModal.find('input[name="id"]').val(row.id);
+            $noticeModal.find('input[name="title"]').val(row.title);
+            $noticeModal.find('input[name="content"]').val(row.content);
+            if (row.status == 'RELEASE') {
+                $noticeModal.find('input[name="status"][value="true"]').click();
+            } else {
+                $noticeModal.find('input[name="status"][value="false"]').click();
+            }
+            $noticeModal.modal('show');
         },
-        'click .tag-delete': function (e, value, row, index) {
+        'click .notice-delete': function (e, value, row, index) {
             console.log(JSON.stringify(row));
-            deleteTag(row.id);
+            deleteNotice(row.id);
             e.preventDefault();
         }
     };
-
     var columns = [{
         field: 'state',
         // halign:'center',
@@ -84,17 +103,18 @@
     }, {
         field: 'id',
         title: 'ID'
+    }, {
+        field: 'title',
+        title: '标题',
+        formatter: notice_formatter
+    }, {
+        field: 'content',
+        title: '内容'
         // formatter: title_for
     }, {
-        field: 'name',
-        title: '名称',
-        // formatter: title_for
-    }, {
-        field: 'description',
-        title: '描述'
-    }, {
-        field: 'createTime',
-        title: '创建时间'
+        field: 'status',
+        title: '状态',
+        formatter: status_formatter
     }, {
         field: 'operate',
         title: '操作',
@@ -102,8 +122,8 @@
         events: 'operateEvents',
         formatter: addButton
     }];
-    $('#tag_table').bootstrapTable({
-        url: "/tag/page",                           //请求后台的URL（*）
+    $('#notice_table').bootstrapTable({
+        url: "/notice/page",                           //请求后台的URL（*）
         method: 'get',                     //请求方式（*）
         toolbar: $('#toolbar'),                   //工具按钮用哪个容器
         striped: true,                      //是否显示行间隔色
@@ -144,46 +164,65 @@
         }
     }
 
+    function notice_formatter(value, row, index) {
+        return row.title;
+    }
+    function status_formatter(value, row, index) {
+        if (row.status == 'RELEASE') {
+            return '已发布';
+        }else {
+            return '未发布';
+        }
+    }
     function addButton(value, row, index) {
         return [
-            '<button  class="btn tag-edit btn-primary btn-sm mr-3"><i class="fa fa-pencil" aria-hidden="true"></i></button>',
-            '<button class="btn tag-delete btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button>'
+            '<button  class="btn notice-edit btn-primary btn-sm mr-3"><i class="fa fa-pencil" aria-hidden="true"></i></button>',
+            '<button class="btn notice-delete btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button>'
         ].join('')
     }
+
     $('#save_btn').click(function () {
         $.post({
-            url:'/tag/add',
-            data:$('#tag_form').serialize(),
-            dataType:'json',
-            success:function (res) {
-                $('#tag_modal').modal('hide');
+            url: '/notice',
+            data: $('#notice_form').serialize(),
+            dataType: 'json',
+            success: function (res) {
+                $('#notice_modal').modal('hide');
                 alert(res.msg);
                 $('button[name="refresh"]').click();
             },
-            error:function (res) {
+            error: function (res) {
                 alert(res.responseJSON.msg);
             }
         });
     });
-    function deleteTag(ids) {
-        $.post({
-            url:'/tag/delete',
-            data:{ids:ids},
-            dataType:'json',
+
+    function deleteNotice(ids) {
+        $.ajax({
+            url: '/notice',
+            method: 'DELETE',
+            data: {ids: ids},
+            dataType: 'json',
             traditional: true,
-            success:function (res) {
+            success: function (res) {
                 alert(res.msg);
                 $('button[name="refresh"]').click();
             }
         });
     }
+
     $('#batch_delete').click(function () {
-        var rows = $('#tag_table').bootstrapTable('getSelections');
-        var ids =[];
-        $.each(rows,function (i, value) {
-            ids[i] =value.id;
+        var rows = $('#notice_table').bootstrapTable('getSelections');
+        var ids = [];
+        $.each(rows, function (i, value) {
+            ids[i] = value.id;
         });
-        deleteTag(ids);
+        deleteNotice(ids);
+    });
+    $('#notice_modal').on('hidden.bs.modal',function (e) {
+        $.each($(this).find(':input'),function (i, v) {
+            $(v).val('');
+        })
     });
 
 </script>
