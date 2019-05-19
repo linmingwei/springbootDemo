@@ -17,7 +17,7 @@
                     <i class="fa fa-minus" aria-hidden="true"></i> 批量删除
                 </button>
             </div>
-            <table id="tag_table"></table>
+            <table id="link_table"></table>
         </div>
     </form>
 </div>
@@ -33,7 +33,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="mx-4 my-1" id="tag_form">
+                <form class="mx-4 my-1" id="link_form">
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">名称</label>
                         <div class="col-sm-10">
@@ -72,7 +72,7 @@
         },
         'click .link-delete': function (e, value, row, index) {
             console.log(JSON.stringify(row));
-            deleteTag(row.id);
+            deleteLink(row.id);
             e.preventDefault();
         }
     };
@@ -82,8 +82,8 @@
         // halign:'center',
         checkbox: true
     }, {
-        field: 'id',
-        title: 'ID'
+        field: 'url',
+        title: 'URL',
         // formatter: title_for
     }, {
         field: 'name',
@@ -92,6 +92,9 @@
     }, {
         field: 'description',
         title: '描述'
+    },{
+        field: 'email',
+        title: '邮箱'
     }, {
         field: 'createTime',
         title: '创建时间'
@@ -102,8 +105,8 @@
         events: 'operateEvents',
         formatter: addButton
     }];
-    $('#tag_table').bootstrapTable({
-        url: "/tag/page",                           //请求后台的URL（*）
+    $('#link_table').bootstrapTable({
+        url: "/link/page",                           //请求后台的URL（*）
         method: 'get',                     //请求方式（*）
         toolbar: $('#toolbar'),                   //工具按钮用哪个容器
         striped: true,                      //是否显示行间隔色
@@ -152,8 +155,8 @@
     }
     $('#save_btn').click(function () {
         $.post({
-            url:'/tag/add',
-            data:$('#tag_form').serialize(),
+            url:'/link',
+            data:$('#link_form').serialize(),
             dataType:'json',
             success:function (res) {
                 $('#link_modal').modal('hide');
@@ -165,9 +168,10 @@
             }
         });
     });
-    function deleteTag(ids) {
-        $.post({
-            url:'/tag/delete',
+    function deleteLink(ids) {
+        $.ajax({
+            url:'/link',
+            method:'delete',
             data:{ids:ids},
             dataType:'json',
             traditional: true,
@@ -178,12 +182,12 @@
         });
     }
     $('#batch_delete').click(function () {
-        var rows = $('#tag_table').bootstrapTable('getSelections');
+        var rows = $('#link_table').bootstrapTable('getSelections');
         var ids =[];
         $.each(rows,function (i, value) {
             ids[i] =value.id;
         });
-        deleteTag(ids);
+        deleteLink(ids);
     });
 
 </script>

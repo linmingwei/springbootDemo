@@ -23,20 +23,27 @@ import java.util.List;
 public class LinkController {
     @Autowired
     private LinkService linkService;
+
     @GetMapping("/link")
     public List<Link> all() {
         return linkService.getAll();
     }
+
     @PostMapping("/link")
     public ResponseVo save(Link link) {
         try {
-            linkService.save(link);
+            if (link.getId() == null) {
+                linkService.save(link);
+            }else {
+                linkService.update(link);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             ResultUtil.error("友链保存失败");
         }
         return ResultUtil.success("友链保存成功");
     }
+
     @DeleteMapping("/link")
     public ResponseVo update(List<Long> ids) {
         try {
@@ -48,9 +55,9 @@ public class LinkController {
         return ResponseVo.success("删除友链成功");
     }
 
-    @PostMapping("/link/page")
+    @GetMapping("/link/page")
     public PageInfo<Link> page(Integer pageNum, Integer pageSize) {
-        PageHelper.startPage(pageNum,pageSize);
+        PageHelper.startPage(pageNum, pageSize);
         List<Link> all = linkService.getAll();
         PageInfo<Link> info = new PageInfo<>(all);
         return info;
