@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.20, for Win64 (x86_64)
+-- MySQL dump 10.16  Distrib 10.1.30-MariaDB, for CYGWIN (x86_64)
 --
 -- Host: 127.0.0.1    Database: bootdemo
 -- ------------------------------------------------------
--- Server version	5.7.20
+-- Server version	5.6.35-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -134,7 +134,7 @@ CREATE TABLE `link` (
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
   `update_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -143,7 +143,7 @@ CREATE TABLE `link` (
 
 LOCK TABLES `link` WRITE;
 /*!40000 ALTER TABLE `link` DISABLE KEYS */;
-INSERT INTO `link` VALUES (1,'https://www.zhyd.me','张亚东博客','一个程序员的个人博客','yadong.zhang0415@gmail.com',NULL,'https://static.zhyd.me/static/img/favicon.ico',1,1,NULL,'ADMIN','2016-11-16 23:32:03','2018-01-23 11:27:19'),(13,'http://tool.zhyd.me','在线工具','在线工具，只做最有用、最简单、最干净、最方便的工具网站。','yadong.zhang0415@gmail.com',NULL,'https://static.zhyd.me/static/img/favicon.ico',1,1,NULL,'ADMIN','2017-05-04 11:22:29','2017-05-09 09:11:35'),(35,'http://music.zhyd.me','我的音乐馆','我的音乐馆','yadong.zhang0415@gmail.com',NULL,'http://music.zhyd.me/images/favicon.ico',1,1,NULL,'ADMIN','2018-04-19 20:01:35','2018-04-19 20:01:35');
+INSERT INTO `link` VALUES (1,'https://www.zhyd.me','张亚东博客','一个程序员的个人博客','yadong.zhang0415@gmail.com',NULL,'https://static.zhyd.me/static/img/favicon.ico',1,1,NULL,'ADMIN','2016-11-16 23:32:03','2018-01-23 11:27:19'),(13,'http://tool.zhyd.me','在线工具','在线工具，只做最有用、最简单、最干净、最方便的工具网站。','yadong.zhang0415@gmail.com','','https://static.zhyd.me/static/img/favicon.ico',1,0,'',NULL,NULL,NULL),(35,'http://music.zhyd.me','我的音乐馆','我的音乐馆','yadong.zhang0415@gmail.com',NULL,'http://music.zhyd.me/images/favicon.ico',1,0,NULL,'ADMIN','2018-04-19 20:01:35','2018-04-19 20:01:35'),(36,'www.baidu.com','百度','','sdf@eami.com','','',1,1,'',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `link` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -398,4 +398,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-19 13:36:43
+-- Dump completed on 2019-05-19 16:10:43
