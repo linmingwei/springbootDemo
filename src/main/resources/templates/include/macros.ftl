@@ -42,9 +42,11 @@
             var pli = urls[urls.length-2], sli = urls[urls.length-1];
             if (sli == 'home') {
                 $('#home_li').addClass('active');
+                $('#now-page').text('');
             } else {
                 $('#'+pli+'_li').addClass('active').find('.collapse').addClass('show');
                 $('#'+pli+'_'+sli).addClass('active-li');
+                $('#now-page').text($('#'+pli+'_'+sli).text());
 
             }
         });

@@ -5,7 +5,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb p-0 " style="background-color: unset;" >
                     <li class="breadcrumb-item"><a href="/admin/home">首页</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Library</li>
+                    <li class="breadcrumb-item active" aria-current="page" id="now-page"></li>
                 </ol>
             </nav>
         </div>

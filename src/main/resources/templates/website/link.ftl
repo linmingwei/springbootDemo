@@ -35,6 +35,13 @@
             <div class="modal-body">
                 <form class="mx-4 my-1" id="link_form">
                     <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">网址</label>
+                        <div class="col-sm-10">
+                            <input type="hidden" name="id">
+                            <input type="text" name="url" class="form-control" placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label class="col-sm-2 col-form-label">名称</label>
                         <div class="col-sm-10">
                             <input type="hidden" name="id">
@@ -45,6 +52,60 @@
                         <label class="col-sm-2 col-form-label">描述</label>
                         <div class="col-sm-10">
                             <input type="text" name="description" class="form-control" placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">状态</label>
+                        <div class="col-sm-10">
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="customRadioInline1" value="true" name="status"
+                                       class="custom-control-input">
+                                <label class="custom-control-label" for="customRadioInline1">启用</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="customRadioInline2" value="false" name="status"
+                                       class="custom-control-input">
+                                <label class="custom-control-label" for="customRadioInline2">禁用</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">主页显示</label>
+                        <div class="col-sm-10">
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="customRadioInline11" value="true" name="home_page_display"
+                                       class="custom-control-input">
+                                <label class="custom-control-label" for="customRadioInline11">启用</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="customRadioInline12" value="false" name="home_page_display"
+                                       class="custom-control-input">
+                                <label class="custom-control-label" for="customRadioInline12">禁用</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">LOGO</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="favicon" class="form-control" placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">邮箱</label>
+                        <div class="col-sm-10">
+                            <input type="email" name="email" class="form-control" placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">QQ</label>
+                        <div class="col-sm-10">
+                            <input type="email" name="qq" class="form-control" placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">备注</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" name="remark" id="" cols="30" rows=3></textarea>
                         </div>
                     </div>
 
@@ -64,11 +125,26 @@
     window.operateEvents = {
         'click .link-edit ': function (e, value, row, index) {
             e.preventDefault();
-            var $tagModal = $('#link_modal');
-            $tagModal.find('input[name="id"]').val(row.id);
-            $tagModal.find('input[name="name"]').val(row.name);
-            $tagModal.find('input[name="description"]').val(row.description);
-            $tagModal.modal('show');
+            var $linkModal = $('#link_modal');
+            $linkModal.find('input[name="id"]').val(row.id);
+            $linkModal.find('input[name="url"]').val(row.url);
+            $linkModal.find('input[name="favicon"]').val(row.favicon);
+            $linkModal.find('input[name="email"]').val(row.email);
+            $linkModal.find('input[name="qq"]').val(row.qq);
+            $linkModal.find('input[name="remark"]').val(row.remark);
+            $linkModal.find('input[name="name"]').val(row.name);
+            $linkModal.find('input[name="description"]').val(row.description);
+            if (row.status) {
+                $linkModal.find('input[name="status"][value="true"]').click();
+            } else {
+                $linkModal.find('input[name="status"][value="false"]').click();
+            }
+            if (row.home_page_display) {
+                $linkModal.find('input[name="home_page_display"][value="true"]').click();
+            } else {
+                $linkModal.find('input[name="home_page_display"][value="false"]').click();
+            }
+            $linkModal.modal('show');
         },
         'click .link-delete': function (e, value, row, index) {
             console.log(JSON.stringify(row));
@@ -76,7 +152,6 @@
             e.preventDefault();
         }
     };
-
     var columns = [{
         field: 'state',
         // halign:'center',
@@ -84,7 +159,7 @@
     }, {
         field: 'url',
         title: 'URL',
-        // formatter: title_for
+        formatter: link_formatter
     }, {
         field: 'name',
         title: '名称',
@@ -92,7 +167,13 @@
     }, {
         field: 'description',
         title: '描述'
-    },{
+    }, {
+        field: 'status',
+        title: '状态'
+    }, {
+        field: 'home_page_display',
+        title: '主页显示'
+    }, {
         field: 'email',
         title: '邮箱'
     }, {
@@ -147,45 +228,52 @@
         }
     }
 
+    function link_formatter(value, row, index) {
+        return '<a href="'+row.url+'">'+row.url+'</a>';
+    }
+
     function addButton(value, row, index) {
         return [
             '<button  class="btn link-edit btn-primary btn-sm mr-3"><i class="fa fa-pencil" aria-hidden="true"></i></button>',
             '<button class="btn link-delete btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button>'
         ].join('')
     }
+
     $('#save_btn').click(function () {
         $.post({
-            url:'/link',
-            data:$('#link_form').serialize(),
-            dataType:'json',
-            success:function (res) {
+            url: '/link',
+            data: $('#link_form').serialize(),
+            dataType: 'json',
+            success: function (res) {
                 $('#link_modal').modal('hide');
                 alert(res.msg);
                 $('button[name="refresh"]').click();
             },
-            error:function (res) {
+            error: function (res) {
                 alert(res.responseJSON.msg);
             }
         });
     });
+
     function deleteLink(ids) {
         $.ajax({
-            url:'/link',
-            method:'delete',
-            data:{ids:ids},
-            dataType:'json',
+            url: '/link',
+            method: 'DELETE',
+            data: {ids: ids},
+            dataType: 'json',
             traditional: true,
-            success:function (res) {
+            success: function (res) {
                 alert(res.msg);
                 $('button[name="refresh"]').click();
             }
         });
     }
+
     $('#batch_delete').click(function () {
         var rows = $('#link_table').bootstrapTable('getSelections');
-        var ids =[];
-        $.each(rows,function (i, value) {
-            ids[i] =value.id;
+        var ids = [];
+        $.each(rows, function (i, value) {
+            ids[i] = value.id;
         });
         deleteLink(ids);
     });

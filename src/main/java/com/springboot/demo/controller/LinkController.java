@@ -7,10 +7,7 @@ import com.springboot.demo.service.LinkService;
 import com.springboot.demo.util.ResultUtil;
 import com.springboot.demo.vo.ResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -45,7 +42,7 @@ public class LinkController {
     }
 
     @DeleteMapping("/link")
-    public ResponseVo update(List<Long> ids) {
+    public ResponseVo delete(@RequestParam("ids") List<Long> ids) {
         try {
             linkService.batchDelete(ids);
         } catch (Exception e) {
