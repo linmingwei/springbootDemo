@@ -44,7 +44,10 @@
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">资源类型</label>
                         <div class="flex-fill">
-                            <input type="text" name="type" class="form-control" placeholder="">
+                            <select id="pid_select" name="type" class="custom-select">
+                                <option value="menu">菜单</option>
+                                <option value="button">按钮</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group row">
