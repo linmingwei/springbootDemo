@@ -77,6 +77,7 @@
     window.operateEvents = {
         'click .type-edit ': function (e, value, row, index) {
             e.preventDefault();
+            $('#type_modalLabel').text('编辑类型');
             var $typeModal = $('#type_modal');
             $typeModal.find('input[name="id"]').val(row.id);
             $typeModal.find('input[name="name"]').val(row.name);
@@ -229,9 +230,11 @@
         deleteType(ids);
     });
     $('#type_modal').on('hidden.bs.modal',function (e) {
-        $.each($(this).find(':input'),function (i, v) {
+        $.each($(this).find('input[type="text"]'),function (i, v) {
             $(v).val('');
-        })
+        });
+        $(this).find('input[type="hidden"]').val('');
+        $('#type_modalLabel').text('新增类型');
     });
 
 

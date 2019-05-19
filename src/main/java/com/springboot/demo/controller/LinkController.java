@@ -31,12 +31,12 @@ public class LinkController {
         try {
             if (link.getId() == null) {
                 linkService.save(link);
-            }else {
+            } else {
                 linkService.update(link);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            ResultUtil.error("友链保存失败");
+            return ResultUtil.error("友链保存失败");
         }
         return ResultUtil.success("友链保存成功");
     }

@@ -125,6 +125,7 @@
     window.operateEvents = {
         'click .link-edit ': function (e, value, row, index) {
             e.preventDefault();
+            $('#link_modalLabel').text('编辑友链');
             var $linkModal = $('#link_modal');
             $linkModal.find('input[name="id"]').val(row.id);
             $linkModal.find('input[name="url"]').val(row.url);
@@ -278,9 +279,11 @@
         deleteLink(ids);
     });
     $('#link_modal').on('hidden.bs.modal',function (e) {
-        $.each($(this).find(':input'),function (i, v) {
+        $.each($(this).find('input[type="text"]'),function (i, v) {
             $(v).val('');
-        })
+        });
+        $(this).find('input[type="hidden"]').val('');
+        $('#link_modalLabel').text('新增友链');
     });
 
 

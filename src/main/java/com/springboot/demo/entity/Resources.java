@@ -32,6 +32,16 @@ public class Resources {
 
     private String alias;
 
+    private Resources parent;
+
+    public Resources getParent() {
+        return parent;
+    }
+
+    public void setParent(Resources parent) {
+        this.parent = parent;
+    }
+
     public String getAlias() {
         return alias;
     }

@@ -64,6 +64,7 @@
     window.operateEvents = {
         'click .tag-edit ': function (e, value, row, index) {
             e.preventDefault();
+            $('#标签_modalLabel').text('编辑标签');
             var $tagModal = $('#tag_modal');
             $tagModal.find('input[name="id"]').val(row.id);
             $tagModal.find('input[name="name"]').val(row.name);
@@ -186,9 +187,11 @@
         deleteTag(ids);
     });
     $('#tag_modal').on('hidden.bs.modal',function (e) {
-        $.each($(this).find(':input'),function (i, v) {
+        $.each($(this).find('input[type="text"]'),function (i, v) {
             $(v).val('');
-        })
+        });
+        $(this).find('input[type="hidden"]').val('');
+        $('#tag_modalLabel').text('新增标签');
     });
 
 

@@ -85,9 +85,9 @@ public class AdminController {
     public String websiteNotice() {
         return "website/notice";
     }
-    @GetMapping("/perms/resource")
+    @GetMapping("/perms/resources")
     public String permsResources() {
-        return "perms/resource";
+        return "perms/resources";
     }
     @GetMapping("/perms/role")
     public String permsRole() {

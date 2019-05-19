@@ -1,6 +1,8 @@
 package com.springboot.demo.mapper;
 
 import com.springboot.demo.entity.Resources;
+import org.apache.ibatis.annotations.Select;
+
 import java.util.List;
 
 public interface ResourcesMapper {
@@ -13,4 +15,7 @@ public interface ResourcesMapper {
     List<Resources> selectAll();
 
     int updateByPrimaryKey(Resources record);
+
+    @Select("select * from resources where pid = 0")
+    List<Resources> getParents();
 }

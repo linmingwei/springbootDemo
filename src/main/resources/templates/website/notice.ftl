@@ -79,6 +79,7 @@
     window.operateEvents = {
         'click .notice-edit ': function (e, value, row, index) {
             e.preventDefault();
+            $('#notice_modalLabel').text('编辑公告');
             var $noticeModal = $('#notice_modal');
             $noticeModal.find('input[name="id"]').val(row.id);
             $noticeModal.find('input[name="title"]').val(row.title);
@@ -220,9 +221,11 @@
         deleteNotice(ids);
     });
     $('#notice_modal').on('hidden.bs.modal',function (e) {
-        $.each($(this).find(':input'),function (i, v) {
+        $.each($(this).find('input[type="text"]'),function (i, v) {
             $(v).val('');
-        })
+        });
+        $(this).find('input[type="hidden"]').val('');
+        $('#notice_modalLabel').text('新增公告');
     });
 
 </script>

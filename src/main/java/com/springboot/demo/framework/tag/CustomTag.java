@@ -32,7 +32,7 @@ public class CustomTag extends BaseTag {
     @Autowired
     private TagService tagService;
     @Autowired
-    private ResourceService resourceService;
+    private ResourcesService resourcesService;
 
     @Autowired
     private CommentService commentService;
@@ -83,6 +83,6 @@ public class CustomTag extends BaseTag {
         return info;
     }
     public List<Resources> resources(Map map) {
-        return resourceService.getParentWithChildren();
+        return resourcesService.getParentWithChildren();
     }
 }

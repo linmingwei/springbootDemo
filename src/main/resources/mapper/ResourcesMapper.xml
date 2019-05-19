@@ -19,7 +19,7 @@
     updateTime, `alias`
   </sql>
   <sql id="insertParams">
-    #{name,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR},
+    #{id,jdbcType=INTEGER},#{name,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR},
       #{permission,jdbcType=VARCHAR}, #{pid,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER},
       #{available,jdbcType=TINYINT}, #{icon,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
       #{updateTime,jdbcType=TIMESTAMP},#{alias,jdbcType=VARCHAR}

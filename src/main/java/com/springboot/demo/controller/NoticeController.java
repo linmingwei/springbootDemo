@@ -41,7 +41,7 @@ public class NoticeController {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            ResultUtil.error("公告保存失败");
+            return ResultUtil.error("公告保存失败");
         }
         return ResultUtil.success("公告保存成功");
     }
