@@ -1,6 +1,7 @@
 package com.springboot.demo.service.impl;
 
 import com.springboot.demo.entity.Resources;
+import com.springboot.demo.entity.ResourcesNode;
 import com.springboot.demo.mapper.ResourcesMapper;
 import com.springboot.demo.service.ResourcesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,15 +21,26 @@ public class ResourcesServiceImpl implements ResourcesService {
     private ResourcesMapper resourcesMapper;
 
     @Override
-    public List<Resources> getParentWithChildren() {
-        List<Resources> all = resourcesMapper.selectAll();
-        List<Resources> parents = all.stream().filter(resources ->resources.getPid()!=null && resources.getPid() == 0 ).collect(Collectors.toList());
+    public List<ResourcesNode> getParentWithChildren() {
+        List<ResourcesNode> all = resourcesMapper.selectAll();
+        List<ResourcesNode> parents = all.stream().filter(resources ->resources.getPid()!=null && resources.getPid() == 0 ).collect(Collectors.toList());
         all.forEach(resource -> {
             parents.forEach(parent ->{
                 if (resource.getPid() == parent.getId()) {
                     parent.getChildren().add(resource);
                 }
             });
+        });
+        parents.forEach(parent ->{
+            if (parent.getChildren() != null && parent.getChildren().size() != 0) {
+                parent.getChildren().forEach(child ->{
+                    all.forEach(c ->{
+                        if (c.getPid() != null && c.getPid() == child.getId()) {
+                            child.getChildren().add(c);
+                        }
+                    });
+                });
+            }
         });
         return parents;
     }

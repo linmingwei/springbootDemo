@@ -1,11 +1,12 @@
 package com.springboot.demo.service;
 
 import com.springboot.demo.entity.Resources;
+import com.springboot.demo.entity.ResourcesNode;
 
 import java.util.List;
 
 public interface ResourcesService {
-    List<Resources> getParentWithChildren();
+    List<ResourcesNode> getParentWithChildren();
 
     List<Resources> getAll();
 

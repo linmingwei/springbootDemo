@@ -33,6 +33,10 @@ public class AdminController {
     private TagService tagService;
     @Autowired
     private TypeService typeService;
+    @GetMapping("")
+    public String index() {
+        return "redirect:/admin/home";
+    }
     @GetMapping("/home")
     public String home(Model model) {
         model.addAttribute("articleCount", articleService.count());

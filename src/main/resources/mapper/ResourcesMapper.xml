@@ -62,7 +62,7 @@
     from resources
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <select id="selectAll" resultMap="BaseResultMap">
+  <select id="selectAll" resultType="com.springboot.demo.entity.ResourcesNode">
     select <include refid="baseParams"/>
     from resources
   </select>

@@ -2,7 +2,7 @@
 <@header>
     <link rel="stylesheet" href="/static/css/bootstrap-table.min.css">
     <link rel="stylesheet" href="/static/css/article_list.css">
-    <link rel="stylesheet" href="/static/css/zTreeStyle.css">
+    <link rel="stylesheet" href="/static/css/metroStyle.css">
 </@header>
 <div class="shadow-sm bg-white rounded item px-4 pt-3 pb-2">
     <h4>角色列表</h4>
@@ -265,6 +265,8 @@
                 enable: true
             },
             view: {
+                showIcon: true,
+                ShowLine: true,
                 dblClickExpand: true,
                 expandSpeed: ""
             },
@@ -272,10 +274,9 @@
             async: {
                 enable: true,//设置是否异步加载
                 url: "/resources/tree", //设置异步获取节点的 URL 地址
-                type:'get',
-                dataFilter:treeDataFilter
-                <#--otherParam: ["roleId", '${updateRole.id}']-->
-
+                type: 'get',
+                dataFilter: treeDataFilter
+            <#--otherParam: ["roleId", '${updateRole.id}']-->
             },
 
             //这个data里面的pIdKey,idKey,name等等之类的都是对应后台查出的字段名字，
@@ -290,18 +291,42 @@
                     checked: "CHECKED",
                     name: "name"
                 }
+            },
+            callback: {
+                onCheck: zTreeOnCheck,
+                onAsyncSuccess: function (event, treeId, treeNode, msg) {
+                    var nodes;
+                    if (treeNode == null) {
+                        nodes = tree.getNodes();
+                    } else {
+                        nodes = treeNode.children;
+                    }
+                    for (var i = 0; i < nodes.length; i++) {
+                        var node = nodes[i];
+                        tree.expandNode(node);
+                        if (node.children != null) {
+                            var children = node.children;
+                            for (var j = 0; j < children.length; j++) {
+                                var child = children[j];
+                                tree.expandNode(child);
+                            }
+                        }
+                    }
+                }
             }
-            // callback: {
-            //     onAsyncSuccess: zTreeOnAsyncSuccess
-            // }
         };
-        var tree =  $.fn.zTree.init($('#resources_tree'),setting);
+        var tree = $.fn.zTree.init($('#resources_tree'), setting, null);
         tree.expandAll(true);
+    }
+
+    function zTreeOnCheck(event, treeId, treeNode) {
+        alert(treeNode.tId + ", " + treeNode.name + "," + treeNode.checked);
     }
 
     function treeDataFilter(treeId, parentNode, responseData) {
         return responseData.data;
     }
+
     $(function () {
         createResourcesTree();
     })

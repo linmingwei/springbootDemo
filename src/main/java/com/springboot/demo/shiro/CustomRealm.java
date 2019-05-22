@@ -1,16 +1,22 @@
 package com.springboot.demo.shiro;
 
+import com.springboot.demo.entity.Resources;
 import com.springboot.demo.entity.User;
+import com.springboot.demo.service.ResourcesService;
+import com.springboot.demo.service.RoleService;
 import com.springboot.demo.service.UserService;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 
 /**
@@ -23,9 +29,20 @@ public class CustomRealm extends AuthorizingRealm {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private RoleService roleService;
+    @Autowired
+    private ResourcesService resourcesService;
+
     @Override
-    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        return null;
+    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals){
+        User user = (User) principals.getPrimaryPrincipal();
+        List<Resources> resources = userService.findPermissionsByUserId(user.getId());
+        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+        resources.forEach(resource ->{
+            info.addStringPermission(resource.getPermission());
+        });
+        return info;
     }
 
     @Override
@@ -37,7 +54,7 @@ public class CustomRealm extends AuthorizingRealm {
         }
         ByteSource salt = ByteSource.Util.bytes(username);
 
-        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(username, user.getPassword(),salt, getName());
+        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user, user.getPassword(),salt, getName());
         return info;
     }
 }

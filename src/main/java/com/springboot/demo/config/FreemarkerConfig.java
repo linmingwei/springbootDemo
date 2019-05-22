@@ -1,5 +1,6 @@
 package com.springboot.demo.config;
 
+import com.jagregory.shiro.freemarker.ShiroTags;
 import com.springboot.demo.framework.tag.BaseTag;
 import com.springboot.demo.framework.tag.CustomTag;
 import freemarker.template.TemplateModelException;
@@ -25,5 +26,6 @@ public class FreemarkerConfig {
     @PostConstruct
     public void setSharedVariable() throws TemplateModelException {
         configuration.setSharedVariable("customTag",customTag);
+        configuration.setSharedVariable("shiro",new ShiroTags());
     }
 }

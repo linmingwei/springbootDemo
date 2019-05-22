@@ -10,8 +10,8 @@
                 <img class="rounded-circle img-fluid" width="48" height="48" src="/static/images/head.jpg" alt="">
             </div>
             <div class="user-info w-50 ">
-                <h6 class="text-truncate"><a href="#">Maxine Kennedy</a></h6>
-                <p class="text-truncate text-muted">Admin Heada</p>
+                <h6 class="text-truncate"><a href="#"><@shiro.principal property="nickname"/></a></h6>
+                <p class="text-truncate text-muted"><@shiro.principal property="username"/></p>
             </div>
         </div>
         <div id="sidebar-menu">

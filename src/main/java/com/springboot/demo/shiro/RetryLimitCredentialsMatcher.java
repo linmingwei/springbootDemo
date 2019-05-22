@@ -1,5 +1,6 @@
 package com.springboot.demo.shiro;
 
+import com.springboot.demo.entity.User;
 import com.springboot.demo.service.UserService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
@@ -35,7 +36,8 @@ public class RetryLimitCredentialsMatcher extends HashedCredentialsMatcher {
 
     @Override
     public boolean doCredentialsMatch(AuthenticationToken token, AuthenticationInfo info) {
-        String username = (String) info.getPrincipals().getPrimaryPrincipal();
+        User user = (User)info.getPrincipals().getPrimaryPrincipal();
+        String username = user.getUsername();
         String loginCountKey = SHIRO_LOGIN_COUNT + username;
         String isLock = SHIRO_IS_LOCK + username;
         //每次登录计数加1
