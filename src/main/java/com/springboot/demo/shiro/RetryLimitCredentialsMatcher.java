@@ -2,8 +2,10 @@ package com.springboot.demo.shiro;
 
 import com.springboot.demo.entity.User;
 import com.springboot.demo.service.UserService;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.session.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
@@ -62,6 +64,9 @@ public class RetryLimitCredentialsMatcher extends HashedCredentialsMatcher {
         }
         //清空登录计数
         redisTemplate.delete(loginCountKey);
+
+        Session session = SecurityUtils.getSubject().getSession();
+        session.setAttribute("user",user);
 
         return true;
     }

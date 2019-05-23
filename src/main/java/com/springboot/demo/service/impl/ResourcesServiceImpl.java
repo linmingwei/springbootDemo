@@ -2,12 +2,14 @@ package com.springboot.demo.service.impl;
 
 import com.springboot.demo.entity.Resources;
 import com.springboot.demo.entity.ResourcesNode;
+import com.springboot.demo.entity.RoleResources;
 import com.springboot.demo.mapper.ResourcesMapper;
+import com.springboot.demo.mapper.RoleResourcesMapper;
 import com.springboot.demo.service.ResourcesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -19,11 +21,13 @@ import java.util.stream.Collectors;
 public class ResourcesServiceImpl implements ResourcesService {
     @Autowired
     private ResourcesMapper resourcesMapper;
+    @Autowired
+    private RoleResourcesMapper roleResourcesMapper;
 
     @Override
-    public List<ResourcesNode> getParentWithChildren() {
-        List<ResourcesNode> all = resourcesMapper.selectAll();
-        List<ResourcesNode> parents = all.stream().filter(resources ->resources.getPid()!=null && resources.getPid() == 0 ).collect(Collectors.toList());
+    public List<Resources> getParentWithChildren() {
+        List<Resources> all = resourcesMapper.selectAll();
+        List<Resources> parents = all.stream().filter(resources ->resources.getPid()!=null && resources.getPid() == 0 ).collect(Collectors.toList());
         all.forEach(resource -> {
             parents.forEach(parent ->{
                 if (resource.getPid() == parent.getId()) {
@@ -83,4 +87,25 @@ public class ResourcesServiceImpl implements ResourcesService {
         resourcesMapper.insert(entity);
     }
 
+    @Override
+    public List<Map<String,Object>> getAllWithSelected(Integer roleId) {
+        List<Map<String,Object>> mapList = new ArrayList<>();
+        List<Resources> all = resourcesMapper.selectAll();
+        List<RoleResources> roleResources = roleResourcesMapper.selectByRoleId(roleId);
+        Set<Integer> containsIds = new HashSet<>();
+        roleResources.forEach(roleResource -> containsIds.add(roleResource.getResourcesId()));
+        all.forEach(resource ->{
+            Map<String,Object> map = new HashMap<>();
+            map.put("id",resource.getId());
+            map.put("pid",resource.getPid());
+            map.put("name",resource.getName());
+            if (containsIds.contains(resource.getId())) {
+                map.put("checked",true);
+            }else {
+                map.put("checked",false);
+            }
+            mapList.add(map);
+        });
+        return mapList;
+    }
 }

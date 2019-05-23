@@ -34,6 +34,8 @@ public class Resources {
 
     private Resources parent;
 
+    private List<Resources> children = new ArrayList<>();
+
     public Resources getParent() {
         return parent;
     }
@@ -50,7 +52,6 @@ public class Resources {
         this.alias = alias;
     }
 
-    private List<Resources> children = new ArrayList<>();
 
     public List<Resources> getChildren() {
         return children;

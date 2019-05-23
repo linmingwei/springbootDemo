@@ -4,9 +4,10 @@ import com.springboot.demo.entity.Resources;
 import com.springboot.demo.entity.ResourcesNode;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ResourcesService {
-    List<ResourcesNode> getParentWithChildren();
+    List<Resources> getParentWithChildren();
 
     List<Resources> getAll();
 
@@ -19,5 +20,7 @@ public interface ResourcesService {
     void batchDelete(List<Integer> ids);
 
     List<Resources> getParents();
+
+    List<Map<String,Object>> getAllWithSelected(Integer roleId);
 
 }

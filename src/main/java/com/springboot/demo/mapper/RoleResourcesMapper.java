@@ -18,4 +18,7 @@ public interface RoleResourcesMapper {
 
     @Select("select * from role_resources where roleId = #{roleId}")
     List<RoleResources> selectByRoleId(Integer roleId);
+
+    @Select("select * from role_resources where roleId = #{roleId} and resourcesId = #{resourcesId}")
+    RoleResources selectByEntity(Integer roleId, Integer resourcesId);
 }

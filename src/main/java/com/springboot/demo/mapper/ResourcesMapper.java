@@ -13,7 +13,10 @@ public interface ResourcesMapper {
 
     Resources selectByPrimaryKey(Integer id);
 
-    List<ResourcesNode> selectAll();
+    @Select("select * from resources where id = #{id}")
+    ResourcesNode selectById(Integer id);
+
+    List<Resources> selectAll();
 
     int updateByPrimaryKey(Resources record);
 

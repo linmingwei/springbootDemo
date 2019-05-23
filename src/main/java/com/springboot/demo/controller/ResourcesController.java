@@ -3,18 +3,21 @@ package com.springboot.demo.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.springboot.demo.entity.Resources;
-import com.springboot.demo.entity.ResourcesNode;
+import com.springboot.demo.entity.RoleResources;
 import com.springboot.demo.entity.User;
 import com.springboot.demo.service.ResourcesService;
+import com.springboot.demo.service.RoleResourcesService;
+import com.springboot.demo.service.UserRoleService;
 import com.springboot.demo.service.UserService;
 import com.springboot.demo.util.ResultUtil;
 import com.springboot.demo.vo.ResponseVo;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.web.session.HttpServletSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +32,10 @@ public class ResourcesController {
     private ResourcesService resourcesService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private UserRoleService userRoleService;
+    @Autowired
+    private RoleResourcesService roleResourcesService;
 
     @GetMapping("/resources")
     public List<Resources> all() {
@@ -40,7 +47,7 @@ public class ResourcesController {
         try {
             if (resources.getId() == null) {
                 resourcesService.save(resources);
-            }else {
+            } else {
                 resourcesService.update(resources);
             }
         } catch (Exception e) {
@@ -62,40 +69,48 @@ public class ResourcesController {
     }
 
     @GetMapping("/resources/page")
-    public PageInfo<Resources> page(@RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum,
-                                  @RequestParam(value = "pageSize",defaultValue = "10")  Integer pageSize) {
+    public PageInfo<Resources> page(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+                                    @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         List<Resources> all = resourcesService.getAll();
         PageInfo<Resources> info = new PageInfo<>(all);
         return info;
     }
+
     @GetMapping("/resources/parent")
     public ResponseVo parent() {
         List<Resources> list = resourcesService.getParents();
         return ResponseVo.success(list);
     }
-    @GetMapping("/resources/tree")
-    public ResponseVo tree() {
-        List<ResourcesNode> resourceTree = resourcesService.getParentWithChildren();
-        Subject subject = SecurityUtils.getSubject();
-        User user = (User) subject.getPrincipal();
-        List<Resources> resources = userService.findPermissionsByUserId(user.getId());
-        Map<Integer,String> containResources = new HashMap<>();
-        resources.forEach(resource ->{
-            containResources.put(resource.getId(),resource.getPermission());
-        });
-        resourceTree.forEach(resourceNode ->{
-            if (containResources.containsKey(resourceNode.getId())) {
-                resourceNode.setChecked(true);
-            }
-            if (resourceNode.getChildren() != null) {
-                resourceNode.setParent(true);
-                List<ResourcesNode> children = ()resourceNode.getChildren();
-            }
-        });
 
-
-        return ResponseVo.success(resourceTree);
+    @GetMapping("/resources/tree/{roleId}")
+    public ResponseVo tree(@PathVariable("roleId")Integer roleId) {
+        List<Map<String,Object>> mapList= resourcesService.getAllWithSelected(roleId);
+        return ResponseVo.success(mapList);
+    }
+    @PostMapping("/resources/{resourceId}")
+    public ResponseVo update(@PathVariable("resourceId")Integer id,
+                             @RequestParam("roleId")Integer roleId) {
+        User currentUser = (User) SecurityUtils.getSubject().getPrincipal();
+        Integer currentRoleId = userRoleService.getRoleIdByUserId(currentUser.getId());
+        if (currentRoleId >= roleId) {
+            return ResultUtil.error("您无权操作");
+        }
+        RoleResources roleResources = new RoleResources(roleId, id);
+        roleResourcesService.save(roleResources);
+        return ResultUtil.success("增加权限成功");
+    }
+    @DeleteMapping("/resources/{resourceId}")
+    public ResponseVo delete(@PathVariable("resourceId")Integer resourceId,
+                             @RequestParam("roleId")Integer roleId) {
+        User currentUser = (User) SecurityUtils.getSubject().getPrincipal();
+        Integer currentRoleId = userRoleService.getRoleIdByUserId(currentUser.getId());
+        if (currentRoleId >= roleId) {
+            return ResultUtil.error("您无权操作");
+        }
+        RoleResources entity = roleResourcesService.findByEntity(roleId, resourceId);
+        roleResourcesService.delete(entity.getId());
+        return ResultUtil.success("删除权限成功");
     }
 
 }

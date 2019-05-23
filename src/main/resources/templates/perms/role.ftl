@@ -122,6 +122,7 @@
         'click .role-assign': function (e, value, row, index) {
             e.preventDefault();
             var $assignModal = $('#assignModal');
+            createResourcesTree(row.id);
             $assignModal.modal('show');
         }
     };
@@ -259,7 +260,7 @@
     });
 
     //    创建资源树
-    function createResourcesTree() {
+    function createResourcesTree(roleId) {
         var setting = {
             check: {
                 enable: true
@@ -273,7 +274,7 @@
             //异步加载
             async: {
                 enable: true,//设置是否异步加载
-                url: "/resources/tree", //设置异步获取节点的 URL 地址
+                url: "/resources/tree/" + roleId, //设置异步获取节点的 URL 地址
                 type: 'get',
                 dataFilter: treeDataFilter
             <#--otherParam: ["roleId", '${updateRole.id}']-->
@@ -285,7 +286,11 @@
                 simpleData: {
                     enable: true,
                     pIdKey: "pid",
-                    idKey: "id"
+                    idKey: "id",
+                    // isParent:"parent",
+                    checked: 'checked'
+                    // children:'children',
+                    // url:'url'
                 },
                 key: {
                     checked: "CHECKED",
@@ -293,7 +298,28 @@
                 }
             },
             callback: {
-                onCheck: zTreeOnCheck,
+                onCheck: function (event, treeId, treeNode) {
+                    console.log(treeNode.tId + ", " + treeNode.name + "," + treeNode.checked+','+treeId);
+                    console.log(JSON.stringify(treeNode));
+                    if (treeNode.checked) {
+                        $.ajax({
+                            url: '/resources/' + treeNode.id,
+                            method:'delete',
+                            data: {roleId: roleId},
+                            success: function (res) {
+                                console.log(res.msg);
+                            }
+                        })
+                    } else {
+                        $.post({
+                            url: '/resources/' + treeNode.id,
+                            data: {roleId: roleId},
+                            success: function (res) {
+                                console.log(res.msg);
+                            }
+                        });
+                    }
+                },
                 onAsyncSuccess: function (event, treeId, treeNode, msg) {
                     var nodes;
                     if (treeNode == null) {
@@ -304,11 +330,27 @@
                     for (var i = 0; i < nodes.length; i++) {
                         var node = nodes[i];
                         tree.expandNode(node);
+                        if (node.checked) {
+                            tree.checkNode(node, true);
+                        }
                         if (node.children != null) {
                             var children = node.children;
                             for (var j = 0; j < children.length; j++) {
                                 var child = children[j];
                                 tree.expandNode(child);
+                                if (child.checked) {
+                                    tree.checkNode(child, true);
+                                }
+                                if (child.children != null) {
+                                    var subChildren = child.children;
+                                    for (var k = 0; k < subChildren.length; k++) {
+                                        var subChild = subChildren[k];
+                                        if (subChild.checked) {
+                                            tree.checkNode(subChild, true);
+                                        }
+                                    }
+                                }
+
                             }
                         }
                     }
@@ -319,17 +361,13 @@
         tree.expandAll(true);
     }
 
-    function zTreeOnCheck(event, treeId, treeNode) {
-        alert(treeNode.tId + ", " + treeNode.name + "," + treeNode.checked);
-    }
+    // function zTreeOnCheck(event, treeId, treeNode) {
+    //     alert(treeNode.tId + ", " + treeNode.name + "," + treeNode.checked);
+    // }
 
     function treeDataFilter(treeId, parentNode, responseData) {
         return responseData.data;
     }
-
-    $(function () {
-        createResourcesTree();
-    })
 
 </script>
 </@footer>

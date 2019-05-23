@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
         List<RoleResources> roleResources = roleResourcesMapper.selectByRoleId(userRole.getRoleId());
         List<Resources> resources = new ArrayList<>();
         roleResources.forEach(roleResource -> {
-            resources.add((ResourcesNode) resourcesMapper.selectByPrimaryKey(roleResource.getResourcesId()));
+            resources.add(resourcesMapper.selectByPrimaryKey(roleResource.getResourcesId()));
         });
         return resources;
 
