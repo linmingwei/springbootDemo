@@ -87,8 +87,7 @@
                 <ul class="ztree" id="resources_tree"></ul>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-                <button type="button" id="save_btn" class="btn btn-primary">保存</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
             </div>
         </div>
     </div>
@@ -299,25 +298,24 @@
             },
             callback: {
                 onCheck: function (event, treeId, treeNode) {
-                    console.log(treeNode.tId + ", " + treeNode.name + "," + treeNode.checked+','+treeId);
                     console.log(JSON.stringify(treeNode));
-                    if (treeNode.checked) {
-                        $.ajax({
-                            url: '/resources/' + treeNode.id,
-                            method:'delete',
-                            data: {roleId: roleId},
-                            success: function (res) {
-                                console.log(res.msg);
-                            }
-                        })
-                    } else {
-                        $.post({
-                            url: '/resources/' + treeNode.id,
-                            data: {roleId: roleId},
-                            success: function (res) {
-                                console.log(res.msg);
-                            }
+                    if (treeNode.children != null) {
+                        var resourcesIds = [];
+                        $.each(treeNode.children,function (i, node) {
+                            resourcesIds[i] = node.id;
                         });
+                        if (treeNode.children[0].CHECKED) {
+                            addRoleResource(roleId,resourcesIds,tree,treeNode);
+                        }else {
+                            deleteRoleResource(roleId,resourcesIds,tree,treeNode);
+                        }
+                    }else{
+                        console.log(treeNode.CHECKED);
+                        if (treeNode.CHECKED) {
+                            addRoleResource(roleId,treeNode.id,tree,treeNode);
+                        } else {
+                            deleteRoleResource(roleId,treeNode.id,tree,treeNode);
+                        }
                     }
                 },
                 onAsyncSuccess: function (event, treeId, treeNode, msg) {
@@ -361,9 +359,31 @@
         tree.expandAll(true);
     }
 
-    // function zTreeOnCheck(event, treeId, treeNode) {
-    //     alert(treeNode.tId + ", " + treeNode.name + "," + treeNode.checked);
-    // }
+    function addRoleResource(roleId, resourcesIds,tree,treeNode) {
+        $.post({
+            url: '/resources/' + roleId,
+            data: {resourcesIds: resourcesIds},
+            traditional: true,
+            success: function (res) {
+                tree.checkNode(treeNode,true);
+                console.log(res.msg);
+            }
+        });
+
+    }
+    function deleteRoleResource(roleId, resourcesIds,tree,treeNode) {
+        $.ajax({
+            url: '/resources/' + roleId,
+            method:'delete',
+            data: {resourcesIds: resourcesIds},
+            traditional: true,
+            success: function (res) {
+                tree.checkNode(treeNode,false);
+                console.log(res.msg);
+            }
+        })
+
+    }
 
     function treeDataFilter(treeId, parentNode, responseData) {
         return responseData.data;

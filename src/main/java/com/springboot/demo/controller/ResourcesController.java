@@ -84,32 +84,38 @@ public class ResourcesController {
     }
 
     @GetMapping("/resources/tree/{roleId}")
-    public ResponseVo tree(@PathVariable("roleId")Integer roleId) {
-        List<Map<String,Object>> mapList= resourcesService.getAllWithSelected(roleId);
+    public ResponseVo tree(@PathVariable("roleId") Integer roleId) {
+        List<Map<String, Object>> mapList = resourcesService.getAllWithSelected(roleId);
         return ResponseVo.success(mapList);
     }
-    @PostMapping("/resources/{resourceId}")
-    public ResponseVo update(@PathVariable("resourceId")Integer id,
-                             @RequestParam("roleId")Integer roleId) {
+
+    @PostMapping("/resources/{roleId}")
+    public ResponseVo update(@PathVariable("roleId") Integer roleId,
+                             @RequestParam("resourcesIds") List<Integer> resourceIds) {
         User currentUser = (User) SecurityUtils.getSubject().getPrincipal();
         Integer currentRoleId = userRoleService.getRoleIdByUserId(currentUser.getId());
         if (currentRoleId >= roleId) {
             return ResultUtil.error("您无权操作");
         }
-        RoleResources roleResources = new RoleResources(roleId, id);
-        roleResourcesService.save(roleResources);
+        resourceIds.forEach(resourceId -> {
+            RoleResources roleResources = new RoleResources(roleId, resourceId);
+            roleResourcesService.save(roleResources);
+        });
         return ResultUtil.success("增加权限成功");
     }
-    @DeleteMapping("/resources/{resourceId}")
-    public ResponseVo delete(@PathVariable("resourceId")Integer resourceId,
-                             @RequestParam("roleId")Integer roleId) {
+
+    @DeleteMapping("/resources/{roleId}")
+    public ResponseVo delete(@PathVariable("roleId") Integer roleId,
+                             @RequestParam("resourcesIds") List<Integer> resourceIds) {
         User currentUser = (User) SecurityUtils.getSubject().getPrincipal();
         Integer currentRoleId = userRoleService.getRoleIdByUserId(currentUser.getId());
         if (currentRoleId >= roleId) {
             return ResultUtil.error("您无权操作");
         }
-        RoleResources entity = roleResourcesService.findByEntity(roleId, resourceId);
-        roleResourcesService.delete(entity.getId());
+        resourceIds.forEach(resourceId -> {
+            RoleResources entity = roleResourcesService.findByEntity(roleId, resourceId);
+            roleResourcesService.delete(entity.getId());
+        });
         return ResultUtil.success("删除权限成功");
     }
 
