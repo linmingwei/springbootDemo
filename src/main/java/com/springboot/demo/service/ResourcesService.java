@@ -23,4 +23,5 @@ public interface ResourcesService {
 
     List<Map<String,Object>> getAllWithSelected(Integer roleId);
 
+    Resources findById(Integer resourceId);
 }

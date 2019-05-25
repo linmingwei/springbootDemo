@@ -8,6 +8,8 @@ import com.springboot.demo.service.UserRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @Auther: mingweilin
  * @Date: 5/23/2019 17:30
@@ -25,11 +27,16 @@ public class RoleResourcesServiceImpl implements RoleResourcesService {
 
     @Override
     public RoleResources findByEntity(Integer roleId, Integer resourceId) {
-        return roleResourcesMapper.selectByEntity(roleId,resourceId);
+         return roleResourcesMapper.selectByEntity(roleId,resourceId);
     }
 
     @Override
     public void delete(Integer id) {
         roleResourcesMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public int subRoleResources(Integer roleId, Integer pid) {
+        return roleResourcesMapper.subRoleResources(roleId,pid);
     }
 }

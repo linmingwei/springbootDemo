@@ -299,26 +299,24 @@
             callback: {
                 onCheck: function (event, treeId, treeNode) {
                     console.log(JSON.stringify(treeNode));
-                    if (treeNode.children != null) {
-                        var resourcesIds = [];
-                        $.each(treeNode.children,function (i, node) {
-                            resourcesIds[i] = node.id;
-                        });
-                        if (treeNode.children[0].CHECKED) {
-                            addRoleResource(roleId,resourcesIds,tree,treeNode);
-                        }else {
-                            deleteRoleResource(roleId,resourcesIds,tree,treeNode);
-                        }
-                    }else{
-                        console.log(treeNode.CHECKED);
+                    if (treeNode.children == undefined) {
+                        console.log('CHECKED:' + treeNode.CHECKED + '| checked:' + treeNode.checked);
                         if (treeNode.CHECKED) {
-                            addRoleResource(roleId,treeNode.id,tree,treeNode);
+                            console.log("增加权限");
+                            addRoleResource(roleId, treeNode.id, tree, treeNode);
                         } else {
-                            deleteRoleResource(roleId,treeNode.id,tree,treeNode);
+                            console.log("删除权限");
+                            deleteRoleResource(roleId, treeNode.id, tree, treeNode);
                         }
+                    } else if (treeNode.children[0].children == undefined) {
+                        addOrDeleteResources(treeNode, roleId, tree);
+                    } else {
+                        $.each(treeNode.children, function (i, node) {
+                            addOrDeleteResources(node, roleId, tree);
+                        })
                     }
                 },
-                onAsyncSuccess: function (event, treeId, treeNode, msg) {
+                onAsyncSuccess: function (event, treeId, treeNode) {
                     var nodes;
                     if (treeNode == null) {
                         nodes = tree.getNodes();
@@ -353,32 +351,58 @@
                         }
                     }
                 }
+
             }
         };
         var tree = $.fn.zTree.init($('#resources_tree'), setting, null);
         tree.expandAll(true);
     }
 
-    function addRoleResource(roleId, resourcesIds,tree,treeNode) {
+    function addOrDeleteResources(treeNode, roleId, tree) {
+        var resourcesIds = [];
+        var delIds = [];
+        $.each(treeNode.children, function (i, node) {
+            console.log('CHECKED:' + node.CHECKED + '| checked:' + node.checked);
+            if (!node.CHECKED && node.checked) {
+                delIds[i] = node.id;
+            }
+            resourcesIds[i] = node.id;
+        });
+        console.log('增加的id = ' + resourcesIds);
+        console.log('删除的id = ' + delIds);
+        if (treeNode.children[0].CHECKED) {
+            console.log("增加权限");
+            addRoleResource(roleId, resourcesIds, tree, treeNode);
+        } else {
+            console.log("删除权限");
+            deleteRoleResource(roleId, delIds, tree, treeNode);
+        }
+
+    }
+
+    function addRoleResource(roleId, resourcesIds, tree, treeNode) {
         $.post({
             url: '/resources/' + roleId,
             data: {resourcesIds: resourcesIds},
             traditional: true,
             success: function (res) {
-                tree.checkNode(treeNode,true);
+                tree.checkNode(treeNode, true);
+                tree.reAsyncChildNodes(null, 'refresh', null);
                 console.log(res.msg);
             }
         });
 
     }
-    function deleteRoleResource(roleId, resourcesIds,tree,treeNode) {
+
+    function deleteRoleResource(roleId, resourcesIds, tree, treeNode) {
         $.ajax({
             url: '/resources/' + roleId,
-            method:'delete',
+            method: 'delete',
             data: {resourcesIds: resourcesIds},
             traditional: true,
             success: function (res) {
-                tree.checkNode(treeNode,false);
+                tree.checkNode(treeNode, false);
+                tree.reAsyncChildNodes(null, 'refresh', null);
                 console.log(res.msg);
             }
         })
@@ -388,6 +412,7 @@
     function treeDataFilter(treeId, parentNode, responseData) {
         return responseData.data;
     }
+
 
 </script>
 </@footer>

@@ -15,6 +15,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.session.HttpServletSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -90,8 +91,12 @@ public class ResourcesController {
     }
 
     @PostMapping("/resources/{roleId}")
+    @Transactional
     public ResponseVo update(@PathVariable("roleId") Integer roleId,
                              @RequestParam("resourcesIds") List<Integer> resourceIds) {
+        if (resourceIds == null) {
+            ResultUtil.error("请至少选择一个资源");
+        }
         User currentUser = (User) SecurityUtils.getSubject().getPrincipal();
         Integer currentRoleId = userRoleService.getRoleIdByUserId(currentUser.getId());
         if (currentRoleId >= roleId) {
@@ -99,6 +104,22 @@ public class ResourcesController {
         }
         resourceIds.forEach(resourceId -> {
             RoleResources roleResources = new RoleResources(roleId, resourceId);
+            Resources byId = resourcesService.findById(resourceId);
+            if (byId.getPid() != 0) {
+                RoleResources parentRoleResources = roleResourcesService.findByEntity(roleId, byId.getPid());
+                if (parentRoleResources == null) {
+                    roleResourcesService.save(new RoleResources(roleId, byId.getPid()));
+                }
+                Resources byPid = resourcesService.findById(byId.getPid());
+                if (byPid.getPid() != 0) {
+                    RoleResources rootRoleResources = roleResourcesService.findByEntity(roleId, byPid.getPid());
+                    if (rootRoleResources == null) {
+                        roleResourcesService.save(new RoleResources(roleId, byPid.getPid()));
+                    }
+
+                }
+
+            }
             roleResourcesService.save(roleResources);
         });
         return ResultUtil.success("增加权限成功");
@@ -113,8 +134,26 @@ public class ResourcesController {
             return ResultUtil.error("您无权操作");
         }
         resourceIds.forEach(resourceId -> {
+            Resources byId = resourcesService.findById(resourceId);
             RoleResources entity = roleResourcesService.findByEntity(roleId, resourceId);
             roleResourcesService.delete(entity.getId());
+            if (byId.getPid() != 0) {
+                RoleResources parentRoleResource = roleResourcesService.findByEntity(roleId, byId.getPid());
+                if (parentRoleResource != null) {
+                    int count = roleResourcesService.subRoleResources(roleId, byId.getPid());
+                    if (count == 0) {
+                        roleResourcesService.delete(parentRoleResource.getId());
+                    }
+                }
+                Resources byPid = resourcesService.findById(byId.getPid());
+                RoleResources rootRoleResources = roleResourcesService.findByEntity(roleId, byPid.getPid());
+                if (rootRoleResources != null) {
+                    int rootCount = roleResourcesService.subRoleResources(roleId, byPid.getPid());
+                    if (rootCount == 0) {
+                        roleResourcesService.delete(rootRoleResources.getId());
+                    }
+                }
+            }
         });
         return ResultUtil.success("删除权限成功");
     }

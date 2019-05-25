@@ -1,6 +1,7 @@
 package com.springboot.demo.mapper;
 
 import com.springboot.demo.entity.RoleResources;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -20,5 +21,8 @@ public interface RoleResourcesMapper {
     List<RoleResources> selectByRoleId(Integer roleId);
 
     @Select("select * from role_resources where roleId = #{roleId} and resourcesId = #{resourcesId}")
-    RoleResources selectByEntity(Integer roleId, Integer resourcesId);
+    RoleResources selectByEntity(@Param("roleId") Integer roleId, @Param("resourcesId")Integer resourcesId);
+
+    @Select("select count(*) from role_resources where roleId = #{roleId} and resourcesId in (select id from resources where pid = #{pid})")
+    int subRoleResources(@Param("roleId")Integer roleId, @Param("pid")Integer pid);
 }

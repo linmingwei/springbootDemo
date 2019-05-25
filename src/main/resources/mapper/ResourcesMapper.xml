@@ -11,6 +11,7 @@
     <result column="sort" jdbcType="INTEGER" property="sort" />
     <result column="available" jdbcType="TINYINT" property="available" />
     <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="alias" jdbcType="VARCHAR" property="alias" />
     <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
     <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>

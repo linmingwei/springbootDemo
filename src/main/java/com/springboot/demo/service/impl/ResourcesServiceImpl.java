@@ -88,6 +88,11 @@ public class ResourcesServiceImpl implements ResourcesService {
     }
 
     @Override
+    public Resources findById(Integer resourceId) {
+        return resourcesMapper.selectByPrimaryKey(resourceId);
+    }
+
+    @Override
     public List<Map<String,Object>> getAllWithSelected(Integer roleId) {
         List<Map<String,Object>> mapList = new ArrayList<>();
         List<Resources> all = resourcesMapper.selectAll();
