@@ -44,4 +44,34 @@ public class UserServiceImpl implements UserService {
 
 
     }
+
+    @Override
+    public void update(User entity) {
+        userMapper.updateByPrimaryKey(entity);
+    }
+
+    @Override
+    public void delete(Integer id) {
+        userMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public void batchDelete(List<Integer> ids) {
+        ids.forEach(id-> userMapper.deleteByPrimaryKey(id));
+    }
+
+    @Override
+    public List<User> getAll() {
+        return userMapper.selectAll();
+    }
+
+    @Override
+    public void save(User entity) {
+        userMapper.insert(entity);
+    }
+
+    @Override
+    public User findById(Integer id) {
+        return userMapper.selectByPrimaryKey(id);
+    }
 }

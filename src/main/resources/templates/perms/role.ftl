@@ -262,7 +262,8 @@
     function createResourcesTree(roleId) {
         var setting = {
             check: {
-                enable: true
+                enable: true,
+
             },
             view: {
                 showIcon: true,

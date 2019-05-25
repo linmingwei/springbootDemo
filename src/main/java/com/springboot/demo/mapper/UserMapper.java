@@ -1,6 +1,7 @@
 package com.springboot.demo.mapper;
 
 import com.springboot.demo.entity.User;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -17,5 +18,5 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
 
     @Select("select * from user where username = #{name}")
-    User findByName(String name);
+    User findByName(@Param("name") String name);
 }
