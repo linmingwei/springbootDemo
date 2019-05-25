@@ -6,13 +6,15 @@ spring:
     console:
       path: /h2-console
       enabled: true
+      settings:
+        web-allow-others: true
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    url: jdbc:mysql://127.0.0.1:3306/bootdemo?serverTimezone=GMT
-    password: mysql123
+    driver-class-name: org.h2.Driver
+    username: h2
+    url: jdbc:h2:file:E:\myGitHub\springbootDemo\src\main\resources\h2\boot
+    password: h2123
   mvc:
-    static-path-pattern: /**
+    static-path-pattern: /static/**
   resources:
     static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${web.upload-path}
   servlet:
@@ -21,7 +23,7 @@ spring:
 mybatis:
   mapper-locations: classpath:mapper/*.xml
 pagehelper:
-  helper-dialect: mysql
+  helper-dialect: h2
   reasonable: true
   supportMethodsArguments: true
   params: count=countSql
@@ -29,6 +31,7 @@ logging:
   level:
     com.springboot.demo.mapper: DEBUG
 web:
-  upload-path: /home/mwl/upload/
+#  upload-path: /home/mwl/upload/
+  upload-path: d:/articleImg/
 server:
   address: 0.0.0.0

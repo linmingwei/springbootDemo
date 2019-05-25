@@ -8,10 +8,10 @@ spring:
       enabled: true
 
   datasource:
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#    username: root
-#    url: jdbc:mysql://localhost:3306/bootdemo?serverTimezone=GMT
-#    password: mysql123
+#    driver-class-name: org.h2.Driver
+#    username: h2
+#    url: jdbc:h2:file:E:\myGitHub\springbootDemo\src\main\resources\h2\boot
+#    password: h2123
     hikari:
       maximum-pool-size: 8
       username: root
@@ -21,7 +21,6 @@ spring:
       minimum-idle: 5
       auto-commit: true
       connection-test-query: SELECT 1
-
   mvc:
     static-path-pattern: /static/**
   resources:
@@ -29,8 +28,8 @@ spring:
   servlet:
     multipart:
       max-file-size: 10MB
-#  profiles:
-#    active: dev
+  profiles:
+    active: dev
   redis:
     host: 127.0.0.1
     port: 6379
