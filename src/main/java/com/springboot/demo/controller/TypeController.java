@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.springboot.demo.entity.Type;
 import com.springboot.demo.service.TypeService;
 import com.springboot.demo.vo.ResponseVo;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindException;
@@ -34,6 +35,7 @@ public class TypeController {
         return ResponseVo.success(list);
     }
 
+    @RequiresPermissions("types")
     @GetMapping("/all")
     public PageInfo<Type> all(@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum,@RequestParam(value = "pageSize",defaultValue = "5") Integer pageSize) {
         PageHelper.startPage(pageNum,pageSize);
@@ -57,6 +59,7 @@ public class TypeController {
         List<Type> list = typeService.list(0);
         return ResponseVo.success(list);
     }
+    @RequiresPermissions("type:add")
     @PostMapping("/add")
     public ResponseVo addType(@Valid Type type){
         if (type.getId() == null) {
@@ -67,6 +70,7 @@ public class TypeController {
         return ResponseVo.success("添加分类成功");
 
     }
+    @RequiresPermissions("type:delete")
     @PostMapping("/delete")
     public ResponseVo deleteType(Integer[] ids) {
         if (ids == null || ids.length == 0) {

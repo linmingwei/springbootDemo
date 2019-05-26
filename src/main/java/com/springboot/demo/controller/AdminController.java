@@ -7,6 +7,7 @@ import com.springboot.demo.service.TagService;
 import com.springboot.demo.service.TypeService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,22 +45,23 @@ public class AdminController {
         model.addAttribute("typeCount", typeService.count());
         return "admin/home";
     }
-
+    @RequiresPermissions("article:write")
     @GetMapping("/article/write")
     public String articleWrite() {
         return "article/write";
     }
-
+    @RequiresPermissions("articles")
     @GetMapping("/article/list")
     public String articleList() {
         return "article/list";
     }
 
+    @RequiresPermissions("types")
     @GetMapping("/article/type")
     public String articleType() {
         return "article/type";
     }
-
+    @RequiresPermissions("tags")
     @GetMapping("/article/tag")
     public String articleTag() {
         return "article/tag";
@@ -76,27 +78,32 @@ public class AdminController {
 
 
     }
-
+    @RequiresPermissions("comments")
     @GetMapping("/article/comment")
     public String articleComment() {
         return "article/comment";
     }
+    @RequiresPermissions("links")
     @GetMapping("/website/link")
     public String websiteLink() {
         return "website/link";
     }
+    @RequiresPermissions("notices")
     @GetMapping("/website/notice")
     public String websiteNotice() {
         return "website/notice";
     }
+    @RequiresPermissions("resources")
     @GetMapping("/perms/resources")
     public String permsResources() {
         return "perms/resources";
     }
+    @RequiresPermissions("roles")
     @GetMapping("/perms/role")
     public String permsRole() {
         return "perms/role";
     }
+    @RequiresPermissions("users")
     @GetMapping("/users/list")
     public String usersList() {
         return "users/list";

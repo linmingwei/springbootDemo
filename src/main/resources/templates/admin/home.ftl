@@ -5,7 +5,7 @@
 
 <div class=" d-flex justify-content-between flex-wrap">
     <div class="shadow-sm bg-white rounded item">
-        <a href="/admin/article/list" class="d-flex p-2 align-items-center">
+        <a href="/admin/article/list" class="d-flex p-2 align-items-center" >
             <div class="item-count ml-3 mr-5">
                 <h2>${articleCount!0}</h2>
                 <h6>文章</h6>
@@ -16,7 +16,7 @@
         </a>
     </div>
     <div class="shadow-sm bg-white rounded item">
-        <a href="/admin/article/type" class="d-flex p-2 align-items-center">
+        <a href="/admin/article/type" class="d-flex p-2 align-items-center" onclick="auth()">
             <div class="item-count ml-3 mr-5">
                 <h2>${typeCount!0}</h2>
                 <h6>分类</h6>
@@ -133,5 +133,11 @@
     </div>
 </div>
 <@footer>
+<script>
+    function auth(e) {
+        e.preventDefault();
+        alert("good");
 
+    }
+</script>
 </@footer>

@@ -35,11 +35,21 @@
                             <#if resource.children?? && resource.children?size gt 0>
                                 <ul class="d-flex flex-column list-unstyled pl-4 pt-2">
                                     <#list resource.children as child>
-                                     <li class="py-2 px-2" id="${(resource.alias)!""}_${(child.alias)!""}">
-                                         <a class="" href="${(child.url)!""}">
-                                             <span class="d-inline-block ml-2">${(child.name)!""}</span>
-                                         </a>
-                                     </li>
+                                        <#if child.permission??>
+                                            <@shiro.hasPermission name="${child.permission?if_exists}">
+                                             <li class="py-2 px-2" id="${(resource.alias)!""}_${(child.alias)!""}">
+                                                 <a class="" href="${(child.url)!""}">
+                                                     <span class="d-inline-block ml-2">${(child.name)!""}</span>
+                                                 </a>
+                                             </li>
+                                            </@shiro.hasPermission>
+                                        <#--<#else>-->
+                                     <#--<li class="py-2 px-2" id="${(resource.alias)!""}_${(child.alias)!""}">-->
+                                         <#--<a class="" href="${(child.url)!""}">-->
+                                             <#--<span class="d-inline-block ml-2">${(child.name)!""}</span>-->
+                                         <#--</a>-->
+                                     <#--</li>-->
+                                        </#if>
                                     </#list>
                                 </ul>
                             </#if>

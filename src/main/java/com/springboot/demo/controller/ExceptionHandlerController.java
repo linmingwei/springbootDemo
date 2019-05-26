@@ -3,6 +3,7 @@ package com.springboot.demo.controller;
 import com.springboot.demo.util.ResultUtil;
 import com.springboot.demo.vo.ResponseVo;
 import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authz.AuthorizationException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -49,6 +50,11 @@ public class ExceptionHandlerController {
     public ResponseVo authenticationException(AuthenticationException e, HttpServletResponse response) {
         return ResultUtil.error(409, e.getMessage());
 
+    }
+
+    @ExceptionHandler(value = AuthorizationException.class)
+    public ResponseVo authorizationException(AuthorizationException e,HttpServletResponse response) {
+        return ResultUtil.error("您无权访问");
     }
 }
 

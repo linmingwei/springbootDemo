@@ -40,7 +40,9 @@ public class CustomRealm extends AuthorizingRealm {
         List<Resources> resources = userService.findPermissionsByUserId(user.getId());
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         resources.forEach(resource ->{
+            if (resource.getPermission() != null) {
             info.addStringPermission(resource.getPermission());
+            }
         });
         return info;
     }
