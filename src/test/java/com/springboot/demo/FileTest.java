@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Auther: mingweilin
@@ -69,6 +72,26 @@ public class FileTest {
                 System.out.println(i);
             }
         }while (i<6);
+    }
+
+    @Test
+    public void test3() throws IOException {
+        Path path = Paths.get("D:\\ideaProject\\springbootDemo\\src\\test\\resources\\temp");
+        List<String> strings = Files.readAllLines(path);
+        List<StringBuilder> sbs = new ArrayList<>();
+        strings.forEach(string ->{
+            StringBuilder sb = new StringBuilder();
+            sb.append(string.substring(string.indexOf("(") + 1, string.length())).append(string.substring(0, string.indexOf("("))).append("\n");
+            sbs.add(sb);
+        });
+        Path dest = Paths.get("D:\\ideaProject\\springbootDemo\\src\\test\\resources\\new.txt");
+        sbs.forEach(stringBuilder -> {
+            try {
+                Files.write(dest,stringBuilder.toString().getBytes(), StandardOpenOption.APPEND);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
 }

@@ -6,6 +6,7 @@ import com.springboot.demo.entity.Tag;
 import com.springboot.demo.service.TagService;
 import com.springboot.demo.vo.ResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -29,6 +30,7 @@ public class TagController {
         return ResponseVo.success(tagService.getByAid(aid));
     }
 
+    @Cacheable("tagPageInfo")
     @GetMapping("/page")
     public PageInfo<Tag> page(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                               @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize) {

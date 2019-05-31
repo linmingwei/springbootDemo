@@ -8,6 +8,8 @@ import com.springboot.demo.service.ArticleTagService;
 import com.springboot.demo.vo.ResponseVo;
 import org.pegdown.PegDownProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
@@ -67,6 +69,7 @@ public class ArticleController {
 
     }
 
+    @Cacheable("pageInfo")
     @GetMapping("/list")
     @ResponseBody
     public PageInfo<Article> list(@RequestParam(value = "pageNo", defaultValue = "1") int pageNo
