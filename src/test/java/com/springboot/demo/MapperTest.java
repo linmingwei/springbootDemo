@@ -20,6 +20,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 /**
@@ -44,13 +45,20 @@ public class MapperTest {
     private RoleMapper roleMapper;
     @Test
     public void insert() {
-        Article article = articleMapper.selectByPrimaryKey(1);
-        article.setId(null);
-        article.setTop(false);
-        for (int i = 2; i <= 100; i++) {
-            article.setDescription("这是第"+i+"篇文章");
+        Article article = articleMapper.selectByPrimaryKey(207);
+        for (int i = 0; i < 5000000; i++) {
+
+            article.setId(null);
+            article.setTitle("第"+i+"文章，测试专用");
+            article.setTitle(article.getTitle());
+            article.setTypeId(4 + (int) (Math.random() * 9));
+            article.setTop(false);
+            article.setOrder((int) Math.random() * 1000);
+            article.setOrder(article.getOrder());
+            article.setFavorite((int) Math.random() * 1000);
             articleMapper.insert(article);
         }
+
         System.out.println("end");
 
     }

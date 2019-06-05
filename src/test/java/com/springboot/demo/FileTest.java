@@ -76,7 +76,7 @@ public class FileTest {
 
     @Test
     public void test3() throws IOException {
-        Path path = Paths.get("D:\\ideaProject\\springbootDemo\\src\\test\\resources\\temp");
+        Path path = Paths.get("D:\\ideaProject\\springbootDemo\\src\\test\\resources\\temp.txt");
         List<String> strings = Files.readAllLines(path);
         List<StringBuilder> sbs = new ArrayList<>();
         strings.forEach(string ->{
@@ -85,6 +85,13 @@ public class FileTest {
             sbs.add(sb);
         });
         Path dest = Paths.get("D:\\ideaProject\\springbootDemo\\src\\test\\resources\\new.txt");
+
+        if (Files.notExists(dest)) {
+            Files.createFile(dest);
+        }else {
+            Files.write(dest,"".getBytes());
+        }
+
         sbs.forEach(stringBuilder -> {
             try {
                 Files.write(dest,stringBuilder.toString().getBytes(), StandardOpenOption.APPEND);

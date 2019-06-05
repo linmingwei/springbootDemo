@@ -20,4 +20,11 @@ public class TimeTest {
         System.out.println(days);
 
     }
+
+    @Test
+    public void random() {
+        for (int i = 0; i < 1000; i++) {
+            System.out.println(4+(int)(Math.random()*9));
+        }
+    }
 }
